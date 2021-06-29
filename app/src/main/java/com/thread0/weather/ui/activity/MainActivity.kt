@@ -4,6 +4,10 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.thread0.weather.R
 import com.thread0.weather.databinding.ActivityMainBinding
 import top.xuqingquan.base.view.activity.SimpleActivity
 
@@ -37,10 +41,13 @@ class MainActivity : SimpleActivity() {
     // view binding
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var btn_lunar: Button;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        btn_lunar = findViewById(R.id.btn_lunar)
 
     }
 }
