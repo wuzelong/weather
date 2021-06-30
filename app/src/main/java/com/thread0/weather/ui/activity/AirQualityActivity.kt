@@ -32,7 +32,6 @@ class AirQualityActivity : SimpleActivity() {
         setContentView(binding.root)
         // 设置点击事件
         setClickEvent()
-
     }
 
     private fun setClickEvent() {

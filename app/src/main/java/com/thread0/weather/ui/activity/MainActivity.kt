@@ -11,9 +11,12 @@ import com.cxyzy.demo.RvAdapterV
 import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterH
 import com.thread0.weather.databinding.ActivityMainBinding
+import com.thread0.weather.net.service.WeatherService
 import top.xuqingquan.base.view.activity.SimpleActivity
 import java.util.ArrayList
 import kotlinx.android.synthetic.main.activity_main.*
+import top.xuqingquan.app.ScaffoldConfig
+import top.xuqingquan.extension.launch
 
 /**
  *@ClassName: MainActivity
@@ -66,7 +69,7 @@ class MainActivity : SimpleActivity() {
         adapterH = RvAdapterH()
         rv_time.adapter = adapterH
 
-        adapterV= RvAdapterV()
+        adapterV = RvAdapterV()
         rv_day.adapter = adapterV
         rv_day.layoutManager = LinearLayoutManager(this)
         //添加安卓自带的分割线
@@ -83,5 +86,13 @@ class MainActivity : SimpleActivity() {
         }
         adapterH.setData(data)
         adapterV.setData(data)
+        val weatherService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
+        launch {
+            val result = weatherService.getLocationCurrentWeather("beijing")//获取返回数据
+            if (result != null) {
+                tv_temperature.text = result.results[0].now.temperature.toString()
+            }
+        }
     }
 }
