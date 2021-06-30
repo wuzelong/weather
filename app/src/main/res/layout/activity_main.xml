@@ -274,15 +274,36 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_split" />
 
                         <LinearLayout
+                            android:id="@+id/ll_h"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/cardview_shadow_start_color"
                             app:layout_constraintTop_toBottomOf="@+id/tv_container">
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/rv_time"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center" />
+                                    android:layout_gravity="center"
+                                    android:scrollbars="none" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/ll_v"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/cardview_shadow_start_color"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_h"
+                            android:layout_marginBottom="20dp"
+                            app:layout_constraintBottom_toBottomOf="parent">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rv_day"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:scrollbars="none" />
                         </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

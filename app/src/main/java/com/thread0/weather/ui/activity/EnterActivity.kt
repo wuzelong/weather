@@ -4,6 +4,7 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import com.thread0.weather.R
 import com.thread0.weather.databinding.ActivityEnterBinding
 import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.utils.startActivity
@@ -17,12 +18,11 @@ import top.xuqingquan.utils.startActivity
 class EnterActivity : SimpleActivity() {
 
     // view binding----https://blog.csdn.net/c10WTiybQ1Ye3/article/details/112690188
-    private lateinit var binding: ActivityEnterBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEnterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_enter)
         //TODO:引导界面，同学可自行丰富。
         parseXMLIntoDB()
     }
@@ -33,8 +33,6 @@ class EnterActivity : SimpleActivity() {
      *      3、保存完毕后跳转MainActivity，并销毁当前页面。
      */
     private fun parseXMLIntoDB() {
-
-
         //操作完成后跳转首页
         startActivity<MainActivity>()
         finish()

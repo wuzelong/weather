@@ -4,10 +4,12 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cxyzy.demo.RvAdapterV
 import com.thread0.weather.R
-import com.thread0.weather.adapter.RvAdapter
+import com.thread0.weather.adapter.RvAdapterH
 import com.thread0.weather.databinding.ActivityMainBinding
 import top.xuqingquan.base.view.activity.SimpleActivity
 import java.util.ArrayList
@@ -43,27 +45,43 @@ class MainActivity : SimpleActivity() {
     // 使用kotlin-android-extensions省略控件绑定
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var adapter: RvAdapter
+    private lateinit var adapterH: RvAdapterH
+    private lateinit var adapterV: RvAdapterV
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setContentView(R.layout.activity_main)
+
         initRecyclerView()
         loadData()
     }
+
+    /**
+     * 初始化列表
+     */
     private fun initRecyclerView() {
         rv_time.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        adapter = RvAdapter()
-        rv_time.adapter = adapter
+        adapterH = RvAdapterH()
+        rv_time.adapter = adapterH
+
+        adapterV= RvAdapterV()
+        rv_day.adapter = adapterV
+        rv_day.layoutManager = LinearLayoutManager(this)
+        //添加安卓自带的分割线
+        rv_day.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
+    /**
+     * 载入数据
+     */
     private fun loadData() {
         val data = ArrayList<String>()
-        for (i in 0..50) {
+        for (i in 0..20) {
             data.add("text-$i")
         }
-        adapter.setData(data)
+        adapterH.setData(data)
+        adapterV.setData(data)
     }
 }

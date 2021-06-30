@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
-import kotlinx.android.synthetic.main.item_rv.view.*
+import kotlinx.android.synthetic.main.item_rv_h.view.*
 
-class RvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RvAdapterH : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mDataList = mutableListOf<String>()
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = mDataList[position]
-        holder.itemView.tv_item.text = data
+        holder.itemView.tv_itemH.text = data
         holder.itemView.setOnClickListener {
             setOnItemClickListener(data)
         }
@@ -30,7 +30,7 @@ class RvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         mContext = parent.context
-        val view = LayoutInflater.from(mContext).inflate(R.layout.item_rv, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.item_rv_h, parent, false)
         return ViewHolder(view)
     }
 
