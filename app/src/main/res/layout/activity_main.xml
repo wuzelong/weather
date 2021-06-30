@@ -27,12 +27,14 @@
                     android:text="定位"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
+
                 <androidx.appcompat.widget.ActionMenuView
                     android:id="@+id/amv"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:background="@drawable/ic_more_vert"
-                    android:layout_gravity="right">
+                    android:layout_gravity="end"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/ic_more_vert">
 
                 </androidx.appcompat.widget.ActionMenuView>
 
@@ -109,7 +111,6 @@
                             android:text="@string/temperature"
                             android:textSize="60sp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.498"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/btn_yesterday" />
 
@@ -269,16 +270,21 @@
                             android:layout_height="250dp"
                             android:layout_marginTop="30dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.445"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_split" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="50dp"
-                            android:layout_height="200dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_container" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_container">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rv_time"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center" />
+                        </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,12 +4,14 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
+import com.thread0.weather.adapter.RvAdapter
 import com.thread0.weather.databinding.ActivityMainBinding
 import top.xuqingquan.base.view.activity.SimpleActivity
+import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  *@ClassName: MainActivity
@@ -38,16 +40,30 @@ import top.xuqingquan.base.view.activity.SimpleActivity
  *@Date: 2021/5/25 11:36 下午 Created
  */
 class MainActivity : SimpleActivity() {
-    // view binding
+    // 使用kotlin-android-extensions省略控件绑定
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var btn_lunar: Button;
+    private lateinit var adapter: RvAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        btn_lunar = findViewById(R.id.btn_lunar)
+        setContentView(R.layout.activity_main)
+        initRecyclerView()
+        loadData()
+    }
+    private fun initRecyclerView() {
+        rv_time.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        adapter = RvAdapter()
+        rv_time.adapter = adapter
+    }
 
+    private fun loadData() {
+        val data = ArrayList<String>()
+        for (i in 0..50) {
+            data.add("text-$i")
+        }
+        adapter.setData(data)
     }
 }
