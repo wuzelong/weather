@@ -16,17 +16,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_add">
 
                 <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/activity_air_quality"
+                    android:text="定位"
                     android:textColor="@color/white"
-                    android:textSize="?attr/MediumText" />
+                    android:textSize="20dp" />
+                <androidx.appcompat.widget.ActionMenuView
+                    android:id="@+id/amv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/ic_more_vert"
+                    android:layout_gravity="right">
 
+                </androidx.appcompat.widget.ActionMenuView>
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -273,21 +281,4 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_container" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toolbar"
-            android:background="@drawable/ic_add"/>
-
-        <Button
-            android:id="@+id/btn_hms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hms"
-            app:layout_constraintStart_toStartOf="@+id/toolbar"
-            android:background="none"
-            android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="@+id/toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
