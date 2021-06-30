@@ -27,12 +27,11 @@
             android:textSize="?attr/MediumText" />
 
     </androidx.appcompat.widget.Toolbar>
-
-    <include
-        android:id="@+id/rv_title"
-        layout="@layout/rv_item_city_rank_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <TextView
+        android:id="@+id/tv_airRankTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_shade_blue_rc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -46,7 +45,76 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_airRankTitle"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tv_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_quater1_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/tv_center"
+        app:layout_constraintStart_toStartOf="@+id/tv_airRankTitle"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_quater2_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_center"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_title_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/city"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
+        app:layout_constraintEnd_toStartOf="@+id/tv_center"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater1_2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_title_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rank"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater1_2"
+        app:layout_constraintStart_toStartOf="@+id/tv_airRankTitle"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_title_aqi2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AQI"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater2_2"
+        app:layout_constraintStart_toEndOf="@+id/tv_center"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/quality"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater2_2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
