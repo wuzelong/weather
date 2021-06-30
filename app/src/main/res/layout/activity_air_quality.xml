@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg_airQuality"
+    android:background="@mipmap/bg_air_quality"
     tools:context=".ui.activity.AirQualityActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -28,34 +28,19 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <TextView
+        android:id="@+id/tv_airQuality"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="28"
+        android:textColor="@color/black"
+        android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="1.0">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <!--数据展示相关的view在此处布局-->
-
-            <TextView
-                android:id="@+id/tv_airQuality"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:text="28"
-                android:textColor="@color/black"
-                android:textSize="70sp"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.48"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
             <TextView
                 android:id="@+id/tv_airLevel"
@@ -75,10 +60,11 @@
                 android:layout_height="wrap_content"
                 android:text="2021-06-30"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_airQuality"
+                app:layout_constraintBottom_toTopOf="@+id/tv_time"
                 app:layout_constraintEnd_toStartOf="@+id/tv_airQuality"
+                app:layout_constraintHorizontal_bias="0.581"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_airQuality" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_area" />
 
             <TextView
                 android:id="@+id/tv_area"
@@ -86,9 +72,9 @@
                 android:layout_height="wrap_content"
                 android:text="集美"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_day"
                 app:layout_constraintEnd_toStartOf="@+id/tv_airQuality"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_airLevel" />
 
             <TextView
                 android:id="@+id/tv_time"
@@ -96,9 +82,9 @@
                 android:layout_height="wrap_content"
                 android:text="19:00:00"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_airRank"
                 app:layout_constraintEnd_toStartOf="@+id/tv_airQuality"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_day" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/tv_pm25Val"
@@ -258,8 +244,91 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_airQuality"
                 app:layout_constraintTop_toBottomOf="@+id/tv_airLevel" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_time_air"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_pm25" />
 
+    <TextView
+        android:id="@+id/tv_airTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_shade_blue_rc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_time_air" />
+
+    <TextView
+        android:id="@+id/tv_title_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/week"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airTitle"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater"
+        app:layout_constraintStart_toStartOf="@+id/tv_airTitle"
+        app:layout_constraintTop_toBottomOf="@+id/rv_time_air" />
+
+    <TextView
+        android:id="@+id/tv_title_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airTitle"
+        app:layout_constraintEnd_toStartOf="@+id/tc_center"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater"
+        app:layout_constraintTop_toBottomOf="@+id/rv_time_air" />
+
+    <TextView
+        android:id="@+id/tv_title_aqi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/AQI"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airTitle"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater2"
+        app:layout_constraintStart_toEndOf="@+id/tc_center"
+        app:layout_constraintTop_toBottomOf="@+id/rv_time_air" />
+
+    <TextView
+        android:id="@+id/tv_title_quality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quality"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_airTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater2"
+        app:layout_constraintTop_toBottomOf="@+id/rv_time_air" />
+
+    <TextView
+        android:id="@+id/tv_quater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/tc_center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tc_center" />
+
+    <TextView
+        android:id="@+id/tv_quater2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tc_center"
+        app:layout_constraintTop_toBottomOf="@+id/tc_center" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_day_air"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_airTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

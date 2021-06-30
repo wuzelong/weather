@@ -34,7 +34,7 @@ class EnterActivity : SimpleActivity() {
      */
     private fun parseXMLIntoDB() {
         //操作完成后跳转首页
-        startActivity<MainActivity>()
+        startActivity<AirQualityActivity>()
         finish()
     }
 }
