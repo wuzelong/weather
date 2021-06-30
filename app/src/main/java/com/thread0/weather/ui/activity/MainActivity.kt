@@ -12,11 +12,11 @@ import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterH
 import com.thread0.weather.databinding.ActivityMainBinding
 import com.thread0.weather.net.service.WeatherService
-import top.xuqingquan.base.view.activity.SimpleActivity
-import java.util.ArrayList
 import kotlinx.android.synthetic.main.activity_main.*
 import top.xuqingquan.app.ScaffoldConfig
+import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.extension.launch
+import java.util.*
 
 /**
  *@ClassName: MainActivity
@@ -71,7 +71,15 @@ class MainActivity : SimpleActivity() {
 
         adapterV = RvAdapterV()
         rv_day.adapter = adapterV
-        rv_day.layoutManager = LinearLayoutManager(this)
+        val linearLayoutManager: LinearLayoutManager = object : LinearLayoutManager(
+            this@MainActivity,
+            VERTICAL, false
+        ) {  //设置不滑动
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        rv_day.layoutManager = linearLayoutManager
         //添加安卓自带的分割线
         rv_day.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
