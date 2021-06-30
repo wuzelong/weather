@@ -12,4 +12,13 @@
 
     <color name="bg_gray">#F2F2F2</color>
     <color name="choice_ring">#FF3B30</color>
+
+    <color name="btn_bg">#CCF5FB</color>
+    <color name="btn_bg_press">#C5EAF0</color>
+    <color name="btn_text">#33C759</color>
+
+    <color name="text_blue">#01B1EC</color>
+    <color name="bg_blue">#B2E5F8</color>
+    <color name="shadow_blue">#9CDDDE</color>
+
 </resources>

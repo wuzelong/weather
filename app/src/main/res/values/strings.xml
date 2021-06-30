@@ -31,7 +31,7 @@
 
     <string name="activity_air_quality">空气质量</string>
 
-    <string name="activity_air_quality_rank">空气质量排行榜</string>
+    <string name="activity_air_quality_rank">质量排行</string>
 
     <string name="activity_zodiac">农历、节气与生肖</string>
 
@@ -44,4 +44,11 @@
     <string name="location_name">经纬度：</string>
     <string name="water_level_name">水位基准：</string>
     <string name="port_info">港口信息</string>
+
+    <string name="PM25">PM2.5</string>
+    <string name="PM10">PM10</string>
+    <string name="SO2">SO₂</string>
+    <string name="NO2">NO₂</string>
+    <string name="O3">O₃</string>
+    <string name="CO">CO</string>
 </resources>
