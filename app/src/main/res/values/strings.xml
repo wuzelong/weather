@@ -54,7 +54,7 @@
     <string name="air_quality">空气质量</string>
     <string name="rain_level">降雨等级</string>
     <string name="see_weather">查看天气</string>
-    <string name="position">定位</string>
+    <string name="position">位置</string>
     <string name="centigrade">℃</string>
     <string name="sunrise">日出</string>
     <string name="sunset">日落</string>
