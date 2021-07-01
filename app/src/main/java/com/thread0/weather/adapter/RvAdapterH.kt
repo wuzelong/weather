@@ -14,7 +14,7 @@ class RvAdapterH : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = mDataList[position]
-        holder.itemView.tv_itemH.text = data
+//        holder.itemView.tv_itemH.text = data
         holder.itemView.setOnClickListener {
             setOnItemClickListener(data)
         }
