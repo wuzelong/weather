@@ -9,7 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.adapter.RvAdapterAirQuaRank
 import com.thread0.weather.databinding.ActivityAirQualityRankBinding
+import com.thread0.weather.net.service.WeatherService
 import kotlinx.android.synthetic.main.activity_air_quality_rank.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import top.xuqingquan.app.ScaffoldConfig
+import top.xuqingquan.extension.launch
 import java.util.ArrayList
 
 /**
@@ -52,17 +58,46 @@ class AirQualityRankActivity : AppCompatActivity() {
      * 载入数据
      */
     private fun loadData() {
-        var nums = ArrayList<String>()
-        var levels = ArrayList<String>()
-        var times = ArrayList<String>()
-        var quas = ArrayList<String>()
-        for (i in 0..20){
-            nums.add("$i")
-            levels.add("c$i")
-            times.add("1$i")
-            quas.add("好")
-        }
-        adapterH.setData(nums,levels,times,quas)
-    }
+        var ranks = ArrayList<String>()
+        var citys = ArrayList<String>()
+        var AQIs = ArrayList<String>()
+        var qualities = ArrayList<String>()
 
+        val weatherService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
+        launch {
+            val result = weatherService.getAirQualityRank()
+            if (result != null) {
+                for ((index,e) in result.results.withIndex()){
+                    ranks.add("${index+1}")
+                    citys.add(e.location.name)
+                    AQIs.add(e.aqi.toString())
+                    if(e.aqi in 0..50){
+                        qualities.add("好")
+                    }
+                    else if(e.aqi in 51..100){
+                        qualities.add("良")
+                    }
+                    else if(e.aqi in 101..150){
+                        qualities.add("轻度污染")
+                    }
+                    else if(e.aqi in 151..200){
+                        qualities.add("中度污染")
+                    }
+                    else if(e.aqi in 201..300){
+                        qualities.add("重度污染")
+                    }
+                    else{
+                        qualities.add("严重污染")
+                    }
+                }
+                withContext(
+                    Dispatchers.Main
+                ){
+                    adapterH.setData(ranks,citys,AQIs,qualities)
+                }
+            }
+        }
+
+    }
 }

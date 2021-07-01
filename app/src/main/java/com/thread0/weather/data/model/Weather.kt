@@ -73,6 +73,22 @@ data class WeatherFromServer(
     val results: List<WeatherResult>
 )
 
+/**
+ * 空气质量排行榜返回结果类
+ */
+data class RankServer(
+    val results: List<RankResult>
+)
+
+/**
+ * 排行结果类
+ */
+data class RankResult(
+    val location: Location,
+    val aqi:Int,
+)
+
+
 
 
 

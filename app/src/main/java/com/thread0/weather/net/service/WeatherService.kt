@@ -3,6 +3,7 @@
  */
 package com.thread0.weather.net.service
 
+import com.thread0.weather.data.model.RankServer
 import com.thread0.weather.data.model.WeatherFromServer
 import com.thread0.weather.net.WEATHER_PRIVATE_KEY
 import retrofit2.http.GET
@@ -22,4 +23,11 @@ interface WeatherService {
         @Query("language") language: String = "zh-Hans",
         @Query("unit") unit: String = "c"
     ): WeatherFromServer?
+
+    @GET("/v3/air/ranking.json")
+    suspend fun getAirQualityRank(
+        @Query("key") key: String = WEATHER_PRIVATE_KEY,
+        @Query("language") language: String = "zh-Hans"
+    ): RankServer?
+
 }
