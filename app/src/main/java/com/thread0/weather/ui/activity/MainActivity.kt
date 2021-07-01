@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.calendar -> startActivity(Intent(this, ZodiacActivity::class.java))
@@ -80,6 +81,9 @@ class MainActivity : AppCompatActivity() {
         }
         toolbar.setNavigationOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
+        }
+        btn_see_weather.setOnClickListener {
+            startActivity(Intent(this, FutureWeatherActivity::class.java))
         }
     }
 
