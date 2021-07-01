@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
-import kotlinx.android.synthetic.main.item_rv_h.view.*
 
 class RvAdapterH : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mDataList = mutableListOf<String>()
@@ -30,7 +29,7 @@ class RvAdapterH : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         mContext = parent.context
-        val view = LayoutInflater.from(mContext).inflate(R.layout.item_rv_h, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.rv_item_hourly_weather, parent, false)
         return ViewHolder(view)
     }
 
