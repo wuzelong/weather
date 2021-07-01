@@ -32,4 +32,8 @@
     <dimen name="size_icon_mini">16dp</dimen>
     <dimen name="size_icon_ex_mini">12dp</dimen>
     <dimen name="dialog_btn_height">48dp</dimen>
+
+    <!--布局-->
+    <dimen name="page_margin">25dp</dimen>
+
 </resources>

@@ -10,4 +10,5 @@
         <attr name="radius" format="float" />
         <attr name="stroke_ratio" format="float" />
     </declare-styleable>
+
 </resources>
