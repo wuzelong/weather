@@ -4,17 +4,12 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cxyzy.demo.RvAdapterV
-import com.thread0.weather.adapter.RvAdapterH
+import com.thread0.weather.adapter.RvAdapterAirQuaH
+import com.thread0.weather.adapter.RvAdapterAirQuaV
 import com.thread0.weather.databinding.ActivityAirQualityBinding
-import com.thread0.weather.net.service.WeatherService
-import kotlinx.android.synthetic.main.activity_main.*
-import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
-import top.xuqingquan.extension.launch
 import java.util.ArrayList
 import kotlinx.android.synthetic.main.activity_air_quality.*
 
@@ -36,8 +31,8 @@ class AirQualityActivity : SimpleActivity() {
 
     // view binding
     private lateinit var binding: ActivityAirQualityBinding
-    private lateinit var adapterH: RvAdapterH
-    private lateinit var adapterV: RvAdapterV
+    private lateinit var adapterH: RvAdapterAirQuaH
+    private lateinit var adapterV: RvAdapterAirQuaV
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,11 +55,11 @@ class AirQualityActivity : SimpleActivity() {
      */
     private fun initRecyclerView() {
         rv_time_air.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        adapterH = RvAdapterH()
+        adapterH = RvAdapterAirQuaH()
         rv_time_air.adapter = adapterH
 
         rv_day_air.layoutManager = LinearLayoutManager(this)
-        adapterV = RvAdapterV()
+        adapterV = RvAdapterAirQuaV()
         rv_day_air.adapter = adapterV
     }
 
@@ -72,11 +67,26 @@ class AirQualityActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
-        val data = ArrayList<String>()
-        for (i in 0..20) {
-            data.add("text-$i")
+        var nums =ArrayList<String>()
+        var levels =ArrayList<String>()
+        var times =ArrayList<String>()
+        for (i in 0..20){
+            nums.add("$i")
+            levels.add("1$i")
+            times.add("18:00")
         }
-        adapterH.setData(data)
-        adapterV.setData(data)
+        adapterH.setData(nums,levels,times)
+
+        val weeks = ArrayList<String>()
+        val dates = ArrayList<String>()
+        val aqis = ArrayList<String>()
+        val quas = ArrayList<String>()
+        for (i in 0..7) {
+            weeks.add("星期$i")
+            dates.add("明天")
+            aqis.add("2$i")
+            quas.add("优")
+        }
+        adapterV.setData(weeks,dates,aqis,quas)
     }
 }

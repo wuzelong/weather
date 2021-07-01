@@ -259,7 +259,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bg_shade_blue_rc"
+        android:background="@drawable/bg_shade_blue_rc_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_time_air" />
@@ -327,7 +327,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_day_air"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_shade_grey_rc_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_airTitle" />

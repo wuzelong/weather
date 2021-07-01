@@ -21,4 +21,6 @@
     <color name="bg_blue">#B2E5F8</color>
     <color name="shadow_blue">#9CDDDE</color>
 
+    <color name="shadow_grey">#30000000</color>
+
 </resources>
