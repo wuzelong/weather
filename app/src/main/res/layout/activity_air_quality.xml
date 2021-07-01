@@ -5,26 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg_air_quality"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.AirQualityActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/blue_00DEFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_return">
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/activity_air_quality"
-            android:textColor="@color/white"
-            android:textSize="?attr/MediumText" />
 
     </androidx.appcompat.widget.Toolbar>
 

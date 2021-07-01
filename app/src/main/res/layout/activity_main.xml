@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg_clear_day"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -67,10 +68,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:layout_marginStart="10dp"
                 android:text="@string/air_quality"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@id/tv_rain_level"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_weather" />
 
@@ -79,24 +80,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/rain_level"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_air_quality"
                 app:layout_constraintTop_toBottomOf="@id/tv_weather" />
+
+            <ListView
+                android:id="@+id/lv_weather"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_rain_level">
+
+            </ListView>
 
             <Button
                 android:id="@+id/btn_see_weather"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
-                android:background="@color/gray4"
+                android:background="@drawable/panel"
                 android:text="@string/see_weather"
+                android:textSize="20sp"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_air_quality" />
+                app:layout_constraintTop_toBottomOf="@id/lv_weather" />
 
             <LinearLayout
                 android:id="@+id/ll_h"
