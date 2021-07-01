@@ -58,10 +58,11 @@ class AirQualityRankActivity : AppCompatActivity() {
      * 载入数据
      */
     private fun loadData() {
-        var ranks = ArrayList<String>()
-        var citys = ArrayList<String>()
-        var AQIs = ArrayList<String>()
-        var qualities = ArrayList<String>()
+        val ranks = ArrayList<String>()
+        val citys = ArrayList<String>()
+        val AQIs = ArrayList<String>()
+        val qualities = ArrayList<String>()
+        val colors = ArrayList<String>()
 
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
@@ -74,27 +75,33 @@ class AirQualityRankActivity : AppCompatActivity() {
                     AQIs.add(e.aqi.toString())
                     if(e.aqi in 0..50){
                         qualities.add("好")
+                        colors.add("green")
                     }
                     else if(e.aqi in 51..100){
                         qualities.add("良")
+                        colors.add("yellow")
                     }
                     else if(e.aqi in 101..150){
                         qualities.add("轻度污染")
+                        colors.add("orange")
                     }
                     else if(e.aqi in 151..200){
                         qualities.add("中度污染")
+                        colors.add("red")
                     }
                     else if(e.aqi in 201..300){
                         qualities.add("重度污染")
+                        colors.add("purple")
                     }
                     else{
                         qualities.add("严重污染")
+                        colors.add("brown")
                     }
                 }
                 withContext(
                     Dispatchers.Main
                 ){
-                    adapterH.setData(ranks,citys,AQIs,qualities)
+                    adapterH.setData(ranks,citys,AQIs,qualities,colors)
                 }
             }
         }

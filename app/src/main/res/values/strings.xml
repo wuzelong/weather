@@ -60,4 +60,6 @@
     <string name="sunset">日落</string>
     <string name="moonrise">月出</string>
     <string name="moonset">月落</string>
+
+    <string name="quality">质量</string>
 </resources>
