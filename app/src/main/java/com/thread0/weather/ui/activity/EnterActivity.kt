@@ -9,7 +9,6 @@ import android.os.Bundle
 import com.thread0.weather.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import top.xuqingquan.utils.startActivity
 import java.lang.Thread.sleep
 
 /**

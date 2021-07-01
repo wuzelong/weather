@@ -80,15 +80,6 @@ class MainActivity : AppCompatActivity() {
         rv_time.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         adapterH = RvAdapterH()
         rv_time.adapter = adapterH
-
-        val linearLayoutManager: LinearLayoutManager = object : LinearLayoutManager(
-            this@MainActivity,
-            VERTICAL, false
-        ) {  //设置不滑动
-            override fun canScrollVertically(): Boolean {
-                return false
-            }
-        }
     }
 
     /**
