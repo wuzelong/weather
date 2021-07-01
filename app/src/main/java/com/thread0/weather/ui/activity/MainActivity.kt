@@ -6,6 +6,8 @@ package com.thread0.weather.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
 import java.util.*
+
 
 /**
  *@ClassName: MainActivity
@@ -59,6 +62,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.calendar -> startActivity(Intent(this, ZodiacActivity::class.java))
+            R.id.hms -> startActivity(Intent(this, HmsActivity::class.java))
+        }
+        return false
     }
 
     /**
