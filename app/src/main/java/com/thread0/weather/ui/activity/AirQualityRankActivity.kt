@@ -74,7 +74,7 @@ class AirQualityRankActivity : AppCompatActivity() {
                     citys.add(e.location.name)
                     AQIs.add(e.aqi.toString())
                     if(e.aqi in 0..50){
-                        qualities.add("好")
+                        qualities.add("优")
                         colors.add("green")
                     }
                     else if(e.aqi in 51..100){
