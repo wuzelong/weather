@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 允许应用程序访问额外的位置提供命令 -->
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- 相机权限，用于HMS人像分割 -->
+
     <application
         android:name=".app.MApp"
         android:allowBackup="true"
