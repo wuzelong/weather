@@ -14,9 +14,9 @@ class RvAdapterAirQuaH : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var timeList = mutableListOf<String>()
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_item_air_quality_aqis.text = numList[position]
-        holder.itemView.tv_item_air_quality_levels.text = levelList[position]
-        holder.itemView.tv_item_air_quality_time.text = timeList[position]
+        holder.itemView.tv_item_air_quality_rank_aqi.text = numList[position]
+        holder.itemView.tv_item_air_quality_rank_city.text = levelList[position]
+        holder.itemView.tv_item_air_quality_ranks.text = timeList[position]
     }
 
     fun setData(numsList: List<String>,levelsList: List<String>,timesList: List<String>) {

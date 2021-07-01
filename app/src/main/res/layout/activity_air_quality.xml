@@ -22,11 +22,12 @@
 
     <TextView
         android:id="@+id/tv_airQuality"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="28"
         android:textColor="@color/black"
+        android:gravity="center"
         android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
@@ -81,7 +82,7 @@
         android:id="@+id/tv_pm25Val"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="4dp"
         android:gravity="center"
         android:text="11"
@@ -104,14 +105,13 @@
         android:id="@+id/tv_pm10Val"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="4dp"
         android:gravity="center"
         android:text="29"
         android:textColor="@color/btn_text"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_so2Val"
-        app:layout_constraintTop_toBottomOf="@+id/tv_airQuality" />
+        app:layout_constraintTop_toTopOf="@+id/tv_pm25Val" />
 
     <TextView
         android:id="@+id/tv_pm10"
@@ -127,14 +127,13 @@
         android:id="@+id/tv_so2Val"
         android:layout_width="50dp"
         android:layout_height="20dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="2dp"
         android:gravity="center"
         android:text="3"
         android:textColor="@color/btn_text"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/tc_center"
-        app:layout_constraintTop_toBottomOf="@+id/tv_airQuality" />
+        app:layout_constraintTop_toTopOf="@+id/tv_pm10Val" />
 
     <TextView
         android:id="@+id/tv_so2"
@@ -151,13 +150,12 @@
         android:layout_width="50dp"
         android:layout_height="20dp"
         android:layout_marginStart="2dp"
-        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="12"
         android:textColor="@color/btn_text"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tc_center"
-        app:layout_constraintTop_toBottomOf="@+id/tv_airQuality" />
+        app:layout_constraintTop_toTopOf="@+id/tv_so2Val" />
 
     <TextView
         android:id="@+id/tv_no2"
@@ -174,13 +172,12 @@
         android:layout_width="50dp"
         android:layout_height="20dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="42"
         android:textColor="@color/btn_text"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tv_no2Val"
-        app:layout_constraintTop_toBottomOf="@+id/tv_airQuality" />
+        app:layout_constraintTop_toTopOf="@+id/tv_no2Val" />
 
     <TextView
         android:id="@+id/tv_o3"
@@ -197,13 +194,12 @@
         android:layout_width="50dp"
         android:layout_height="20dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="0.383"
         android:textColor="@color/btn_text"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/tv_o3Val"
-        app:layout_constraintTop_toBottomOf="@+id/tv_airQuality" />
+        app:layout_constraintTop_toTopOf="@+id/tv_o3Val" />
 
     <TextView
         android:id="@+id/tv_co"
