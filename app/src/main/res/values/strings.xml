@@ -56,4 +56,8 @@
     <string name="see_weather">查看天气</string>
     <string name="position">定位</string>
     <string name="centigrade">℃</string>
+    <string name="sunrise">日出</string>
+    <string name="sunset">日落</string>
+    <string name="moonrise">月出</string>
+    <string name="moonset">月落</string>
 </resources>

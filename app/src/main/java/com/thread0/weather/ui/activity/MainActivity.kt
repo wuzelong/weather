@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
             val result = weatherService.getLocationCurrentWeather("beijing")//获取返回数据
             if (result != null) {
                 tv_temperature.text = result.results[0].now.temperature.toString()
+                tv_weather.text = result.results[0].now.weather
             }
         }
     }

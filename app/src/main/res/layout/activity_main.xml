@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,13 +54,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:text="@string/centigrade"
                 android:textColor="@color/white"
-                android:layout_marginTop="30dp"
                 android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@id/tv_temperature"
-                app:layout_constraintTop_toTopOf="@id/tv_temperature"
-                />
+                app:layout_constraintTop_toTopOf="@id/tv_temperature" />
 
             <TextView
                 android:id="@+id/tv_weather"
@@ -78,14 +78,14 @@
                 android:id="@+id/tv_air_quality"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="@dimen/page_margin"
+                android:layout_marginTop="50dp"
                 android:text="@string/air_quality"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_air_quality"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_weather"
-                app:drawableStartCompat="@drawable/ic_air_quality" />
+                app:layout_constraintTop_toBottomOf="@id/tv_weather" />
 
             <TextView
                 android:id="@+id/tv_rain_level"
@@ -96,9 +96,9 @@
                 android:text="@string/rain_level"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                app:drawableStartCompat="@drawable/ic_rain_level"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_weather"
-                app:drawableStartCompat="@drawable/ic_rain_level" />
+                app:layout_constraintTop_toBottomOf="@id/tv_weather" />
 
             <ListView
                 android:id="@+id/lv_weather"
@@ -118,8 +118,8 @@
                 android:layout_marginHorizontal="@dimen/page_margin"
                 android:background="@drawable/panel"
                 android:text="@string/see_weather"
-                android:textSize="20sp"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lv_weather" />
@@ -128,7 +128,6 @@
                 android:id="@+id/ll_h"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 app:layout_constraintTop_toBottomOf="@+id/btn_see_weather">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -136,18 +135,63 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginVertical="30dp"
                     android:scrollbars="none" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_sunrise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sunrise"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_sunrise"
+                app:layout_constraintEnd_toStartOf="@id/tv_sunset"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+
+            <TextView
+                android:id="@+id/tv_sunset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sunset"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_sunset"
+                app:layout_constraintEnd_toStartOf="@id/tv_moonrise"
+                app:layout_constraintStart_toEndOf="@id/tv_sunrise"
+                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+
+            <TextView
+                android:id="@+id/tv_moonrise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moonrise"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_moonrise"
+                app:layout_constraintEnd_toStartOf="@id/tv_moonset"
+                app:layout_constraintStart_toEndOf="@id/tv_sunset"
+                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+
+            <TextView
+                android:id="@+id/tv_moonset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/moonset"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_moonset"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_moonrise"
+                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+
             <GridView
                 android:layout_width="0dp"
-                android:layout_height="100dp"
+                android:layout_height="1000dp"
+                android:layout_marginHorizontal="@dimen/page_margin"
                 android:background="@drawable/panel"
                 android:numColumns="3"
-                android:layout_marginHorizontal="@dimen/page_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_h">
+                app:layout_constraintTop_toBottomOf="@id/tv_moonset">
 
             </GridView>
         </androidx.constraintlayout.widget.ConstraintLayout>
