@@ -10,12 +10,12 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@mipmap/app_launcher"
         android:layout_marginBottom="@dimen/margin_large"
+        android:contentDescription="@string/img_content_description"
+        android:src="@mipmap/app_launcher"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/img_content_description" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"

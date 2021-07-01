@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
@@ -52,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         toolbar.title = ""
         setSupportActionBar(toolbar);
-        initButtons()
+        setClickEvent()
         initRecyclerView()
         loadData()
     }
@@ -63,11 +62,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * 初始化按钮
+     * 初始化点击事件
      */
-    private fun initButtons() {
+    private fun setClickEvent() {
         tv_air_quality.setOnClickListener {
             startActivity(Intent(this, AirQualityActivity::class.java))
+        }
+        toolbar.setNavigationOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
         }
     }
 

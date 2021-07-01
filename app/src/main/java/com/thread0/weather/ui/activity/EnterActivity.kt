@@ -3,10 +3,14 @@
  */
 package com.thread0.weather.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import com.thread0.weather.R
-import top.xuqingquan.base.view.activity.SimpleActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import top.xuqingquan.utils.startActivity
+import java.lang.Thread.sleep
 
 /**
  *@ClassName: EnterActivity
@@ -14,7 +18,7 @@ import top.xuqingquan.utils.startActivity
  *@Author: hongzf
  *@Date: 2021/5/27 11:18 下午 Created
  */
-class EnterActivity : SimpleActivity() {
+class EnterActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_enter)
@@ -29,7 +33,11 @@ class EnterActivity : SimpleActivity() {
      */
     private fun parseXMLIntoDB() {
         //操作完成后跳转首页
-        startActivity<MainActivity>()
-        finish()
+        GlobalScope.launch {
+            sleep(1000);
+        }.invokeOnCompletion {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 }

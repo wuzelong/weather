@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activity.SearchActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,13 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/margin_large"
-            android:textSize="?attr/SmallText"
-            android:textColor="@color/black"
             android:hint="@string/search_hint"
+            android:inputType="text"
             android:maxLength="15"
             android:maxLines="1"
-            android:inputType="text"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="?attr/SmallText" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -39,6 +40,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
