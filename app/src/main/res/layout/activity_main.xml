@@ -1,303 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.activity.MainActivity"
-    android:background="@mipmap/bg_clear_day"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_clear_day"
+    tools:context=".ui.activity.MainActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_add">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_add">
+            android:layout_gravity="center"
+            android:text="定位"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="定位"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
+    </androidx.appcompat.widget.Toolbar>
 
-        </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="50dp"
-            android:scrollbars="none">
+            android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/tv_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="60dp"
+                android:text="@string/temperature"
+                android:textColor="@color/white"
+                android:textSize="120sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/weather"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
+
+            <TextView
+                android:id="@+id/tv_air_quality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/air_quality"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@id/tv_rain_level"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_weather" />
+
+            <TextView
+                android:id="@+id/tv_rain_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/rain_level"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_air_quality"
+                app:layout_constraintTop_toBottomOf="@id/tv_weather" />
+
+            <Button
+                android:id="@+id/btn_see_weather"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:background="@color/gray4"
+                android:text="@string/see_weather"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_air_quality" />
+
+            <LinearLayout
+                android:id="@+id/ll_h"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/btn_see_weather">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                    >
+                    android:layout_gravity="center"
+                    android:scrollbars="none" />
+            </LinearLayout>
 
-                        <Button
-                            android:id="@+id/btn_lunar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="20dp"
-                            android:background="@drawable/bg_shade_gray_rc"
-                            android:text="@string/activity_zodiac"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+            <GridView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="@drawable/panel"
+                android:numColumns="3"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_h">
 
-                        <Button
-                            android:id="@+id/btn_car"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:background="@drawable/bg_shade_gray_rc"
-                            android:text="@string/car_restricted"
-                            app:layout_constraintStart_toStartOf="@+id/btn_lunar"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_lunar" />
-
-                        <Button
-                            android:id="@+id/btn_air"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/bg_shade_gray_rc"
-                            android:text="@string/activity_air_quality"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/btn_lunar" />
-
-                        <Button
-                            android:id="@+id/btn_alarm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:background="@drawable/bg_shade_gray_rc"
-                            android:text="@string/activity_alarm"
-                            app:layout_constraintEnd_toEndOf="@+id/btn_air"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_air" />
-
-                        <Button
-                            android:id="@+id/btn_yesterday"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:background="@drawable/bg_shade_gray_rc"
-                            android:text="@string/activity_yesterday"
-                            app:layout_constraintEnd_toEndOf="@+id/btn_air"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_alarm" />
-
-                        <TextView
-                            android:id="@+id/tv_temperature"
-                            android:layout_width="124dp"
-                            android:layout_height="79dp"
-                            android:gravity="center"
-                            android:text="@string/temperature"
-                            android:textColor="@color/white"
-                            android:textSize="60sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/btn_yesterday" />
-
-                        <TextView
-                            android:id="@+id/tv_quality"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:text="@string/quality"
-                            android:textSize="20sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_temperature" />
-
-                        <TextView
-                            android:id="@+id/tv_maxTemperatue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/highest"
-                            app:layout_constraintEnd_toStartOf="@+id/tv_split"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_quality" />
-
-                        <TextView
-                            android:id="@+id/tv_split"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="/"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_quality" />
-
-                        <TextView
-                            android:id="@+id/tv_minTemperatue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/lowest"
-                            app:layout_constraintStart_toEndOf="@+id/tv_split"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_quality" />
-
-                        <TextView
-                            android:id="@+id/tv_moonSet"
-                            android:layout_width="145dp"
-                            android:layout_height="115dp"
-                            android:background="@color/cardview_shadow_start_color"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_sunSet"
-                            app:layout_constraintTop_toTopOf="@+id/tv_moonRise" />
-
-                        <TextView
-                            android:id="@+id/tv_moonRise"
-                            android:layout_width="145dp"
-                            android:layout_height="115dp"
-                            android:layout_marginTop="20dp"
-                            android:background="@color/cardview_shadow_start_color"
-                            app:layout_constraintStart_toStartOf="@+id/tv_sunRise"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_sunRise" />
-
-                        <TextView
-                            android:id="@+id/tv_sunRise"
-                            android:layout_width="145dp"
-                            android:layout_height="115dp"
-                            android:background="@color/cardview_shadow_start_color"
-                            app:layout_constraintStart_toStartOf="@+id/tv_container"
-                            app:layout_constraintTop_toTopOf="@+id/tv_container" />
-
-                        <TextView
-                            android:id="@+id/tv_sunSet"
-                            android:layout_width="145dp"
-                            android:layout_height="115dp"
-                            android:layout_marginStart="20dp"
-                            android:background="@color/cardview_shadow_start_color"
-                            app:layout_constraintStart_toEndOf="@+id/tv_sunRise"
-                            app:layout_constraintTop_toTopOf="@+id/tv_container" />
-
-                        <ImageView
-                            android:id="@+id/iv_sunRise"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="15dp"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_sunRise"
-                            app:layout_constraintStart_toStartOf="@+id/tv_sunRise"
-                            app:layout_constraintTop_toTopOf="@+id/tv_sunRise"
-                            app:srcCompat="@drawable/ic_sunrise" />
-
-                        <TextView
-                            android:id="@+id/tv_sunRiseInfo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="日出:05:22"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_sunRise"
-                            app:layout_constraintStart_toStartOf="@+id/tv_sunRise"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_sunRise" />
-
-                        <ImageView
-                            android:id="@+id/iv_sunSet"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="15dp"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_sunSet"
-                            app:layout_constraintStart_toStartOf="@+id/tv_sunSet"
-                            app:layout_constraintTop_toTopOf="@+id/tv_sunSet"
-                            app:srcCompat="@drawable/ic_sunset" />
-
-                        <TextView
-                            android:id="@+id/tv_sunSetInfo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="日落:19:01"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_sunSet"
-                            app:layout_constraintStart_toStartOf="@+id/tv_sunSet"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_sunSet" />
-
-                        <ImageView
-                            android:id="@+id/iv_moonRise"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="15dp"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_moonRise"
-                            app:layout_constraintStart_toStartOf="@+id/tv_moonRise"
-                            app:layout_constraintTop_toTopOf="@+id/tv_moonRise"
-                            app:srcCompat="@drawable/ic_moon_sunrise" />
-
-                        <TextView
-                            android:id="@+id/tv_moonRiseInfo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="月出:22:56"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_moonRise"
-                            app:layout_constraintStart_toStartOf="@+id/tv_moonRise"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_moonRise" />
-
-                        <ImageView
-                            android:id="@+id/iv_moonSet"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="15dp"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_moonSet"
-                            app:layout_constraintStart_toStartOf="@+id/tv_moonSet"
-                            app:layout_constraintTop_toTopOf="@+id/tv_moonSet"
-                            app:srcCompat="@drawable/ic_moon_sunset" />
-
-                        <TextView
-                            android:id="@+id/tv_moonSetInfo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="月落:09:43"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_moonSet"
-                            app:layout_constraintStart_toStartOf="@+id/tv_moonSet"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_moonSet" />
-
-                        <TextView
-                            android:id="@+id/tv_container"
-                            android:layout_width="310dp"
-                            android:layout_height="250dp"
-                            android:layout_marginTop="30dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_split" />
-
-                        <LinearLayout
-                            android:id="@+id/ll_h"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="20dp"
-                            android:background="@color/cardview_shadow_start_color"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_container">
-
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/rv_time"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:scrollbars="none" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/ll_v"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="20dp"
-                            android:background="@color/cardview_shadow_start_color"
-                            app:layout_constraintTop_toBottomOf="@+id/ll_h"
-                            android:layout_marginBottom="20dp"
-                            app:layout_constraintBottom_toBottomOf="parent">
-
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/rv_day"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-
-                                    android:scrollbars="none" />
-                        </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+            </GridView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

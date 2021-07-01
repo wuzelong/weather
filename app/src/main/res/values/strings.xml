@@ -12,9 +12,9 @@
     <string name="aqi">AQI</string>
     <string name="week">星期</string>
     <string name="date">日期</string>
-    <string name="temperature">天气</string>
+    <string name="temperature">温度</string>
     <string name="AQI">AQI</string>
-    <string name="quality">质量</string>
+    <string name="weather">天气</string>
     <string name="lowest">最低</string>
     <string name="highest">最高</string>
     <string name="rank">排名</string>
@@ -51,4 +51,7 @@
     <string name="NO2">NO₂</string>
     <string name="O3">O₃</string>
     <string name="CO">CO</string>
+    <string name="air_quality">空气质量</string>
+    <string name="rain_level">降雨等级</string>
+    <string name="see_weather">查看天气</string>
 </resources>

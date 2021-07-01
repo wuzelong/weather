@@ -3,13 +3,13 @@
  */
 package com.thread0.weather.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cxyzy.demo.RvAdapterV
 import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterH
 import com.thread0.weather.net.service.WeatherService
@@ -46,7 +46,6 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var adapterH: RvAdapterH
-    private lateinit var adapterV: RvAdapterV
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +66,9 @@ class MainActivity : AppCompatActivity() {
      * 初始化按钮
      */
     private fun initButtons() {
+        tv_air_quality.setOnClickListener {
+            startActivity(Intent(this, AirQualityActivity::class.java))
+        }
     }
 
     /**
@@ -77,8 +79,6 @@ class MainActivity : AppCompatActivity() {
         adapterH = RvAdapterH()
         rv_time.adapter = adapterH
 
-        adapterV = RvAdapterV()
-        rv_day.adapter = adapterV
         val linearLayoutManager: LinearLayoutManager = object : LinearLayoutManager(
             this@MainActivity,
             VERTICAL, false
@@ -87,9 +87,6 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         }
-        rv_day.layoutManager = linearLayoutManager
-        //添加安卓自带的分割线
-        rv_day.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     }
 
     /**
@@ -101,7 +98,6 @@ class MainActivity : AppCompatActivity() {
             data.add("text-$i")
         }
         adapterH.setData(data)
-        adapterV.setData(data)
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
         launch {
