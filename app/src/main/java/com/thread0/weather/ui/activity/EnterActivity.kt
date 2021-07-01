@@ -5,7 +5,6 @@ package com.thread0.weather.ui.activity
 
 import android.os.Bundle
 import com.thread0.weather.R
-import com.thread0.weather.databinding.ActivityEnterBinding
 import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.utils.startActivity
 
@@ -16,10 +15,6 @@ import top.xuqingquan.utils.startActivity
  *@Date: 2021/5/27 11:18 下午 Created
  */
 class EnterActivity : SimpleActivity() {
-
-    // view binding----https://blog.csdn.net/c10WTiybQ1Ye3/article/details/112690188
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_enter)
@@ -34,7 +29,7 @@ class EnterActivity : SimpleActivity() {
      */
     private fun parseXMLIntoDB() {
         //操作完成后跳转首页
-        startActivity<AirQualityActivity>()
+        startActivity<MainActivity>()
         finish()
     }
 }

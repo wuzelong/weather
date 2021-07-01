@@ -10,9 +10,9 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="@color/blue_00DEFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,16 +27,6 @@
                     android:text="定位"
                     android:textColor="@color/white"
                     android:textSize="20dp" />
-
-                <androidx.appcompat.widget.ActionMenuView
-                    android:id="@+id/amv"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_gravity="end"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/ic_more_vert">
-
-                </androidx.appcompat.widget.ActionMenuView>
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -109,6 +99,7 @@
                             android:layout_height="79dp"
                             android:gravity="center"
                             android:text="@string/temperature"
+                            android:textColor="@color/white"
                             android:textSize="60sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

@@ -4,17 +4,17 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import android.view.Menu
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cxyzy.demo.RvAdapterV
 import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterH
-import com.thread0.weather.databinding.ActivityMainBinding
 import com.thread0.weather.net.service.WeatherService
 import kotlinx.android.synthetic.main.activity_main.*
 import top.xuqingquan.app.ScaffoldConfig
-import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.extension.launch
 import java.util.*
 
@@ -44,21 +44,29 @@ import java.util.*
  *                    10、需要有按钮点击进入HmsActivity
  *@Date: 2021/5/25 11:36 下午 Created
  */
-class MainActivity : SimpleActivity() {
-    // 使用kotlin-android-extensions省略控件绑定
-    private lateinit var binding: ActivityMainBinding
-
+class MainActivity : AppCompatActivity() {
     private lateinit var adapterH: RvAdapterH
     private lateinit var adapterV: RvAdapterV
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         setContentView(R.layout.activity_main)
-
+        toolbar.title = ""
+        setSupportActionBar(toolbar);
+        initButtons()
         initRecyclerView()
         loadData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    /**
+     * 初始化按钮
+     */
+    private fun initButtons() {
     }
 
     /**

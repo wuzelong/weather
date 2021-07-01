@@ -54,7 +54,7 @@ android {
     }
 
     // 开启 viewBinding
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
     //如果有用到 kapt 添加如下配置
@@ -76,6 +76,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // fastjson
+    implementation 'com.alibaba:fastjson:1.1.72.android'
 
     // 子模块核心
     implementation 'top.xuqingquan:scaffold:3.0.2'

@@ -44,7 +44,7 @@ class ActivityLifecycleCallbackImpl : Application.ActivityLifecycleCallbacks{
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         Log.d(TAG,"onActivityCreated----${activity.javaClass.name}")
         activityList.add(activity)
-        StatusBarUtils.setStatusBarBackgroundColor(activity, activity.resources.getColor(R.color.blue_00DEFF))
+        StatusBarUtils.translucent(activity)
     }
 
 }
