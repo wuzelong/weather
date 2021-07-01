@@ -3,6 +3,7 @@
  */
 package com.thread0.weather.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,6 +49,9 @@ class AirQualityActivity : SimpleActivity() {
     private fun setClickEvent() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
+        }
+        btn_airRank.setOnClickListener {
+            startActivity(Intent(this, AirQualityRankActivity::class.java))
         }
     }
     /**

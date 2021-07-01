@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_aqis
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_levels
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_time
+import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_rank_aqi
+import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_rank_city
+import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_ranks
 import kotlinx.android.synthetic.main.rv_item_air_quality_v.view.*
 
 class RvAdapterAirQuaV : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -18,10 +18,10 @@ class RvAdapterAirQuaV : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var levelList = mutableListOf<String>()
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_item_air_quality_time.text = weekList[position]
-        holder.itemView.tv_item_air_quality_levels.text = dateList[position]
-        holder.itemView.tv_item_air_quality_aqis.text = aqiList[position]
-        holder.itemView.tv_item_air_quality_level.text = levelList[position]
+        holder.itemView.tv_item_air_quality_ranks.text = weekList[position]
+        holder.itemView.tv_item_air_quality_rank_city.text = dateList[position]
+        holder.itemView.tv_item_air_quality_rank_aqi.text = aqiList[position]
+        holder.itemView.tv_item_air_quality_rank_qua.text = levelList[position]
     }
 
     fun setData(weeksList: List<String>,datesList: List<String>,aqisList: List<String>,quasList: List<String>) {
