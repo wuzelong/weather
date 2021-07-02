@@ -167,7 +167,7 @@ class AirQualityActivity : SimpleActivity() {
                 Dispatchers.Main
             ){
                 adapterH.setData(airQualityHourly)
-
+                rv_time_air.scrollToPosition(20)
             }
         }
     }
