@@ -92,7 +92,8 @@ class CircleDot(context: Context, @Nullable attrs: AttributeSet?, defStyleAttr: 
         when (event.action) {
             MotionEvent.ACTION_UP -> if (ableSelect) {
                 selected = if (selected) {
-                    false
+                    //false
+                    true
                 } else {
                     listener?.onClick()
                     true

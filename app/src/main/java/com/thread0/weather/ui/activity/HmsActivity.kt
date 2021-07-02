@@ -79,6 +79,9 @@ class HmsActivity : SimpleActivity() {
                     toastLoad.show()
                     splitImage(Color.parseColor("#FF3B30"))
                 }
+                redCircleDot.isSelected = true  //圆点单选
+                blueCircleDot.isSelected = false
+                whiteCircleDot.isSelected = false
             }
         })
         binding.blueCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
@@ -91,6 +94,9 @@ class HmsActivity : SimpleActivity() {
                     toastLoad.show()
                     splitImage(Color.parseColor("#007AFF"))
                 }
+                redCircleDot.isSelected = false
+                blueCircleDot.isSelected = true
+                whiteCircleDot.isSelected = false
             }
         })
         binding.whiteCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
@@ -103,6 +109,9 @@ class HmsActivity : SimpleActivity() {
                     toastLoad.show()
                     splitImage(Color.parseColor("#FFFFFF"))
                 }
+                redCircleDot.isSelected = false
+                blueCircleDot.isSelected = false
+                whiteCircleDot.isSelected = true
             }
         })
     }
