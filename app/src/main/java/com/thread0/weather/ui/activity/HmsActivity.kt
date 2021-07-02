@@ -9,15 +9,26 @@ import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.Drawable.ConstantState
 import android.net.Uri
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.view.Gravity
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.huawei.hmf.tasks.OnFailureListener
+import com.huawei.hmf.tasks.Task
+import com.huawei.hms.mlsdk.MLAnalyzerFactory
+import com.huawei.hms.mlsdk.common.MLFrame
+import com.huawei.hms.mlsdk.imgseg.MLImageSegmentation
+import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting
 import com.thread0.weather.databinding.ActivityHmsBinding
 import com.thread0.weather.ui.widget.CircleDot
+import com.thread0.weather.util.BitmapUtil
 import kotlinx.android.synthetic.main.activity_hms.*
 import top.xuqingquan.base.view.activity.SimpleActivity
 
@@ -31,14 +42,17 @@ class HmsActivity : SimpleActivity() {
 
     // view binding
     private lateinit var binding: ActivityHmsBinding
+    private lateinit var bitmap: Bitmap
+    private lateinit var toastLoad: Toast
+    private lateinit var toastPhoto: Toast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHmsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // 设置点击事件
-        setClickEvent()
+        initToast()  //初始化Toast
+        photoImgIV.tag = "unselect"
+        setClickEvent()// 设置点击事件
     }
     private fun setClickEvent() {
         binding.toolbar.setNavigationOnClickListener {
@@ -58,19 +72,37 @@ class HmsActivity : SimpleActivity() {
         binding.redCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为红色后显示到photoImgIV，处理过程需要有处理中的提示
-                Toast.makeText(applicationContext, "处理中", Toast.LENGTH_SHORT).show()
+                if(photoImgIV.getTag().equals("unselect")){
+                    toastPhoto.show()
+                }
+                else{
+                    toastLoad.show()
+                    splitImage(Color.parseColor("#FF3B30"))
+                }
             }
         })
         binding.blueCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为蓝色后显示到photoImgIV，处理过程需要有处理中的提示
-                Toast.makeText(applicationContext, "处理中", Toast.LENGTH_SHORT).show()
+                if(photoImgIV.getTag().equals("unselect")){
+                    toastPhoto.show()
+                }
+                else {
+                    toastLoad.show()
+                    splitImage(Color.parseColor("#007AFF"))
+                }
             }
         })
         binding.whiteCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为白色后显示到photoImgIV，处理过程需要有处理中的提示
-                Toast.makeText(applicationContext, "处理中", Toast.LENGTH_SHORT).show()
+                if(photoImgIV.getTag().equals("unselect")){
+                    toastPhoto.show()
+                }
+                else {
+                    toastLoad.show()
+                    splitImage(Color.parseColor("#FFFFFF"))
+                }
             }
         })
     }
@@ -120,10 +152,10 @@ class HmsActivity : SimpleActivity() {
         }
         // 根据图片路径显示图片
         if (imagePath != null) {
-            val bitmap = BitmapFactory.decodeFile(imagePath)
+            bitmap = BitmapFactory.decodeFile(imagePath)
             photoImgIV.setImageBitmap(bitmap)
+            photoImgIV.tag = "selected"
         }
-        println(imagePath)
     }
 
     /**
@@ -139,5 +171,36 @@ class HmsActivity : SimpleActivity() {
             cursor.close()
         }
         return path
+    }
+
+    /**
+     * 分离图像
+     */
+    fun splitImage(color:Int){
+        val setting = MLImageSegmentationSetting.Factory()
+            .setAnalyzerType(MLImageSegmentationSetting.BODY_SEG)
+            .setExact(true)
+            .create()
+        val analyzer = MLAnalyzerFactory.getInstance().getImageSegmentationAnalyzer(setting)
+        val mlFrame = MLFrame.Creator().setBitmap(this.bitmap).create()
+
+        // 创建一个task，处理图像分割检测器返回的结果。
+        val task : Task<MLImageSegmentation> = analyzer.asyncAnalyseFrame(mlFrame)
+        // 异步处理图像分割检测器返回结果
+        task.addOnSuccessListener { mlImageSegmentationResults -> // Transacting logic for segment success.
+            if (mlImageSegmentationResults != null) {
+                val foreground:Bitmap = mlImageSegmentationResults.getForeground()
+                val background : Bitmap? = BitmapUtil.combineBitmapByColor(this,color,foreground.width,foreground.height,foreground)
+                photoImgIV.setImageBitmap(background)
+            }
+        }.addOnFailureListener(OnFailureListener {
+            Toast.makeText(applicationContext, "处理失败", Toast.LENGTH_SHORT).show()
+        })
+    }
+    fun initToast(){
+        toastLoad =  Toast.makeText(applicationContext,"处理中", Toast.LENGTH_SHORT)
+        toastLoad.setGravity(Gravity.CENTER,0,0)
+        toastPhoto =  Toast.makeText(applicationContext,"请先选择图片", Toast.LENGTH_SHORT)
+        toastPhoto.setGravity(Gravity.CENTER,0,0)
     }
 }
