@@ -139,9 +139,8 @@ class AirQualityActivity : SimpleActivity() {
             val result = weatherService.getAirQualityHourlyHistory(location = "Xiamen")
             var airQualityHourly = ArrayList<AirQualityHourlyBean>()
             if(result!=null){
-                val len = result.results[0].hourlyHistory.size-1
                 val e = result.results[0].hourlyHistory
-                for(i in len downTo 1){
+                for(i in 23 downTo 0){
                     var time = e[i].city.lastUpdate.substring(11,16)
                     val color = AQIUtil.getColor(e[i].city.aqi)
                     val cur = AirQualityHourlyBean(time,e[i].city.quality,e[i].city.aqi.toString(),color)
@@ -151,23 +150,23 @@ class AirQualityActivity : SimpleActivity() {
             //逐小时空气质量
             val result2 = weatherService.getAirQualityHourly(location = "Xiamen")
             if(result2!=null){
-                for((index,e) in result2.results[0].hourly.withIndex()){
-                    var time = when(index){
+                val e = result2.results[0].hourly
+                for(i in 0..23){
+                    var time = when(i){
                         0->"现在"
-                        else->e.time.substring(11,16)
+                        else->e[i].time.substring(11,16)
                     }
                     if(time == "00:00")time="明天"
-                    val color = AQIUtil.getColor(e.aqi)
-                    val cur = AirQualityHourlyBean(time,e.quality,e.aqi.toString(),color)
+                    val color = AQIUtil.getColor(e[i].aqi)
+                    val cur = AirQualityHourlyBean(time,e[i].quality,e[i].aqi.toString(),color)
                     airQualityHourly.add(cur)
                 }
-
             }
             withContext(
                 Dispatchers.Main
             ){
                 adapterH.setData(airQualityHourly)
-                rv_time_air.scrollToPosition(20)
+                rv_time_air.scrollToPosition(21)
             }
         }
     }
