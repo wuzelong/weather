@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.adapter.RvAdapterAirQuaRank
+import com.thread0.weather.data.model.AirQualityRank
 import com.thread0.weather.databinding.ActivityAirQualityRankBinding
 import com.thread0.weather.net.service.WeatherService
+import com.thread0.weather.util.AQIUtil
 import kotlinx.android.synthetic.main.activity_air_quality_rank.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
@@ -58,11 +60,7 @@ class AirQualityRankActivity : AppCompatActivity() {
      * 载入数据
      */
     private fun loadData() {
-        val ranks = ArrayList<String>()
-        val citys = ArrayList<String>()
-        val AQIs = ArrayList<String>()
-        val qualities = ArrayList<String>()
-        val colors = ArrayList<String>()
+        var airQualityRank = ArrayList<AirQualityRank>()
 
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
@@ -70,38 +68,15 @@ class AirQualityRankActivity : AppCompatActivity() {
             val result = weatherService.getAirQualityRank()
             if (result != null) {
                 for ((index,e) in result.results.withIndex()){
-                    ranks.add("${index+1}")
-                    citys.add(e.location.name)
-                    AQIs.add(e.aqi.toString())
-                    if(e.aqi in 0..50){
-                        qualities.add("优")
-                        colors.add("green")
-                    }
-                    else if(e.aqi in 51..100){
-                        qualities.add("良")
-                        colors.add("yellow")
-                    }
-                    else if(e.aqi in 101..150){
-                        qualities.add("轻度污染")
-                        colors.add("orange")
-                    }
-                    else if(e.aqi in 151..200){
-                        qualities.add("中度污染")
-                        colors.add("red")
-                    }
-                    else if(e.aqi in 201..300){
-                        qualities.add("重度污染")
-                        colors.add("purple")
-                    }
-                    else{
-                        qualities.add("严重污染")
-                        colors.add("brown")
-                    }
+                    val qua = AQIUtil.getQuality(e.aqi)
+                    val col = AQIUtil.getColor(e.aqi)
+                    var cur = AirQualityRank(index+1,e.location.name,e.aqi,qua,col)
+                    airQualityRank.add(cur)
                 }
                 withContext(
                     Dispatchers.Main
                 ){
-                    adapterH.setData(ranks,citys,AQIs,qualities,colors)
+                    adapterH.setData(airQualityRank)
                 }
             }
         }
