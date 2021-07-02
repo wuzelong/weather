@@ -10,9 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.adapter.RvAdapterAirQuaH
 import com.thread0.weather.adapter.RvAdapterAirQuaV
 import com.thread0.weather.databinding.ActivityAirQualityBinding
-import top.xuqingquan.base.view.activity.SimpleActivity
-import java.util.ArrayList
+import com.thread0.weather.net.service.WeatherService
 import kotlinx.android.synthetic.main.activity_air_quality.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import top.xuqingquan.app.ScaffoldConfig
+import top.xuqingquan.base.view.activity.SimpleActivity
+import top.xuqingquan.extension.launch
+import java.util.*
 
 /**
  *@ClassName: AirQualityActivity
@@ -71,6 +76,30 @@ class AirQualityActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
+        //空气质量实况
+        val weatherService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
+        launch {
+            val result = weatherService.getAirQuality()
+            withContext(
+                Dispatchers.Main
+            ){
+                if (result != null) {
+                    val result0 = result.results[0]
+                    tv_pm25Val.text = result0.air.city.pm25
+                    tv_pm10Val.text = result0.air.city.pm10
+                    tv_so2Val.text = result0.air.city.so2
+                    tv_no2Val.text = result0.air.city.no2
+                    tv_o3Val.text = result0.air.city.o3
+                    tv_coVal.text = result0.air.city.co
+                    tv_area.text = result0.location.name
+                    tv_airLevel.text = result0.air.city.quality
+                    tv_day.text = result0.last_update.substring(0,10)
+                    tv_time.text = result0.last_update.substring(11,16)
+                }
+            }
+        }
+
         var nums =ArrayList<String>()
         var levels =ArrayList<String>()
         var times =ArrayList<String>()

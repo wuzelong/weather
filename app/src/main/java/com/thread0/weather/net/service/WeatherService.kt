@@ -3,6 +3,7 @@
  */
 package com.thread0.weather.net.service
 
+import com.thread0.weather.data.model.AirQualityServer
 import com.thread0.weather.data.model.RankServer
 import com.thread0.weather.data.model.WeatherFromServer
 import com.thread0.weather.net.WEATHER_PRIVATE_KEY
@@ -24,10 +25,23 @@ interface WeatherService {
         @Query("unit") unit: String = "c"
     ): WeatherFromServer?
 
+    /**
+     * 获取空气质量排行
+     */
     @GET("/v3/air/ranking.json")
     suspend fun getAirQualityRank(
         @Query("key") key: String = WEATHER_PRIVATE_KEY,
         @Query("language") language: String = "zh-Hans"
     ): RankServer?
 
+    /**
+     * 获取空气质量实况
+     */
+    @GET("/v3/air/now.json")
+    suspend fun getAirQuality(
+        @Query("key") key: String = WEATHER_PRIVATE_KEY,
+        @Query("language") language: String = "zh-Hans",
+        @Query("scope") scope: String = "city",
+        @Query("location") location: String = "beijing"
+    ): AirQualityServer?
 }
