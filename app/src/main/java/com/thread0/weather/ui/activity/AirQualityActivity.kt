@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.adapter.RvAdapterAirQuaH
 import com.thread0.weather.adapter.RvAdapterAirQuaV
-import com.thread0.weather.data.model.AirQualityFutureDayBean
+import com.thread0.weather.data.model.AirQualityDailyBean
+import com.thread0.weather.data.model.AirQualityHourlyBean
 import com.thread0.weather.databinding.ActivityAirQualityBinding
 import com.thread0.weather.net.service.WeatherService
 import com.thread0.weather.util.AQIUtil
@@ -109,8 +110,8 @@ class AirQualityActivity : SimpleActivity() {
 
         //1.2、逐日空气质量
         launch {
-            val result = weatherService.getAirQualityFutureDay(location = "Xiamen")
-            var airQualityFutureDay = ArrayList<AirQualityFutureDayBean>()
+            val result = weatherService.getAirQualityDaily(location = "Xiamen")
+            var airQualityDaily = ArrayList<AirQualityDailyBean>()
             if(result!=null){
                 for((index,e) in result.results[0].daily.withIndex()){
                     val week = getWeekByDateStr(e.date)
@@ -121,26 +122,41 @@ class AirQualityActivity : SimpleActivity() {
                         else->e.date.substring(5,10)
                     }
                     val color = AQIUtil.getColor(e.aqi)
-                    val cur = AirQualityFutureDayBean(week,date,e.aqi.toString(), e.quality,color)
-                    airQualityFutureDay.add(cur)
+                    val cur = AirQualityDailyBean(week,date,e.aqi.toString(), e.quality,color)
+                    airQualityDaily.add(cur)
                 }
                 withContext(
                     Dispatchers.Main
                 ){
-                    adapterV.setData(airQualityFutureDay)
+                    adapterV.setData(airQualityDaily)
                 }
             }
         }
 
-        var nums =ArrayList<String>()
-        var levels =ArrayList<String>()
-        var times =ArrayList<String>()
-        for (i in 0..20){
-            nums.add("$i")
-            levels.add("1$i")
-            times.add("18:00")
+        //1.3、逐小时空气质量
+        launch {
+            val result = weatherService.getAirQualityHourly(location = "Xiamen")
+            var airQualityHourly = ArrayList<AirQualityHourlyBean>()
+            if(result!=null){
+                for((index,e) in result.results[0].hourly.withIndex()){
+                    var time = when(index){
+                        0->"现在"
+                        else->e.time.substring(11,16)
+                    }
+                    if(time == "00:00")time="明天"
+                    val color = AQIUtil.getColor(e.aqi)
+                    val cur = AirQualityHourlyBean(time,e.quality,e.aqi.toString(),color)
+                    airQualityHourly.add(cur)
+                }
+                withContext(
+                    Dispatchers.Main
+                ){
+                    adapterH.setData(airQualityHourly)
+                }
+            }
         }
-        adapterH.setData(nums,levels,times)
+
+        //1.4、历史逐小时空气质量
     }
 
     /**

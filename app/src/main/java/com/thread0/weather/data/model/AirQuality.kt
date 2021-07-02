@@ -72,20 +72,20 @@ data class AirQualityResult(
 /**
  * 逐日空气质量返回结果类
  */
-data class AirQualityFutureDayServer(
-    val results: List<AirQualityFutureDayResult>
+data class AirQualityDailyServer(
+    val results: List<AirQualityDailyResult>
 )
 /**
- * 空气质量结果类
+ * 逐日空气质量结果类
  */
-data class AirQualityFutureDayResult(
+data class AirQualityDailyResult(
     val location: Location,
     val daily: List<Daily>,
     @SerializedName("last_update")
     val lastUpdate: String,
 )
 /**
- * 每日AQI
+ * 逐日AQI
  */
 data class Daily(
     val aqi:Int,
@@ -96,7 +96,7 @@ data class Daily(
 /**
  * 逐日空气质量封装显示类
  */
-data class AirQualityFutureDayBean(
+data class AirQualityDailyBean(
     val week:String,
     val date:String,
     val AQI: String,
@@ -104,6 +104,38 @@ data class AirQualityFutureDayBean(
     val color:Int
 )
 
+/**
+ * 逐小时空气质量返回结果类
+ */
+data class AirQualityHourlyServer(
+    val results: List<AirQualityHourlyResult>
+)
+/**
+ * 逐小时空气质量结果类
+ */
+data class AirQualityHourlyResult(
+    val location: Location,
+    val hourly: List<Hourly>,
+    @SerializedName("last_update")
+    val lastUpdate: String,
+)
+/**
+ * 逐小时AQI
+ */
+data class Hourly(
+    val aqi:Int,
+    val time: String,
+    val quality:String
+)
+/**
+ * 逐小时空气质量封装显示类
+ */
+data class AirQualityHourlyBean(
+    val time: String,
+    val quality:String,
+    val aqi:String,
+    val color:Int
+)
 
 
 

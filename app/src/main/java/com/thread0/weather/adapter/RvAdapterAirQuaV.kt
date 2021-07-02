@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
-import com.thread0.weather.data.model.AirQualityFutureDayBean
+import com.thread0.weather.data.model.AirQualityDailyBean
 import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_aqi
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_date
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_week
 import kotlinx.android.synthetic.main.rv_item_air_quality_v.view.*
 
 class RvAdapterAirQuaV : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var list = mutableListOf<AirQualityFutureDayBean>()
+    private var list = mutableListOf<AirQualityDailyBean>()
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_item_air_quality_week.text = list[position].week
@@ -25,7 +23,7 @@ class RvAdapterAirQuaV : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         holder.itemView.tv_item_air_quality_level.setTextColor(ContextCompat.getColor(mContext,list[position].color))
     }
 
-    fun setData(airList: List<AirQualityFutureDayBean>) {
+    fun setData(airList: List<AirQualityDailyBean>) {
         list.clear()
         list.addAll(airList)
         notifyDataSetChanged()

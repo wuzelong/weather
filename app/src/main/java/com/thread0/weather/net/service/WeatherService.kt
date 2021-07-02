@@ -3,10 +3,7 @@
  */
 package com.thread0.weather.net.service
 
-import com.thread0.weather.data.model.AirQualityFutureDayServer
-import com.thread0.weather.data.model.AirQualityServer
-import com.thread0.weather.data.model.RankServer
-import com.thread0.weather.data.model.WeatherFromServer
+import com.thread0.weather.data.model.*
 import com.thread0.weather.net.WEATHER_PRIVATE_KEY
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -50,9 +47,19 @@ interface WeatherService {
      * 获取逐日空气质量
      */
     @GET("/v3/air/daily.json")
-    suspend fun getAirQualityFutureDay(
+    suspend fun getAirQualityDaily(
         @Query("key") key: String = WEATHER_PRIVATE_KEY,
         @Query("language") language: String = "zh-Hans",
         @Query("location") location: String = "beijing"
-    ): AirQualityFutureDayServer?
+    ): AirQualityDailyServer?
+
+    /**
+     * 获取逐小时空气质量
+     */
+    @GET("/v3/air/hourly.json")
+    suspend fun getAirQualityHourly(
+        @Query("key") key: String = WEATHER_PRIVATE_KEY,
+        @Query("language") language: String = "zh-Hans",
+        @Query("location") location: String = "beijing"
+    ): AirQualityHourlyServer?
 }
