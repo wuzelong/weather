@@ -4,13 +4,16 @@
 package com.thread0.weather.ui.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.adapter.RvAdapterAirQuaH
 import com.thread0.weather.adapter.RvAdapterAirQuaV
 import com.thread0.weather.databinding.ActivityAirQualityBinding
 import com.thread0.weather.net.service.WeatherService
+import com.thread0.weather.util.AQIUtil
 import kotlinx.android.synthetic.main.activity_air_quality.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -80,7 +83,7 @@ class AirQualityActivity : SimpleActivity() {
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
         launch {
-            val result = weatherService.getAirQuality()
+            val result = weatherService.getAirQuality(location = "Xiamen")
             withContext(
                 Dispatchers.Main
             ){
@@ -94,8 +97,11 @@ class AirQualityActivity : SimpleActivity() {
                     tv_coVal.text = result0.air.city.co
                     tv_area.text = result0.location.name
                     tv_airLevel.text = result0.air.city.quality
+                    tv_airQuality.text =result0.air.city.aqi.toString()
                     tv_day.text = result0.last_update.substring(0,10)
                     tv_time.text = result0.last_update.substring(11,16)
+                    val color=AQIUtil.getColorOx(result0.air.city.aqi)  //获取AQI对应颜色
+                    tv_airLevel.setTextColor(Color.parseColor(color))
                 }
             }
         }
@@ -114,7 +120,7 @@ class AirQualityActivity : SimpleActivity() {
         val dates = ArrayList<String>()
         val aqis = ArrayList<String>()
         val quas = ArrayList<String>()
-        for (i in 0..7) {
+        for (i in 1..7) {
             weeks.add("星期$i")
             dates.add("明天")
             aqis.add("2$i")
