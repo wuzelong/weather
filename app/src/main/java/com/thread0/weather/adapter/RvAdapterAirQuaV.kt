@@ -4,39 +4,34 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_rank_aqi
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_rank_city
-import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_rank
+import com.thread0.weather.data.model.AirQualityFutureDayBean
+import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_aqi
+import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_date
+import kotlinx.android.synthetic.main.rv_item_air_quality_h.view.tv_item_air_quality_week
 import kotlinx.android.synthetic.main.rv_item_air_quality_v.view.*
 
 class RvAdapterAirQuaV : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var weekList = mutableListOf<String>()
-    private var dateList = mutableListOf<String>()
-    private var aqiList = mutableListOf<String>()
-    private var levelList = mutableListOf<String>()
+    private var list = mutableListOf<AirQualityFutureDayBean>()
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_item_air_quality_rank.text = weekList[position]
-        holder.itemView.tv_item_air_quality_rank_city.text = dateList[position]
-        holder.itemView.tv_item_air_quality_rank_aqi.text = aqiList[position]
-        holder.itemView.tv_item_air_quality_rank_qua.text = levelList[position]
+        holder.itemView.tv_item_air_quality_week.text = list[position].week
+        holder.itemView.tv_item_air_quality_date.text = list[position].date
+        holder.itemView.tv_item_air_quality_aqi.text = list[position].AQI
+        holder.itemView.tv_item_air_quality_level.text = list[position].quality
+        holder.itemView.tv_item_air_quality_aqi.setTextColor(ContextCompat.getColor(mContext,list[position].color))
+        holder.itemView.tv_item_air_quality_level.setTextColor(ContextCompat.getColor(mContext,list[position].color))
     }
 
-    fun setData(weeksList: List<String>,datesList: List<String>,aqisList: List<String>,quasList: List<String>) {
-        weekList.clear()
-        dateList.clear()
-        aqiList.clear()
-        levelList.clear()
-        weekList.addAll(weeksList)
-        dateList.addAll(datesList)
-        aqiList.addAll(aqisList)
-        levelList.addAll(quasList)
+    fun setData(airList: List<AirQualityFutureDayBean>) {
+        list.clear()
+        list.addAll(airList)
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = aqiList.size
+    override fun getItemCount(): Int = list.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         mContext = parent.context

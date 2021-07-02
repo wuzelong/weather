@@ -6,11 +6,11 @@ package com.thread0.weather.ui.activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.adapter.RvAdapterAirQuaH
 import com.thread0.weather.adapter.RvAdapterAirQuaV
+import com.thread0.weather.data.model.AirQualityFutureDayBean
 import com.thread0.weather.databinding.ActivityAirQualityBinding
 import com.thread0.weather.net.service.WeatherService
 import com.thread0.weather.util.AQIUtil
@@ -21,6 +21,7 @@ import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.extension.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  *@ClassName: AirQualityActivity
@@ -79,15 +80,15 @@ class AirQualityActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
-        //空气质量实况
+        //1.1、当前空气质量
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
         launch {
             val result = weatherService.getAirQuality(location = "Xiamen")
-            withContext(
-                Dispatchers.Main
-            ){
-                if (result != null) {
+            if (result != null) {
+                withContext(
+                    Dispatchers.Main
+                ) {
                     val result0 = result.results[0]
                     tv_pm25Val.text = result0.air.city.pm25
                     tv_pm10Val.text = result0.air.city.pm10
@@ -97,11 +98,36 @@ class AirQualityActivity : SimpleActivity() {
                     tv_coVal.text = result0.air.city.co
                     tv_area.text = result0.location.name
                     tv_airLevel.text = result0.air.city.quality
-                    tv_airQuality.text =result0.air.city.aqi.toString()
-                    tv_day.text = result0.last_update.substring(0,10)
-                    tv_time.text = result0.last_update.substring(11,16)
-                    val color=AQIUtil.getColorOx(result0.air.city.aqi)  //获取AQI对应颜色
+                    tv_airQuality.text = result0.air.city.aqi.toString()
+                    tv_day.text = result0.lastUpdate.substring(0, 10)
+                    tv_time.text = result0.lastUpdate.substring(11, 16)
+                    val color = AQIUtil.getColorOx(result0.air.city.aqi)  //获取AQI对应颜色
                     tv_airLevel.setTextColor(Color.parseColor(color))
+                }
+            }
+        }
+
+        //1.2、逐日空气质量
+        launch {
+            val result = weatherService.getAirQualityFutureDay(location = "Xiamen")
+            var airQualityFutureDay = ArrayList<AirQualityFutureDayBean>()
+            if(result!=null){
+                for((index,e) in result.results[0].daily.withIndex()){
+                    val week = getWeekByDateStr(e.date)
+                    val date = when(index){
+                        0->"今天"
+                        1->"明天"
+                        2->"后天"
+                        else->e.date.substring(5,10)
+                    }
+                    val color = AQIUtil.getColor(e.aqi)
+                    val cur = AirQualityFutureDayBean(week,date,e.aqi.toString(), e.quality,color)
+                    airQualityFutureDay.add(cur)
+                }
+                withContext(
+                    Dispatchers.Main
+                ){
+                    adapterV.setData(airQualityFutureDay)
                 }
             }
         }
@@ -115,17 +141,29 @@ class AirQualityActivity : SimpleActivity() {
             times.add("18:00")
         }
         adapterH.setData(nums,levels,times)
+    }
 
-        val weeks = ArrayList<String>()
-        val dates = ArrayList<String>()
-        val aqis = ArrayList<String>()
-        val quas = ArrayList<String>()
-        for (i in 1..7) {
-            weeks.add("星期$i")
-            dates.add("明天")
-            aqis.add("2$i")
-            quas.add("优")
+    /**
+     * 根据指定的日期字符串获取星期几
+     */
+    private fun getWeekByDateStr(strDate: String): String {
+        val year = strDate.substring(0, 4).toInt()
+        val month = strDate.substring(5, 7).toInt()
+        val day = strDate.substring(8, 10).toInt()
+        val c: Calendar = Calendar.getInstance()
+        c.set(Calendar.YEAR, year)
+        c.set(Calendar.MONTH, month - 1)
+        c.set(Calendar.DAY_OF_MONTH, day)
+        var week = ""
+        when (c.get(Calendar.DAY_OF_WEEK)) {
+            1 -> week = "星期天"
+            2 -> week = "星期一"
+            3 -> week = "星期二"
+            4 -> week = "星期三"
+            5 -> week = "星期四"
+            6 -> week = "星期五"
+            7 -> week = "星期六"
         }
-        adapterV.setData(weeks,dates,aqis,quas)
+        return week
     }
 }

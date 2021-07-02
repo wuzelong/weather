@@ -73,59 +73,6 @@ data class WeatherFromServer(
     val results: List<WeatherResult>
 )
 
-/**
- * 空气质量排行榜返回结果类
- */
-data class RankServer(
-    val results: List<RankResult>
-)
-
-/**
- * 排行结果类
- */
-data class RankResult(
-    val location: Location,
-    val aqi:Int,
-)
-
-/**
- * 空气质量实况返回结果类
- */
-data class AirQualityServer(
-    val results: List<AirQualityResult>
-)
-
-/**
- * 城市类
- */
-data class City(
-    val aqi:Int,
-    val pm25:String,
-    val pm10:String,
-    val so2:String,
-    val no2:String,
-    val co:String,
-    val o3:String,
-    val last_update:String,
-    val quality:String
-)
-/**
- * 空气质量类
- */
-data class Air(
-    val city:City
-)
-
-/**
- * 空气质量结果类
- */
-data class AirQualityResult(
-    val location: Location,
-    val air: Air,
-    val last_update:String
-)
-
-
 
 
 

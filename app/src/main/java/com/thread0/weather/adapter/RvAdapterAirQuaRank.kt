@@ -1,7 +1,6 @@
 package com.thread0.weather.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +15,13 @@ class RvAdapterAirQuaRank : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.tv_item_air_quality_rank.text = list[position].rank.toString()
-        holder.itemView.tv_item_air_quality_rank_city.text = list[position].city
-        holder.itemView.tv_item_air_quality_rank_aqi.text = list[position].AQI.toString()
-        holder.itemView.tv_item_air_quality_rank_qua.text = list[position].quality
+        holder.itemView.tv_item_air_quality_week.text = list[position].rank.toString()
+        holder.itemView.tv_item_air_quality_date.text = list[position].city
+        holder.itemView.tv_item_air_quality_aqi.text = list[position].AQI.toString()
+        holder.itemView.tv_item_air_quality_level.text = list[position].quality
 
-        holder.itemView.tv_item_air_quality_rank_aqi.setTextColor(ContextCompat.getColor(mContext,list[position].color))
-        holder.itemView.tv_item_air_quality_rank_qua.setTextColor(ContextCompat.getColor(mContext,list[position].color))
+        holder.itemView.tv_item_air_quality_aqi.setTextColor(ContextCompat.getColor(mContext,list[position].color))
+        holder.itemView.tv_item_air_quality_level.setTextColor(ContextCompat.getColor(mContext,list[position].color))
     }
 
     fun setData(lists: List<AirQualityRank>) {

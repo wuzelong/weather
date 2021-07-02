@@ -6,14 +6,12 @@ package com.thread0.weather.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.adapter.RvAdapterAirQuaRank
 import com.thread0.weather.data.model.AirQualityRank
 import com.thread0.weather.databinding.ActivityAirQualityRankBinding
 import com.thread0.weather.net.service.WeatherService
 import com.thread0.weather.util.AQIUtil
 import kotlinx.android.synthetic.main.activity_air_quality_rank.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
@@ -70,7 +68,7 @@ class AirQualityRankActivity : AppCompatActivity() {
                 for ((index,e) in result.results.withIndex()){
                     val qua = AQIUtil.getQuality(e.aqi)
                     val col = AQIUtil.getColor(e.aqi)
-                    var cur = AirQualityRank(index+1,e.location.name,e.aqi,qua,col)
+                    val cur = AirQualityRank(index+1,e.location.name,e.aqi,qua,col)
                     airQualityRank.add(cur)
                 }
                 withContext(

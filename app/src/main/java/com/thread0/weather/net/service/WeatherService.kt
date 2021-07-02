@@ -3,6 +3,7 @@
  */
 package com.thread0.weather.net.service
 
+import com.thread0.weather.data.model.AirQualityFutureDayServer
 import com.thread0.weather.data.model.AirQualityServer
 import com.thread0.weather.data.model.RankServer
 import com.thread0.weather.data.model.WeatherFromServer
@@ -44,4 +45,14 @@ interface WeatherService {
         @Query("scope") scope: String = "city",
         @Query("location") location: String = "beijing"
     ): AirQualityServer?
+
+    /**
+     * 获取逐日空气质量
+     */
+    @GET("/v3/air/daily.json")
+    suspend fun getAirQualityFutureDay(
+        @Query("key") key: String = WEATHER_PRIVATE_KEY,
+        @Query("language") language: String = "zh-Hans",
+        @Query("location") location: String = "beijing"
+    ): AirQualityFutureDayServer?
 }
