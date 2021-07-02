@@ -136,8 +136,28 @@ data class AirQualityHourlyBean(
     val aqi:String,
     val color:Int
 )
+/**
+ * 历史逐小时空气质量返回结果类
+ */
+data class AirQualityHourlyHistoryServer(
+    val results: List<AirQualityHourlyHistoryResult>
+)
+/**
+ * 历史逐小时空气质量结果类
+ */
+data class AirQualityHourlyHistoryResult(
+    val location: Location,
+    @SerializedName("hourly_history")
+    val hourlyHistory: List<Cites>
+)
 
-
+/**
+ * 历史逐小时空气质量城市类
+ */
+data class Cites(
+    val city: City,
+    val stations:String
+)
 
 
 

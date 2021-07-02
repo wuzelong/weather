@@ -81,7 +81,7 @@ class AirQualityActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
-        //1.1、当前空气质量
+        //当前空气质量
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
         launch {
@@ -108,7 +108,7 @@ class AirQualityActivity : SimpleActivity() {
             }
         }
 
-        //1.2、逐日空气质量
+        //逐日空气质量
         launch {
             val result = weatherService.getAirQualityDaily(location = "Xiamen")
             var airQualityDaily = ArrayList<AirQualityDailyBean>()
@@ -133,12 +133,25 @@ class AirQualityActivity : SimpleActivity() {
             }
         }
 
-        //1.3、逐小时空气质量
+        //历史逐小时空气质量和逐小时空气质量
         launch {
-            val result = weatherService.getAirQualityHourly(location = "Xiamen")
+            //历史逐小时空气质量
+            val result = weatherService.getAirQualityHourlyHistory(location = "Xiamen")
             var airQualityHourly = ArrayList<AirQualityHourlyBean>()
             if(result!=null){
-                for((index,e) in result.results[0].hourly.withIndex()){
+                val len = result.results[0].hourlyHistory.size-1
+                val e = result.results[0].hourlyHistory
+                for(i in len downTo 1){
+                    var time = e[i].city.lastUpdate.substring(11,16)
+                    val color = AQIUtil.getColor(e[i].city.aqi)
+                    val cur = AirQualityHourlyBean(time,e[i].city.quality,e[i].city.aqi.toString(),color)
+                    airQualityHourly.add(cur)
+                }
+            }
+            //逐小时空气质量
+            val result2 = weatherService.getAirQualityHourly(location = "Xiamen")
+            if(result2!=null){
+                for((index,e) in result2.results[0].hourly.withIndex()){
                     var time = when(index){
                         0->"现在"
                         else->e.time.substring(11,16)
@@ -148,15 +161,15 @@ class AirQualityActivity : SimpleActivity() {
                     val cur = AirQualityHourlyBean(time,e.quality,e.aqi.toString(),color)
                     airQualityHourly.add(cur)
                 }
-                withContext(
-                    Dispatchers.Main
-                ){
-                    adapterH.setData(airQualityHourly)
-                }
+
+            }
+            withContext(
+                Dispatchers.Main
+            ){
+                adapterH.setData(airQualityHourly)
+
             }
         }
-
-        //1.4、历史逐小时空气质量
     }
 
     /**

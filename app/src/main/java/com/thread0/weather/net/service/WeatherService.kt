@@ -62,4 +62,15 @@ interface WeatherService {
         @Query("language") language: String = "zh-Hans",
         @Query("location") location: String = "beijing"
     ): AirQualityHourlyServer?
+
+    /**
+     * 获取历史逐小时空气质量
+     */
+    @GET("/v3/air/hourly_history.json")
+    suspend fun getAirQualityHourlyHistory(
+        @Query("key") key: String = WEATHER_PRIVATE_KEY,
+        @Query("language") language: String = "zh-Hans",
+        @Query("location") location: String = "beijing",
+        @Query("scope") scope: String = "city",
+    ): AirQualityHourlyHistoryServer?
 }
