@@ -5,6 +5,8 @@ package com.thread0.weather.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
+import com.thread0.weather.R
 import com.thread0.weather.databinding.ActivityZodiacBinding
 import com.thread0.weather.net.service.ChineseCalendarService
 import kotlinx.android.synthetic.main.activity_zodiac.*
@@ -59,6 +61,20 @@ class ZodiacActivity : SimpleActivity() {
                     tv_zodiac_year.text = result0.zodiac
                     tv_lunar_festival.text = result0.lunarFestival
                     tv_solar_term.text = result0.solarTerm
+                    tv_zodiac.background=when(result0.zodiac){
+                        "鼠"-> getDrawable(R.mipmap.bg_zodiac_1)
+                        "牛"-> getDrawable(R.mipmap.bg_zodiac_2)
+                        "虎"-> getDrawable(R.mipmap.bg_zodiac_3)
+                        "兔"-> getDrawable(R.mipmap.bg_zodiac_4)
+                        "龙"-> getDrawable(R.mipmap.bg_zodiac_5)
+                        "蛇"-> getDrawable(R.mipmap.bg_zodiac_6)
+                        "马"-> getDrawable(R.mipmap.bg_zodiac_7)
+                        "羊"-> getDrawable(R.mipmap.bg_zodiac_8)
+                        "猴"-> getDrawable(R.mipmap.bg_zodiac_9)
+                        "鸡"-> getDrawable(R.mipmap.bg_zodiac_10)
+                        "狗"-> getDrawable(R.mipmap.bg_zodiac_11)
+                        else -> getDrawable(R.mipmap.bg_zodiac_12)
+                    }
                 }
             }
         }
