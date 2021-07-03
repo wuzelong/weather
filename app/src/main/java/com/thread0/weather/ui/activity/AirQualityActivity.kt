@@ -13,7 +13,7 @@ import com.thread0.weather.adapter.RvAdapterAirQuaV
 import com.thread0.weather.data.model.AirQualityDailyBean
 import com.thread0.weather.data.model.AirQualityHourlyBean
 import com.thread0.weather.databinding.ActivityAirQualityBinding
-import com.thread0.weather.net.service.WeatherService
+import com.thread0.weather.net.service.AirQualityrService
 import com.thread0.weather.util.AQIUtil
 import kotlinx.android.synthetic.main.activity_air_quality.*
 import kotlinx.coroutines.Dispatchers
@@ -82,10 +82,10 @@ class AirQualityActivity : SimpleActivity() {
      */
     private fun loadData() {
         //当前空气质量
-        val weatherService =
-            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
+        val airQualityService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(AirQualityrService::class.java)
         launch {
-            val result = weatherService.getAirQuality(location = "Xiamen")
+            val result = airQualityService.getAirQuality(location = "Xiamen")
             if (result != null) {
                 withContext(
                     Dispatchers.Main
@@ -110,7 +110,7 @@ class AirQualityActivity : SimpleActivity() {
 
         //逐日空气质量
         launch {
-            val result = weatherService.getAirQualityDaily(location = "Xiamen")
+            val result = airQualityService.getAirQualityDaily(location = "Xiamen")
             var airQualityDaily = ArrayList<AirQualityDailyBean>()
             if(result!=null){
                 for((index,e) in result.results[0].daily.withIndex()){
@@ -136,7 +136,7 @@ class AirQualityActivity : SimpleActivity() {
         //历史逐小时空气质量和逐小时空气质量
         launch {
             //历史逐小时空气质量
-            val result = weatherService.getAirQualityHourlyHistory(location = "Xiamen")
+            val result = airQualityService.getAirQualityHourlyHistory(location = "Xiamen")
             var airQualityHourly = ArrayList<AirQualityHourlyBean>()
             if(result!=null){
                 val e = result.results[0].hourlyHistory
@@ -148,7 +148,7 @@ class AirQualityActivity : SimpleActivity() {
                 }
             }
             //逐小时空气质量
-            val result2 = weatherService.getAirQualityHourly(location = "Xiamen")
+            val result2 = airQualityService.getAirQualityHourly(location = "Xiamen")
             if(result2!=null){
                 val e = result2.results[0].hourly
                 for(i in 0..23){

@@ -4,8 +4,15 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import com.thread0.weather.databinding.ActivityZodiacBinding
+import com.thread0.weather.net.service.ChineseCalendarService
+import kotlinx.android.synthetic.main.activity_zodiac.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
+import top.xuqingquan.extension.launch
 
 /**
  *@ClassName: ZodiacActivity
@@ -23,10 +30,9 @@ class ZodiacActivity : SimpleActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityZodiacBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        loadData()
         // 设置点击事件
         setClickEvent()
-        // 初始化数据与布局
     }
 
     private fun setClickEvent() {
@@ -34,6 +40,28 @@ class ZodiacActivity : SimpleActivity() {
             finish()
         }
     }
-
+    private fun loadData(){
+        val chineseCalendarService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(ChineseCalendarService::class.java)
+        launch {
+            val result = chineseCalendarService.getChineseCalendar()
+            if(result!=null) { withContext(
+                Dispatchers.Main
+                ) {
+                    val result0 = result.results.chineseCalendar[0]
+                    tv_lunar_date.text = result0.date
+                    tv_lunar_year.text = result0.lunarYear
+                    tv_lunar_month.text = result0.lunarMonth
+                    tv_lunar_day.text = result0.lunarDay
+                    tv_ganzhi_year.text = result0.ganzhiYear
+                    tv_ganzhi_month.text = result0.ganzhiMonth
+                    tv_ganzhi_day.text = result0.ganzhiDay
+                    tv_zodiac_year.text = result0.zodiac
+                    tv_lunar_festival.text = result0.lunarFestival
+                    tv_solar_term.text = result0.solarTerm
+                }
+            }
+        }
+    }
 
 }

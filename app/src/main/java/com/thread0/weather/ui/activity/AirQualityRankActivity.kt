@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.thread0.weather.adapter.RvAdapterAirQuaRank
 import com.thread0.weather.data.model.AirQualityRank
 import com.thread0.weather.databinding.ActivityAirQualityRankBinding
+import com.thread0.weather.net.service.AirQualityrService
 import com.thread0.weather.net.service.WeatherService
 import com.thread0.weather.util.AQIUtil
 import kotlinx.android.synthetic.main.activity_air_quality_rank.*
@@ -60,10 +61,10 @@ class AirQualityRankActivity : AppCompatActivity() {
     private fun loadData() {
         var airQualityRank = ArrayList<AirQualityRank>()
 
-        val weatherService =
-            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
+        val airQualityService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(AirQualityrService::class.java)
         launch {
-            val result = weatherService.getAirQualityRank()
+            val result = airQualityService.getAirQualityRank()
             if (result != null) {
                 for ((index,e) in result.results.withIndex()){
                     val qua = AQIUtil.getQuality(e.aqi)
