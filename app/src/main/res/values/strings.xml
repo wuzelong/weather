@@ -33,7 +33,7 @@
 
     <string name="activity_air_quality_rank">空气质量排行榜</string>
 
-    <string name="activity_zodiac">农历、节气与生肖</string>
+    <string name="activity_zodiac">农历</string>
 
     <string name="activity_car_restricted_city">机动车尾号限行</string>
 
@@ -56,4 +56,7 @@
     <string name="moonset">月落</string>
 
     <string name="quality">质量</string>
+
+    <string name="lunar">农历：</string>
+    <string name="ganzhi">干支：</string>
 </resources>

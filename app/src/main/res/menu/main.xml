@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/calendar"
-        android:title="日历" />
+        android:title="农历" />
     <item
         android:id="@+id/hms"
         android:title="HMS" />

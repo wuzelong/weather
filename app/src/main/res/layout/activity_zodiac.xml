@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ui.activity.ZodiacActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -26,6 +27,151 @@
             android:textSize="?attr/MediumText" />
 
     </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:background="@mipmap/bg_zodiac"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.301" />
+
+    <TextView
+        android:id="@+id/tv_zodiac"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/bg_zodiac_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_back" />
+
+    <TextView
+        android:id="@+id/tv_lunar_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="2021-07-03"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_back" />
+
+    <TextView
+        android:id="@+id/tv_lunar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/lunar"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lunar_date" />
+
+    <TextView
+        android:id="@+id/tv_lunar_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2021"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_lunar_date"
+        app:layout_constraintTop_toTopOf="@+id/tv_lunar" />
+
+    <TextView
+        android:id="@+id/tv_lunar_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="五月"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_lunar_year"
+        app:layout_constraintTop_toTopOf="@+id/tv_lunar_year" />
+
+    <TextView
+        android:id="@+id/tv_lunar_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="廿四"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_lunar_month"
+        app:layout_constraintTop_toTopOf="@+id/tv_lunar_month" />
+
+    <TextView
+        android:id="@+id/tv_ganzhi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/ganzhi"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_lunar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lunar" />
+
+    <TextView
+        android:id="@+id/tv_ganzhi_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="辛丑"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_lunar_year"
+        app:layout_constraintTop_toTopOf="@+id/tv_ganzhi" />
+
+    <TextView
+        android:id="@+id/tv_ganzhi_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="甲午"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_ganzhi_year"
+        app:layout_constraintTop_toTopOf="@+id/tv_ganzhi_year" />
+
+    <TextView
+        android:id="@+id/tv_ganzhi_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="壬子"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_ganzhi_month"
+        app:layout_constraintTop_toTopOf="@+id/tv_ganzhi_month" />
+
+    <TextView
+        android:id="@+id/tv_zodiac_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="牛"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_lunar_date"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/tv_lunar_festival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="节日"
+        android:textColor="@color/choice_ring"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_zodiac_year"
+        app:layout_constraintEnd_toStartOf="@+id/tv_zodiac_year" />
+
+    <TextView
+        android:id="@+id/tv_solar_term"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="节气"
+        android:textColor="@color/choice_ring"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_lunar_festival"
+        app:layout_constraintStart_toEndOf="@+id/tv_zodiac_year" />
 
     <!--TODO:自行补充-->
 
