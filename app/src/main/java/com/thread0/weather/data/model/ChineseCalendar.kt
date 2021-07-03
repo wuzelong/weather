@@ -32,10 +32,6 @@ data class ChineseCalendar(
     val ganzhiDay:String,
     @SerializedName("lunar_year")
     val lunarYear:String,
-    @SerializedName("lunar_month")
-    val lunarMonth:String,
-    @SerializedName("lunar_day")
-    val lunarDay:String,
     @SerializedName("lunar_month_name")
     val lunarMonthName:String,
     @SerializedName("lunar_day_name")

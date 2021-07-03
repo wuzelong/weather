@@ -68,6 +68,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar", "*.aar"])
+    //gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.11'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
@@ -106,4 +107,8 @@ dependencies {
     implementation 'com.huawei.hms:ml-computer-vision-segmentation:2.0.4.300'
     // 引入人像分割模型包
     implementation 'com.huawei.hms:ml-computer-vision-image-segmentation-body-model:2.0.4.300'
+
+    //viewpager2(RecycleView懒加载)
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+
 }

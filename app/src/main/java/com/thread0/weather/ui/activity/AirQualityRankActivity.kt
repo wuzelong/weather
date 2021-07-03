@@ -10,7 +10,6 @@ import com.thread0.weather.adapter.RvAdapterAirQuaRank
 import com.thread0.weather.data.model.AirQualityRank
 import com.thread0.weather.databinding.ActivityAirQualityRankBinding
 import com.thread0.weather.net.service.AirQualityrService
-import com.thread0.weather.net.service.WeatherService
 import com.thread0.weather.util.AQIUtil
 import kotlinx.android.synthetic.main.activity_air_quality_rank.*
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +58,7 @@ class AirQualityRankActivity : AppCompatActivity() {
      * 载入数据
      */
     private fun loadData() {
-        var airQualityRank = ArrayList<AirQualityRank>()
+        val airQualityRank = ArrayList<AirQualityRank>()
 
         val airQualityService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(AirQualityrService::class.java)

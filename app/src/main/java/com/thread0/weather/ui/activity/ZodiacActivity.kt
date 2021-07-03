@@ -4,9 +4,8 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
-import android.util.Log
-import androidx.core.content.ContextCompat
-import com.thread0.weather.R
+import com.thread0.weather.adapter.Vp2AdapterZodiac
+import com.thread0.weather.data.model.ChineseCalendar
 import com.thread0.weather.databinding.ActivityZodiacBinding
 import com.thread0.weather.net.service.ChineseCalendarService
 import kotlinx.android.synthetic.main.activity_zodiac.*
@@ -15,6 +14,7 @@ import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.extension.launch
+import java.util.ArrayList
 
 /**
  *@ClassName: ZodiacActivity
@@ -27,11 +27,13 @@ class ZodiacActivity : SimpleActivity() {
 
     // view binding
     private lateinit var binding: ActivityZodiacBinding
+    private lateinit var adapter: Vp2AdapterZodiac
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityZodiacBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initViewPage()
         loadData()
         // 设置点击事件
         setClickEvent()
@@ -42,39 +44,43 @@ class ZodiacActivity : SimpleActivity() {
             finish()
         }
     }
+
+    /**
+     * 初始化ViewPage
+     */
+    private fun initViewPage(){
+        adapter = Vp2AdapterZodiac()
+        vp2_zodiac.adapter=adapter
+    }
+    /**
+     * 加载数据
+     */
     private fun loadData(){
+        val chineseCalendar = ArrayList<ChineseCalendar>()
         val chineseCalendarService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(ChineseCalendarService::class.java)
         launch {
             val result = chineseCalendarService.getChineseCalendar()
-            if(result!=null) { withContext(
+            if(result!=null) {
+                for(e in  result.results.chineseCalendar){
+                    val date = e.date
+                    val lunarYear = e.lunarYear
+                    val lunarMonthName = e.lunarMonthName
+                    val lunarDayName = e.lunarDayName
+                    val ganzhiYear = e.ganzhiYear
+                    val ganzhiMonth = e.ganzhiMonth
+                    val ganzhiDay = e.ganzhiDay
+                    val zodiac = e.zodiac
+                    val lunarFestival = e.lunarFestival
+                    val solarTerm = e.solarTerm
+                    val cur = ChineseCalendar(date,zodiac,ganzhiYear,ganzhiMonth,ganzhiDay,lunarYear,lunarMonthName
+                        ,lunarDayName,lunarFestival,solarTerm)
+                    chineseCalendar.add(cur)
+                }
+                withContext(
                 Dispatchers.Main
                 ) {
-                    val result0 = result.results.chineseCalendar[0]
-                    tv_lunar_date.text = result0.date
-                    tv_lunar_year.text = result0.lunarYear
-                    tv_lunar_month.text = result0.lunarMonth
-                    tv_lunar_day.text = result0.lunarDay
-                    tv_ganzhi_year.text = result0.ganzhiYear
-                    tv_ganzhi_month.text = result0.ganzhiMonth
-                    tv_ganzhi_day.text = result0.ganzhiDay
-                    tv_zodiac_year.text = result0.zodiac
-                    tv_lunar_festival.text = result0.lunarFestival
-                    tv_solar_term.text = result0.solarTerm
-                    tv_zodiac.background=when(result0.zodiac){
-                        "鼠"-> getDrawable(R.mipmap.bg_zodiac_1)
-                        "牛"-> getDrawable(R.mipmap.bg_zodiac_2)
-                        "虎"-> getDrawable(R.mipmap.bg_zodiac_3)
-                        "兔"-> getDrawable(R.mipmap.bg_zodiac_4)
-                        "龙"-> getDrawable(R.mipmap.bg_zodiac_5)
-                        "蛇"-> getDrawable(R.mipmap.bg_zodiac_6)
-                        "马"-> getDrawable(R.mipmap.bg_zodiac_7)
-                        "羊"-> getDrawable(R.mipmap.bg_zodiac_8)
-                        "猴"-> getDrawable(R.mipmap.bg_zodiac_9)
-                        "鸡"-> getDrawable(R.mipmap.bg_zodiac_10)
-                        "狗"-> getDrawable(R.mipmap.bg_zodiac_11)
-                        else -> getDrawable(R.mipmap.bg_zodiac_12)
-                    }
+                    adapter.setData(chineseCalendar)
                 }
             }
         }

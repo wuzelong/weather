@@ -16,6 +16,6 @@ interface ChineseCalendarService {
     suspend fun getChineseCalendar(
         @Query("key") key: String = WEATHER_PRIVATE_KEY,
         @Query("start") start: String = "0",
-        @Query("days") days: String = "1",
+        @Query("days") days: String = "7",
     ): ChineseCalendarServer?
 }
