@@ -12,7 +12,6 @@ import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.drawable.Drawable.ConstantState
 import android.net.Uri
 import android.os.Bundle
 import android.provider.DocumentsContract
@@ -20,7 +19,6 @@ import android.provider.MediaStore
 import android.view.Gravity
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import com.huawei.hmf.tasks.OnFailureListener
 import com.huawei.hmf.tasks.Task
 import com.huawei.hms.mlsdk.MLAnalyzerFactory
 import com.huawei.hms.mlsdk.common.MLFrame
@@ -62,7 +60,7 @@ class HmsActivity : SimpleActivity() {
             //TODO:点击前往选择图片，选择完成后显示在此
             //权限检查
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1);
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
             }
             //打开系统相册
             val albumIntent = Intent(Intent.ACTION_PICK)
@@ -72,7 +70,7 @@ class HmsActivity : SimpleActivity() {
         binding.redCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为红色后显示到photoImgIV，处理过程需要有处理中的提示
-                if(photoImgIV.getTag().equals("unselect")){
+                if(photoImgIV.tag.equals("unselect")){
                     toastPhoto.show()
                 }
                 else{
@@ -102,7 +100,7 @@ class HmsActivity : SimpleActivity() {
         binding.whiteCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为白色后显示到photoImgIV，处理过程需要有处理中的提示
-                if(photoImgIV.getTag().equals("unselect")){
+                if(photoImgIV.tag.equals("unselect")){
                     toastPhoto.show()
                 }
                 else {
@@ -202,11 +200,11 @@ class HmsActivity : SimpleActivity() {
                 val background : Bitmap? = BitmapUtil.combineBitmapByColor(this,color,foreground.width,foreground.height,foreground)
                 photoImgIV.setImageBitmap(background)
             }
-        }.addOnFailureListener(OnFailureListener {
+        }.addOnFailureListener {
             Toast.makeText(applicationContext, "处理失败", Toast.LENGTH_SHORT).show()
-        })
+        }
     }
-    fun initToast(){
+    private fun initToast(){
         toastLoad =  Toast.makeText(applicationContext,"处理中", Toast.LENGTH_SHORT)
         toastLoad.setGravity(Gravity.CENTER,0,0)
         toastPhoto =  Toast.makeText(applicationContext,"请先选择图片", Toast.LENGTH_SHORT)

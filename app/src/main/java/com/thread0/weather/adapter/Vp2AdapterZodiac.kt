@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
 import com.thread0.weather.data.model.ChineseCalendar
-import kotlinx.android.synthetic.main.vp2_item_zodiac.*
 import kotlinx.android.synthetic.main.vp2_item_zodiac.view.*
 
 class Vp2AdapterZodiac : RecyclerView.Adapter<RecyclerView.ViewHolder>(){

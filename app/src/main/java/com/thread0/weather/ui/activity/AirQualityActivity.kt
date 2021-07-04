@@ -111,7 +111,7 @@ class AirQualityActivity : SimpleActivity() {
         //逐日空气质量
         launch {
             val result = airQualityService.getAirQualityDaily(location = "Xiamen")
-            var airQualityDaily = ArrayList<AirQualityDailyBean>()
+            val airQualityDaily = ArrayList<AirQualityDailyBean>()
             if(result!=null){
                 for((index,e) in result.results[0].daily.withIndex()){
                     val week = getWeekByDateStr(e.date)
@@ -137,11 +137,11 @@ class AirQualityActivity : SimpleActivity() {
         launch {
             //历史逐小时空气质量
             val result = airQualityService.getAirQualityHourlyHistory(location = "Xiamen")
-            var airQualityHourly = ArrayList<AirQualityHourlyBean>()
+            val airQualityHourly = ArrayList<AirQualityHourlyBean>()
             if(result!=null){
                 val e = result.results[0].hourlyHistory
                 for(i in 23 downTo 0){
-                    var time = when(i){
+                    val time = when(i){
                         0->"现在"
                         else->e[i].city.lastUpdate.substring(11,16)
                     }

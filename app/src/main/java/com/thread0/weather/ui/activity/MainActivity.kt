@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.calendar -> startActivity(Intent(this, ZodiacActivity::class.java))
             R.id.hms -> startActivity(Intent(this, HmsActivity::class.java))
+            R.id.carRestricted -> startActivity(Intent(this, CarRestrictedCityActivity::class.java))
         }
         return false
     }

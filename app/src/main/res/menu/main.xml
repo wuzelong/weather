@@ -3,8 +3,11 @@
 
     <item
         android:id="@+id/calendar"
-        android:title="农历" />
+        android:title="@string/activity_zodiac" />
     <item
         android:id="@+id/hms"
-        android:title="HMS" />
+        android:title="@string/hms" />
+    <item
+        android:id="@+id/carRestricted"
+        android:title="@string/car_restricted" />
 </menu>
