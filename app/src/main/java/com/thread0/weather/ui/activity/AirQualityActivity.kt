@@ -141,7 +141,10 @@ class AirQualityActivity : SimpleActivity() {
             if(result!=null){
                 val e = result.results[0].hourlyHistory
                 for(i in 23 downTo 0){
-                    var time = e[i].city.lastUpdate.substring(11,16)
+                    var time = when(i){
+                        0->"现在"
+                        else->e[i].city.lastUpdate.substring(11,16)
+                    }
                     val color = AQIUtil.getColor(e[i].city.aqi)
                     val cur = AirQualityHourlyBean(time,e[i].city.quality,e[i].city.aqi.toString(),color)
                     airQualityHourly.add(cur)
@@ -152,10 +155,7 @@ class AirQualityActivity : SimpleActivity() {
             if(result2!=null){
                 val e = result2.results[0].hourly
                 for(i in 0..23){
-                    var time = when(i){
-                        0->"现在"
-                        else->e[i].time.substring(11,16)
-                    }
+                    var time = e[i].time.substring(11,16)
                     if(time == "00:00")time="明天"
                     val color = AQIUtil.getColor(e[i].aqi)
                     val cur = AirQualityHourlyBean(time,e[i].quality,e[i].aqi.toString(),color)
@@ -166,7 +166,7 @@ class AirQualityActivity : SimpleActivity() {
                 Dispatchers.Main
             ){
                 adapterH.setData(airQualityHourly)
-                rv_time_air.scrollToPosition(21)
+                rv_time_air.scrollToPosition(20)
             }
         }
     }
