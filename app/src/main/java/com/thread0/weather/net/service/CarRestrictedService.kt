@@ -13,7 +13,7 @@ interface CarRestrictedService {
      * 机动车尾号限行
      */
     @GET("/v3/life/driving_restriction.json")
-    suspend fun getChineseCalendar(
+    suspend fun getCarRestricted(
         @Query("key") key: String = WEATHER_PRIVATE_KEY,
         @Query("location") location: String = "WKEZD7MXE04F"
     ): CarRestrictedServer?
