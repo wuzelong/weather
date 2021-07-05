@@ -67,6 +67,13 @@ class MainActivity : AppCompatActivity() {
             R.id.calendar -> startActivity(Intent(this, ZodiacActivity::class.java))
             R.id.hms -> startActivity(Intent(this, HmsActivity::class.java))
             R.id.carRestricted -> startActivity(Intent(this, CarRestrictedCityActivity::class.java))
+            R.id.port ->{  //传递城市id
+                val intent = Intent(this,PortActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString("id","xiamen")  //将城市id传过去
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
         }
         return false
     }

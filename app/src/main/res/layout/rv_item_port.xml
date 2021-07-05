@@ -16,15 +16,15 @@
             android:id="@+id/tv_port_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_large"
             android:text="@string/port_name"
-            tools:text="港口名："
             android:textColor="@color/black"
             android:textSize="?attr/BigText"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/margin_large"
-            android:layout_marginStart="@dimen/margin_small"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="港口名：" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_port"
@@ -56,27 +56,27 @@
             android:id="@+id/tv_province"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="辽宁省"
+            android:layout_marginStart="@dimen/margin_small"
             android:textColor="@color/white"
             android:textSize="?attr/BigText"
-            android:layout_marginStart="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="@+id/tv_province_title"
             app:layout_constraintStart_toEndOf="@+id/tv_province_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_province_title"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_province_title"
+            tools:text="辽宁省" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_location_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_ex_mini"
             android:text="@string/location_name"
-            tools:text="经纬度："
             android:textColor="@color/black"
             android:textSize="?attr/BigText"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/margin_ex_mini"
-            android:layout_marginStart="@dimen/margin_small"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_province_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_province_title"
+            tools:text="经纬度：" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_location"
@@ -96,10 +96,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_small"
             android:layout_marginTop="@dimen/margin_ex_mini"
+            android:text="@string/water_level_name"
             android:textColor="@color/black"
             android:textSize="?attr/BigText"
             android:textStyle="bold"
-            android:text="@string/water_level_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_title"
             tools:text="水位基准：" />
@@ -108,13 +108,13 @@
             android:id="@+id/tv_water_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="150米"
+            android:layout_marginStart="@dimen/margin_small"
             android:textColor="@color/white"
             android:textSize="?attr/BigText"
-            android:layout_marginStart="@dimen/margin_small"
             app:layout_constraintBottom_toBottomOf="@+id/tv_water_level_title"
             app:layout_constraintStart_toEndOf="@+id/tv_water_level_title"
-            app:layout_constraintTop_toTopOf="@+id/tv_water_level_title"/>
+            app:layout_constraintTop_toTopOf="@+id/tv_water_level_title"
+            tools:text="150米" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

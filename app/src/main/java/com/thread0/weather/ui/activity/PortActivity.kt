@@ -4,8 +4,17 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import com.thread0.weather.adapter.RvAdapterPort
+import com.thread0.weather.data.model.Port
 import com.thread0.weather.databinding.ActivityPortBinding
+import com.thread0.weather.net.service.PortService
+import kotlinx.android.synthetic.main.activity_port.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
+import top.xuqingquan.extension.launch
+import java.util.ArrayList
 
 /**
 *@ClassName: PortActivity
@@ -17,11 +26,14 @@ import top.xuqingquan.base.view.activity.SimpleActivity
 class PortActivity : SimpleActivity() {
 
     private lateinit var binding: ActivityPortBinding
+    private lateinit var adapter: RvAdapterPort
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPortBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        loadData()
+        initViewPage()
         // 设置点击事件
         setClickEvent()
     }
@@ -31,5 +43,38 @@ class PortActivity : SimpleActivity() {
             finish()
         }
     }
-
+    /**
+     * 初始化ViewPage
+     */
+    private fun initViewPage(){
+        adapter = RvAdapterPort()
+        rv_time_air_rank.adapter=adapter
+    }
+    /**
+     * 加载数据
+     */
+    private fun loadData(){
+        //获取传输城市id
+        val bundle = intent.extras
+        var id: String = ""
+        if (bundle != null) {
+            id = bundle.getString("id").toString()
+        }
+        val portService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(PortService::class.java)
+        val ports = ArrayList<Port>()
+        launch {
+            val result = portService.getPort(location = id)
+            if(result!=null) {
+                for(e in  result.results[0].ports){
+                    ports.add(e.port)
+                }
+                withContext(
+                    Dispatchers.Main
+                ) {
+                    adapter.setData(ports)
+                }
+            }
+        }
+    }
 }

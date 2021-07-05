@@ -11,8 +11,6 @@ import com.thread0.weather.R
 import com.thread0.weather.data.constant.getCityBg
 import com.thread0.weather.ui.activity.CarRestrictedInfoActivity
 import kotlinx.android.synthetic.main.rv_item_car_restricted.view.*
-import org.greenrobot.eventbus.EventBus
-
 
 class RvAdapterCity : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var list = mutableListOf<Pair<String, String>>()

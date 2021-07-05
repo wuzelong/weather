@@ -8,6 +8,9 @@
         android:id="@+id/hms"
         android:title="@string/hms" />
     <item
+        android:id="@+id/port"
+        android:title="@string/port_search" />
+    <item
         android:id="@+id/carRestricted"
         android:title="@string/car_restricted" />
 </menu>
