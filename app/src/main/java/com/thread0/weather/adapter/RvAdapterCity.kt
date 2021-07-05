@@ -1,16 +1,17 @@
 package com.thread0.weather.adapter
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
 import com.thread0.weather.data.constant.getCityBg
-import kotlinx.android.synthetic.main.rv_item_car_restricted.*
+import com.thread0.weather.ui.activity.CarRestrictedInfoActivity
 import kotlinx.android.synthetic.main.rv_item_car_restricted.view.*
+import org.greenrobot.eventbus.EventBus
 
 
 class RvAdapterCity : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -19,6 +20,13 @@ class RvAdapterCity : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_car_restricted.text = list[position].second
         holder.itemView.tv_car_restricted.background = mContext.getDrawable(getCityBg(list[position].second).bg)
+        holder.itemView.tv_car_restricted.setOnClickListener(View.OnClickListener {
+            val intent = Intent(mContext, CarRestrictedInfoActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("id",list[position].first)  //将城市id传过去
+            intent.putExtras(bundle)
+            mContext.startActivity(intent)
+        })
     }
 
     fun setData(lists: List<Pair<String, String>>) {

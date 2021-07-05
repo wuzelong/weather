@@ -59,4 +59,12 @@
 
     <string name="lunar">农历：</string>
     <string name="ganzhi">干支：</string>
+    
+    <string name="penalty_provisions">处罚规定</string>
+    <string name="limit_are_time">限行区域与时间</string>
+    <string name="limit_details">限行信息</string>
+    <string name="remarks">详细说明</string>
+    <string name="today">今天</string>
+    <string name="tomorrow">明天</string>
+    <string name="after_tomorrow">后天</string>
 </resources>

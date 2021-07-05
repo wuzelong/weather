@@ -5,6 +5,7 @@ package com.thread0.weather.ui.activity
 
 import android.os.Bundle
 import com.thread0.weather.databinding.ActivityCarRestrictedInfoBinding
+import kotlinx.android.synthetic.main.activity_car_restricted_info.*
 import top.xuqingquan.base.view.activity.SimpleActivity
 
 /**
@@ -25,7 +26,11 @@ class CarRestrictedInfoActivity : SimpleActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCarRestrictedInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //获取传输数据
+        val bundle = intent.extras
+        if (bundle != null) {
+            val text = bundle.getString("id")
+        }
         // 设置点击事件
         setClickEvent()
     }
