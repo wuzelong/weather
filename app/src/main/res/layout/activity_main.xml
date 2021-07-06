@@ -53,6 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -256,13 +257,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_moon_set" />
 
             <View
-                android:layout_width="330dp"
-                android:layout_height="200dp"
+                android:id="@+id/view2"
+                android:layout_width="320dp"
+                android:layout_height="210dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/panel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_bg_moon_rise" />
 
@@ -287,6 +290,120 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_today_avg"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/tv_today_avg" />
+
+            <TextView
+                android:id="@+id/tv_today_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="28"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/view2" />
+
+            <TextView
+                android:id="@+id/tv_today_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26/33"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toEndOf="@+id/tv_today_avg"
+                app:layout_constraintTop_toTopOf="@+id/tv_today_avg" />
+
+            <TextView
+                android:id="@+id/tv_tomorrow_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="28"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_today_avg" />
+
+            <TextView
+                android:id="@+id/tv_tomorrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tomorrow"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_today_avg"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/tv_tomorrow_avg" />
+
+            <TextView
+                android:id="@+id/tv_tomorrow_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26/33"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toEndOf="@+id/tv_tomorrow_avg"
+                app:layout_constraintTop_toTopOf="@+id/tv_tomorrow_avg" />
+
+            <TextView
+                android:id="@+id/tv_after_tomorrow_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="28"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_tomorrow_avg" />
+
+            <TextView
+                android:id="@+id/tv_after_tomorrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/after_tomorrow"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_after_tomorrow_avg"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/tv_after_tomorrow_avg" />
+
+            <TextView
+                android:id="@+id/tv_after_tomorrow_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26/33"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toEndOf="@+id/tv_after_tomorrow_avg"
+                app:layout_constraintTop_toTopOf="@+id/tv_after_tomorrow_avg" />
+
+            <Button
+                android:id="@+id/btn_more"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/panel"
+                android:text="@string/more"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/view2"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

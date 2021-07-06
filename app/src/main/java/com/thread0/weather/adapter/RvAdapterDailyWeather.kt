@@ -14,9 +14,9 @@ class RvAdapterDailyWeather : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var list = mutableListOf<DailyWeather>()
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_weather_daily_temperture.text =((list[position].low.toInt()+list[position].high.toInt())/2).toString()
-        holder.itemView.tv_weather_daily_lowest.text = list[position].low
-        holder.itemView.tv_weather_daily_highest.text = list[position].high
+        holder.itemView.tv_weather_daily_temperture.text = ((list[position].low.toInt()+list[position].high.toInt())/2).toString()+"°"
+        holder.itemView.tv_weather_daily_lowest.text = list[position].low+"°"
+        holder.itemView.tv_weather_daily_highest.text = list[position].high+"°"
         holder.itemView.tv_weather_daily_date.text = list[position].date.substring(5,10)
         holder.itemView.tv_weather_daily_week.text = TimeUtils.getWeekByDateStr(list[position].date)
     }
