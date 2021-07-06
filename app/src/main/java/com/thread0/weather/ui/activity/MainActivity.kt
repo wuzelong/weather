@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterHourlyWeather
+import com.thread0.weather.data.constant.getSky
 import com.thread0.weather.data.model.HourlyWeather
 import com.thread0.weather.data.model.Weather
 import com.thread0.weather.net.service.SunMoonService
@@ -169,12 +170,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        //当前天气
+        //当前天气实况
         launch {
             val result = weatherService.getLocationCurrentWeather("xiamen")//获取返回数据
             if (result != null) {
                 tv_temperature.text = result.results[0].now.temperature.toString()
                 tv_weather.text = result.results[0].now.weather
+                cl_main.background = getDrawable(getSky(result.results[0].now.code.toString()).bg)
             }
         }
 
