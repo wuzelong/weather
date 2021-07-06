@@ -5,15 +5,23 @@ package com.thread0.weather.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
-import com.thread0.weather.adapter.RvAdapterH
+import com.thread0.weather.adapter.RvAdapterHourlyWeather
+import com.thread0.weather.data.model.HourlyWeather
+import com.thread0.weather.data.model.Weather
 import com.thread0.weather.net.service.WeatherService
+import kotlinx.android.synthetic.main.activity_air_quality.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
 import java.util.*
@@ -45,7 +53,7 @@ import java.util.*
  *@Date: 2021/5/25 11:36 下午 Created
  */
 class MainActivity : AppCompatActivity() {
-    private lateinit var adapterH: RvAdapterH
+    private lateinit var adapterHourlyWeather: RvAdapterHourlyWeather
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,21 +106,35 @@ class MainActivity : AppCompatActivity() {
      */
     private fun initRecyclerView() {
         rv_time.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        adapterH = RvAdapterH()
-        rv_time.adapter = adapterH
+        adapterHourlyWeather = RvAdapterHourlyWeather()
+        rv_time.adapter = adapterHourlyWeather
     }
 
     /**
      * 载入数据
      */
     private fun loadData() {
-        val data = ArrayList<String>()
-        for (i in 0..20) {
-            data.add("text-$i")
-        }
-        adapterH.setData(data)
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
+        //未来24小时天气
+        val data = ArrayList<HourlyWeather>()
+        launch{
+            val result = weatherService.getHourlyWeather(location = "xiamen")
+            if(result != null){
+                val result0 = result.results[0].hourly
+                for(i in 0..23){
+                    data.add(result0[i])
+                }
+            }
+            withContext(
+                Dispatchers.Main
+            ){
+                adapterHourlyWeather.setData(data)
+                rv_time_air.scrollToPosition(20)
+            }
+        }
+
+        //当前天气
         launch {
             val result = weatherService.getLocationCurrentWeather("beijing")//获取返回数据
             if (result != null) {
@@ -120,5 +142,6 @@ class MainActivity : AppCompatActivity() {
                 tv_weather.text = result.results[0].now.weather
             }
         }
+
     }
 }

@@ -73,7 +73,35 @@ data class WeatherFromServer(
     val results: List<WeatherResult>
 )
 
+/**
+ * 未来24小时天气返回结果类
+ */
+data class HourlyWeatherServer(
+    val results: List<HourlyWeatherResult>
+)
 
+/**
+ * 未来24小时天气结果类
+ */
+data class HourlyWeatherResult(
+    val location: Location,
+    val hourly : List<HourlyWeather>
+)
+
+/**
+ * 每小时天气
+ */
+data class HourlyWeather(
+    val time: String,
+    val text: String,
+    val code: String,
+    val temperature: String,
+    val humidity: String,
+    @SerializedName("wind_direction")
+    val windDirection: String,
+    @SerializedName("wind_speed")
+    val windSpeed: String
+)
 
 
 

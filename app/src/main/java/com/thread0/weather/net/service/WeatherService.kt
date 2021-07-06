@@ -22,4 +22,14 @@ interface WeatherService {
         @Query("language") language: String = "zh-Hans",
         @Query("unit") unit: String = "c"
     ): WeatherFromServer?
+
+    @GET("/v3/weather/hourly.json")
+    suspend fun getHourlyWeather(
+        @Query("location") location: String = "xiamen",
+        @Query("key") key: String = WEATHER_PRIVATE_KEY,
+        @Query("language") language: String = "zh-Hans",
+        @Query("unit") unit: String = "c",
+        @Query("start") start: String = "0",
+        @Query("hours") hours: String = "24",
+    ): HourlyWeatherServer?
 }
