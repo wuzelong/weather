@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
-                android:text="@string/temperature"
+                android:text="@string/load"
                 android:textColor="@color/white"
                 android:textSize="120sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -125,31 +125,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lv_weather" />
 
-            <LinearLayout
-                android:id="@+id/ll_h"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_time"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_see_weather">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_see_weather"
+                tools:itemCount="1"
+                tools:listitem="@layout/rv_item_hourly_weather" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginVertical="50dp"
-                    android:scrollbars="none" />
-            </LinearLayout>
 
             <TextView
                 android:id="@+id/tv_sunrise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="@string/sunrise"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_sunrise"
                 app:layout_constraintEnd_toStartOf="@id/tv_sunset"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+                app:layout_constraintTop_toBottomOf="@id/rv_time" />
 
             <TextView
                 android:id="@+id/tv_sunset"
@@ -157,10 +156,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sunset"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_sunset"
                 app:layout_constraintEnd_toStartOf="@id/tv_moonrise"
                 app:layout_constraintStart_toEndOf="@id/tv_sunrise"
-                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+                app:layout_constraintTop_toTopOf="@+id/tv_sunrise" />
 
             <TextView
                 android:id="@+id/tv_moonrise"
@@ -168,10 +168,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/moonrise"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_moonrise"
                 app:layout_constraintEnd_toStartOf="@id/tv_moonset"
                 app:layout_constraintStart_toEndOf="@id/tv_sunset"
-                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+                app:layout_constraintTop_toTopOf="@+id/tv_sunset" />
 
             <TextView
                 android:id="@+id/tv_moonset"
@@ -179,22 +180,64 @@
                 android:layout_height="wrap_content"
                 android:text="@string/moonset"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 app:drawableStartCompat="@drawable/ic_moonset"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_moonrise"
-                app:layout_constraintTop_toBottomOf="@id/ll_h" />
+                app:layout_constraintTop_toTopOf="@+id/tv_moonrise" />
 
             <GridView
                 android:layout_width="0dp"
                 android:layout_height="1000dp"
                 android:layout_marginHorizontal="@dimen/page_margin"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/panel"
                 android:numColumns="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_moonset">
+                app:layout_constraintTop_toBottomOf="@+id/tv_sun_rise_info">
 
             </GridView>
+
+            <TextView
+                android:id="@+id/tv_sun_rise_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7:00"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_sunrise"
+                app:layout_constraintStart_toStartOf="@+id/tv_sunrise"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sunrise" />
+
+            <TextView
+                android:id="@+id/tv_sun_set_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18:00"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_sunset"
+                app:layout_constraintStart_toStartOf="@+id/tv_sunset"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sunset" />
+
+            <TextView
+                android:id="@+id/tv_moon_rise_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19:00"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_moonrise"
+                app:layout_constraintStart_toStartOf="@+id/tv_moonrise"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moonrise" />
+
+            <TextView
+                android:id="@+id/tv_moon_set_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7:00"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_moonset"
+                app:layout_constraintStart_toStartOf="@+id/tv_moonset"
+                app:layout_constraintTop_toBottomOf="@+id/tv_moonset" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

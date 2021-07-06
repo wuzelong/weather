@@ -181,6 +181,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="10dp"
+        tools:listitem="@layout/rv_item_air_quality_h"
+        tools:itemCount="1"
         android:layout_marginTop="40dp"
         android:scrollbarAlwaysDrawHorizontalTrack="false"
         app:layout_constraintEnd_toEndOf="parent"

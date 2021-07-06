@@ -27,7 +27,6 @@
         <activity android:name=".ui.activity.AlarmActivity" />
         <activity android:name=".ui.activity.FutureWeatherActivity" />
         <activity android:name=".ui.activity.YesterdayActivity" />
-        <activity android:name=".ui.activity.HoursActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.EnterActivity">
             <intent-filter>

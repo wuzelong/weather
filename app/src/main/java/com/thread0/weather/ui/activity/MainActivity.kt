@@ -16,6 +16,7 @@ import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterHourlyWeather
 import com.thread0.weather.data.model.HourlyWeather
 import com.thread0.weather.data.model.Weather
+import com.thread0.weather.net.service.SunMoonService
 import com.thread0.weather.net.service.WeatherService
 import kotlinx.android.synthetic.main.activity_air_quality.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -144,6 +145,27 @@ class MainActivity : AppCompatActivity() {
             ){
                 adapterHourlyWeather.setData(data)
                 rv_time.scrollToPosition(22)
+            }
+        }
+
+        //日出日落
+        val sunMoonService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(SunMoonService::class.java)
+        launch{
+            val result = sunMoonService.getSun()
+            if(result != null){
+                val result0 = result.results[0].sun[0]
+                tv_sun_rise_info.text = result0.sunrise
+                tv_sun_set_info.text = result0.sunset
+            }
+        }
+        //月出月落
+        launch {
+            val result = sunMoonService.getMoon()
+            if(result != null){
+                val result0 = result.results[0].moon[0]
+                tv_moon_rise_info.text = result0.rise
+                tv_moon_set_info.text = result0.set
             }
         }
 
