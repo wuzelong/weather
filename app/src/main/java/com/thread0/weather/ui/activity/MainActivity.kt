@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thread0.weather.R
+import com.thread0.weather.adapter.RvAdapterAlarm
 import com.thread0.weather.adapter.RvAdapterHourlyWeather
 import com.thread0.weather.data.constant.getSky
 import com.thread0.weather.data.model.HourlyWeather
@@ -27,6 +28,7 @@ import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  *@ClassName: MainActivity
@@ -56,6 +58,7 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var adapterHourlyWeather: RvAdapterHourlyWeather
+    private lateinit var adapterAlarm: RvAdapterAlarm
     private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,6 +128,10 @@ class MainActivity : AppCompatActivity() {
         rv_time.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         adapterHourlyWeather = RvAdapterHourlyWeather()
         rv_time.adapter = adapterHourlyWeather
+
+        rv_alarm.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        adapterAlarm = RvAdapterAlarm()
+        rv_alarm.adapter = adapterAlarm
     }
 
     /**
@@ -200,6 +207,22 @@ class MainActivity : AppCompatActivity() {
             if(result != null){
                 val result0 = result.results[0].daily[0]
                 tv_temperture_range.text = result0.low+"°/"+result0.high+"°"
+            }
+        }
+
+        //气象预警
+        launch {
+            val result = weatherService.getAlarm()
+            val list = ArrayList<String>()
+            if(result != null){
+                for(e in result.results[0].alarms){
+                    list.add(e.level+e.type)
+                }
+            }
+            withContext(
+                Dispatchers.Main
+            ){
+                adapterAlarm.setData(list)
             }
         }
     }

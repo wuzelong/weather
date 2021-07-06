@@ -186,6 +186,29 @@ data class DailyWeather(
     val humidity: String
 )
 
+/**
+ * 气象预警返回结果类
+ */
+data class AlarmServer(
+    val results: List<AlarmResult>
+)
 
-
-
+/**
+ * 气象预警结果类
+ */
+data class AlarmResult(
+    val location: Location,
+    val alarms: List<Alarm>
+)
+/**
+ * 气象预警
+ */
+data class Alarm(
+    val title: String,
+    val type: String,
+    val level: String,
+    val status: String,
+    val description: String,
+    @SerializedName("pub_date")
+    val pubDate: String
+)
