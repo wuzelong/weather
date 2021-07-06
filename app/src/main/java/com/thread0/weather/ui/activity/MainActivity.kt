@@ -116,27 +116,40 @@ class MainActivity : AppCompatActivity() {
     private fun loadData() {
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
-        //未来24小时天气
         val data = ArrayList<HourlyWeather>()
         launch{
+            //过去24小时天气
+            val result2 = weatherService.getHistoryWeather(location = "xiamen")
+            if(result2 != null){
+                val result0 = result2.results[0].hourlyHistory
+                for(i in 23 downTo 0){
+                    data.add(HourlyWeather(result0[i].lastUpdate.substring(11,16),result0[i].text,result0[i].code,
+                        result0[i].temperature,result0[i].humidity,result0[i].windDirection,result0[i].windSpeed))
+                }
+            }
+            //未来24小时天气
             val result = weatherService.getHourlyWeather(location = "xiamen")
             if(result != null){
                 val result0 = result.results[0].hourly
                 for(i in 0..23){
-                    data.add(result0[i])
+                    var cur =result0[i]
+                    if(i == 0)cur.time = "现在"
+                    else if(cur.time.substring(11,16)=="00:00")cur.time = "明天"
+                    else cur.time = cur.time.substring(11,16)
+                    data.add(cur)
                 }
             }
             withContext(
                 Dispatchers.Main
             ){
                 adapterHourlyWeather.setData(data)
-                rv_time_air.scrollToPosition(20)
+                rv_time.scrollToPosition(22)
             }
         }
 
         //当前天气
         launch {
-            val result = weatherService.getLocationCurrentWeather("beijing")//获取返回数据
+            val result = weatherService.getLocationCurrentWeather("xiamen")//获取返回数据
             if (result != null) {
                 tv_temperature.text = result.results[0].now.temperature.toString()
                 tv_weather.text = result.results[0].now.weather

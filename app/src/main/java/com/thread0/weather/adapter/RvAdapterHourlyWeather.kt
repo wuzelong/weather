@@ -16,9 +16,9 @@ class RvAdapterHourlyWeather : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var list = mutableListOf<HourlyWeather>()
     private lateinit var mContext: Context
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.hourly_weather_time.text = list[position].time.substring(11,16)
+        holder.itemView.hourly_weather_time.text = list[position].time
         holder.itemView.hourly_weather_temperature.text = list[position].temperature
-        holder.itemView.hourly_weather_wind_speed.text = list[position].windSpeed
+        holder.itemView.hourly_weather_wind_speed.text = list[position].windDirection
         holder.itemView.hourly_weather_icon.background = mContext.getDrawable(getSky(list[position].code).icon)
     }
 

@@ -85,14 +85,14 @@ data class HourlyWeatherServer(
  */
 data class HourlyWeatherResult(
     val location: Location,
-    val hourly : List<HourlyWeather>
+    val hourly: List<HourlyWeather>
 )
 
 /**
  * 每小时天气
  */
 data class HourlyWeather(
-    val time: String,
+    var time: String,
     val text: String,
     val code: String,
     val temperature: String,
@@ -101,6 +101,46 @@ data class HourlyWeather(
     val windDirection: String,
     @SerializedName("wind_speed")
     val windSpeed: String
+)
+/**
+ * 过去24小时天气返回结果类
+ */
+data class HistoryWeatherServer(
+    val results: List<HistoryWeatherResult>
+)
+
+/**
+ * 过去24小时天气结果类
+ */
+data class HistoryWeatherResult(
+    val location: Location,
+    @SerializedName("hourly_history")
+    val hourlyHistory: List<HistoryWeather>
+)
+/**
+ * 过去小时天气
+ */
+data class HistoryWeather(
+    val text: String,
+    val code: String,
+    val temperature: String,
+    @SerializedName("feels_like")
+    val feelsLike: String,
+    val pressure: String,
+    val humidity: String,
+    val visibility: String,
+    @SerializedName("wind_direction")
+    val windDirection: String,
+    @SerializedName("wind_direction_degree")
+    val windDirectionDegree: String,
+    @SerializedName("wind_speed")
+    val windSpeed: String,
+    @SerializedName("wind_scale")
+    val windScale: String,
+    @SerializedName("dew_point")
+    val dewPoint: String,
+    @SerializedName("last_update")
+    val lastUpdate: String
 )
 
 
