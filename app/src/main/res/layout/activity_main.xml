@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/weather"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -157,17 +157,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_bg_sun_set"
                 app:layout_constraintStart_toStartOf="@+id/tv_bg_sun_set"
                 app:layout_constraintTop_toTopOf="@+id/tv_bg_sun_set" />
-
-            <GridView
-                android:layout_width="0dp"
-                android:layout_height="1000dp"
-                android:layout_marginHorizontal="@dimen/page_margin"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/panel"
-                android:numColumns="3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_bg_moon_rise" />
 
             <View
                 android:id="@+id/tv_bg_sun_rise"
@@ -266,6 +255,25 @@
                 app:layout_constraintStart_toStartOf="@+id/iv_moon_set"
                 app:layout_constraintTop_toBottomOf="@+id/iv_moon_set" />
 
+            <View
+                android:layout_width="330dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/panel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_bg_moon_rise" />
+
+            <TextView
+                android:id="@+id/tv_temperture_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="33°/26°"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_weather" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

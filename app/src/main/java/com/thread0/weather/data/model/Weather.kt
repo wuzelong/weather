@@ -143,7 +143,48 @@ data class HistoryWeather(
     val lastUpdate: String
 )
 
+/**
+ * 追日天气返回结果类
+ */
+data class DailyWeatherServer(
+    val results: List<DailyWeatherResult>
+)
 
+/**
+ * 逐日天气结果类
+ */
+data class DailyWeatherResult(
+    val location: Location,
+    val daily: List<DailyWeather>
+)
+
+/**
+ * 逐日天气
+ */
+data class DailyWeather(
+    val date: String,
+    @SerializedName("text_day")
+    val textDay: String,
+    @SerializedName("code_day")
+    val code_day: String,
+    @SerializedName("text_night")
+    val textNight: String,
+    @SerializedName("code_night")
+    val code_night: String,
+    val high: String,
+    val low: String,
+    val rainfall: String,
+    val precip: String,
+    @SerializedName("wind_direction")
+    val windDirection: String,
+    @SerializedName("wind_direction_degree")
+    val windDirectionDegree: String,
+    @SerializedName("wind_speed")
+    val windSpeed: String,
+    @SerializedName("wind_scale")
+    val windScale: String,
+    val humidity: String
+)
 
 
 

@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             R.id.carRestricted -> startActivity(Intent(this, CarRestrictedCityActivity::class.java))
             R.id.port ->{  //传递城市id
                 val intent = Intent(this,PortActivity::class.java)
+
                 val bundle = Bundle()
                 bundle.putString("id","xiamen")  //将城市id传过去
                 intent.putExtras(bundle)
@@ -125,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             if(result2 != null){
                 val result0 = result2.results[0].hourlyHistory
                 for(i in 23 downTo 0){
-                    data.add(HourlyWeather(result0[i].lastUpdate.substring(11,16),result0[i].text,result0[i].code,
+                    data.add(HourlyWeather(result0[i].lastUpdate.substring(11,14)+"00",result0[i].text,result0[i].code,
                         result0[i].temperature,result0[i].humidity,result0[i].windDirection,result0[i].windSpeed))
                 }
             }
@@ -133,10 +134,9 @@ class MainActivity : AppCompatActivity() {
             val result = weatherService.getHourlyWeather(location = "xiamen")
             if(result != null){
                 val result0 = result.results[0].hourly
-                for(i in 0..23){
+                for(i in 1..23){
                     var cur =result0[i]
-                    if(i == 0)cur.time = "现在"
-                    else if(cur.time.substring(11,16)=="00:00")cur.time = "明天"
+                    if(cur.time.substring(11,16)=="00:00")cur.time = "明天"
                     else cur.time = cur.time.substring(11,16)
                     data.add(cur)
                 }
@@ -180,5 +180,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //今日最高最低温度
+        launch{
+            val result = weatherService.getDailyWeather(days = "1")
+            if(result != null){
+                val result0 = result.results[0].daily[0]
+                tv_temperture_range.text = result0.high+"°/"+result0.low+"°"
+            }
+        }
     }
 }
