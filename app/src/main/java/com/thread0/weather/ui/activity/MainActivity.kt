@@ -199,7 +199,7 @@ class MainActivity : AppCompatActivity() {
             val result = weatherService.getDailyWeather(days = "1")
             if(result != null){
                 val result0 = result.results[0].daily[0]
-                tv_temperture_range.text = result0.high+"°/"+result0.low+"°"
+                tv_temperture_range.text = result0.low+"°/"+result0.high+"°"
             }
         }
     }
