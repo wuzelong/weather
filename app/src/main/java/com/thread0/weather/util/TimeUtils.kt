@@ -4,7 +4,7 @@
 package com.thread0.weather.util
 
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 /**
 *@ClassName: TimeUtils
@@ -67,5 +67,29 @@ object TimeUtils {
         val date = format.substringBefore("T")
         val time = format.substringAfter("T")
         return "$date $time"
+    }
+
+    /**
+     * 根据指定的日期字符串获取星期几
+     */
+    fun getWeekByDateStr(strDate: String): String {
+        val year = strDate.substring(0, 4).toInt()
+        val month = strDate.substring(5, 7).toInt()
+        val day = strDate.substring(8, 10).toInt()
+        val c: Calendar = Calendar.getInstance()
+        c.set(Calendar.YEAR, year)
+        c.set(Calendar.MONTH, month - 1)
+        c.set(Calendar.DAY_OF_MONTH, day)
+        var week = ""
+        when (c.get(Calendar.DAY_OF_WEEK)) {
+            1 -> week = "星期天"
+            2 -> week = "星期一"
+            3 -> week = "星期二"
+            4 -> week = "星期三"
+            5 -> week = "星期四"
+            6 -> week = "星期五"
+            7 -> week = "星期六"
+        }
+        return week
     }
 }

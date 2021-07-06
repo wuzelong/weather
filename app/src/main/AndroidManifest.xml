@@ -24,7 +24,6 @@
         <activity android:name=".ui.activity.ZodiacActivity" />
         <activity android:name=".ui.activity.AirQualityRankActivity" />
         <activity android:name=".ui.activity.AirQualityActivity" />
-        <activity android:name=".ui.activity.AlarmActivity" />
         <activity android:name=".ui.activity.FutureWeatherActivity" />
         <activity android:name=".ui.activity.YesterdayActivity" />
         <activity android:name=".ui.activity.SearchActivity" />

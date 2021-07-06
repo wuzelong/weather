@@ -4,8 +4,17 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.thread0.weather.adapter.RvAdapterDailyWeather
+import com.thread0.weather.data.model.DailyWeather
 import com.thread0.weather.databinding.ActivityFutureWeatherBinding
+import com.thread0.weather.net.service.WeatherService
+import kotlinx.android.synthetic.main.activity_future_weather.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
+import top.xuqingquan.extension.launch
 
 /**
  *@ClassName: FutureWeatherActivity
@@ -19,11 +28,17 @@ class FutureWeatherActivity : SimpleActivity() {
 
     // view binding
     private lateinit var binding: ActivityFutureWeatherBinding
+    private lateinit var cityId: String
+    private lateinit var adapter: RvAdapterDailyWeather
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFutureWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //初始化列表
+        initRecyclerView()
+        //加载数据
+        loadData()
         // 设置点击事件
         setClickEvent()
     }
@@ -31,6 +46,44 @@ class FutureWeatherActivity : SimpleActivity() {
     private fun setClickEvent() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
+        }
+    }
+
+    /**
+     * 初始化列表
+     */
+    private fun initRecyclerView(){
+        rv_recent_days_forecast.layoutManager = LinearLayoutManager(this)
+        adapter = RvAdapterDailyWeather()
+        rv_recent_days_forecast.adapter = adapter
+    }
+    /**
+     * 载入数据
+     */
+    private fun loadData() {
+        //获取城市id
+        val bundle = intent.extras
+        if (bundle != null) {
+            cityId = bundle.getString("id").toString()
+        }
+
+        val weatherService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
+        launch{
+            val result = weatherService.getDailyWeather()
+            val dailyWeatherList = ArrayList<DailyWeather>()
+            if(result != null){
+                val  result0 =result.results[0].daily
+                tv_weather_daily_title.text = result.results[0].location.name+"天气预报"
+                for(e in result0){
+                    dailyWeatherList.add(e)
+                }
+            }
+            withContext(
+                Dispatchers.Main
+            ){
+                adapter.setData(dailyWeatherList)
+            }
         }
     }
 }

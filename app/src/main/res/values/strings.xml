@@ -24,7 +24,7 @@
 
     <string name="activity_yesterday">昨日天气</string>
 
-    <string name="activity_future_weather">未来十五天天气预报</string>
+    <string name="activity_future_weather">天气预报</string>
 
     <string name="activity_alarm">气象预警</string>
     <string name="no_alarm">天气正常，暂无预警</string>
@@ -68,4 +68,5 @@
     <string name="tomorrow">明天</string>
     <string name="after_tomorrow">后天</string>
     <string name="load">加载中</string>
+    <string name="lowest_highest">最低/最高</string>
 </resources>

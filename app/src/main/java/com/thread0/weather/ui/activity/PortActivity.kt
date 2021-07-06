@@ -27,13 +27,16 @@ class PortActivity : SimpleActivity() {
 
     private lateinit var binding: ActivityPortBinding
     private lateinit var adapter: RvAdapterPort
+    private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPortBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loadData()
+        //初始化列表
         initViewPage()
+        //加载数据
+        loadData()
         // 设置点击事件
         setClickEvent()
     }
@@ -54,17 +57,17 @@ class PortActivity : SimpleActivity() {
      * 加载数据
      */
     private fun loadData(){
-        //获取传输城市id
+        //获取城市id
         val bundle = intent.extras
-        var id: String = ""
         if (bundle != null) {
-            id = bundle.getString("id").toString()
+            cityId = bundle.getString("id").toString()
         }
+
         val portService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(PortService::class.java)
         val ports = ArrayList<Port>()
         launch {
-            val result = portService.getPort(location = id)
+            val result = portService.getPort(location = cityId)
             if(result!=null) {
                 for(e in  result.results[0].ports){
                     ports.add(e.port)

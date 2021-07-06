@@ -56,14 +56,21 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var adapterHourlyWeather: RvAdapterHourlyWeather
+    private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //初始化菜单栏
         toolbar.title = ""
         setSupportActionBar(toolbar);
+        //获取定位
+        cityId = "WS7GQBRNR6V8"
+        //设置点击事件
         setClickEvent()
+        //初始化列表
         initRecyclerView()
+        //加载数据
         loadData()
     }
 
@@ -79,9 +86,8 @@ class MainActivity : AppCompatActivity() {
             R.id.carRestricted -> startActivity(Intent(this, CarRestrictedCityActivity::class.java))
             R.id.port ->{  //传递城市id
                 val intent = Intent(this,PortActivity::class.java)
-
                 val bundle = Bundle()
-                bundle.putString("id","xiamen")  //将城市id传过去
+                bundle.putString("id",cityId)  //将城市id传过去
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
@@ -94,13 +100,21 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setClickEvent() {
         tv_air_quality.setOnClickListener {
-            startActivity(Intent(this, AirQualityActivity::class.java))
+            val intent = Intent(this, AirQualityActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("id",cityId)  //将城市id传过去
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
         toolbar.setNavigationOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
         }
         btn_see_weather.setOnClickListener {
-            startActivity(Intent(this, FutureWeatherActivity::class.java))
+            val intent = Intent(this, FutureWeatherActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("id",cityId)  //将城市id传过去
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
     }
 
@@ -122,7 +136,7 @@ class MainActivity : AppCompatActivity() {
         val data = ArrayList<HourlyWeather>()
         launch{
             //过去24小时天气
-            val result2 = weatherService.getHistoryWeather(location = "xiamen")
+            val result2 = weatherService.getHistoryWeather(location = cityId)
             if(result2 != null){
                 val result0 = result2.results[0].hourlyHistory
                 for(i in 23 downTo 0){
@@ -131,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             //未来24小时天气
-            val result = weatherService.getHourlyWeather(location = "xiamen")
+            val result = weatherService.getHourlyWeather(location = cityId)
             if(result != null){
                 val result0 = result.results[0].hourly
                 for(i in 1..23){
@@ -172,7 +186,7 @@ class MainActivity : AppCompatActivity() {
 
         //当前天气实况
         launch {
-            val result = weatherService.getLocationCurrentWeather("xiamen")//获取返回数据
+            val result = weatherService.getLocationCurrentWeather(cityId)//获取返回数据
             if (result != null) {
                 tv_temperature.text = result.results[0].now.temperature.toString()
                 tv_weather.text = result.results[0].now.weather

@@ -15,6 +15,7 @@ import com.thread0.weather.data.model.AirQualityHourlyBean
 import com.thread0.weather.databinding.ActivityAirQualityBinding
 import com.thread0.weather.net.service.AirQualityrService
 import com.thread0.weather.util.AQIUtil
+import com.thread0.weather.util.TimeUtils
 import kotlinx.android.synthetic.main.activity_air_quality.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -44,12 +45,15 @@ class AirQualityActivity : SimpleActivity() {
     private lateinit var binding: ActivityAirQualityBinding
     private lateinit var adapterH: RvAdapterAirQuaH
     private lateinit var adapterV: RvAdapterAirQuaV
+    private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAirQualityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //初始化列表
         initRecyclerView()
+        //加载数据
         loadData()
         // 设置点击事件
         setClickEvent()
@@ -81,11 +85,17 @@ class AirQualityActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
+        //获取城市id
+        val bundle = intent.extras
+        if (bundle != null) {
+            cityId = bundle.getString("id").toString()
+        }
+
         //当前空气质量
         val airQualityService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(AirQualityrService::class.java)
         launch {
-            val result = airQualityService.getAirQuality(location = "Xiamen")
+            val result = airQualityService.getAirQuality(location = cityId)
             if (result != null) {
                 withContext(
                     Dispatchers.Main
@@ -110,11 +120,11 @@ class AirQualityActivity : SimpleActivity() {
 
         //逐日空气质量
         launch {
-            val result = airQualityService.getAirQualityDaily(location = "Xiamen")
+            val result = airQualityService.getAirQualityDaily(location = cityId)
             val airQualityDaily = ArrayList<AirQualityDailyBean>()
             if(result!=null){
                 for((index,e) in result.results[0].daily.withIndex()){
-                    val week = getWeekByDateStr(e.date)
+                    val week = TimeUtils.getWeekByDateStr(e.date)
                     val date = when(index){
                         0->"今天"
                         1->"明天"
@@ -136,7 +146,7 @@ class AirQualityActivity : SimpleActivity() {
         //历史逐小时空气质量和逐小时空气质量
         launch {
             //历史逐小时空气质量
-            val result = airQualityService.getAirQualityHourlyHistory(location = "Xiamen")
+            val result = airQualityService.getAirQualityHourlyHistory(location = cityId)
             val airQualityHourly = ArrayList<AirQualityHourlyBean>()
             if(result!=null){
                 val e = result.results[0].hourlyHistory
@@ -151,7 +161,7 @@ class AirQualityActivity : SimpleActivity() {
                 }
             }
             //逐小时空气质量
-            val result2 = airQualityService.getAirQualityHourly(location = "Xiamen")
+            val result2 = airQualityService.getAirQualityHourly(location = cityId)
             if(result2!=null){
                 val e = result2.results[0].hourly
                 for(i in 0..23){
@@ -169,29 +179,5 @@ class AirQualityActivity : SimpleActivity() {
                 rv_time_air.scrollToPosition(20)
             }
         }
-    }
-
-    /**
-     * 根据指定的日期字符串获取星期几
-     */
-    private fun getWeekByDateStr(strDate: String): String {
-        val year = strDate.substring(0, 4).toInt()
-        val month = strDate.substring(5, 7).toInt()
-        val day = strDate.substring(8, 10).toInt()
-        val c: Calendar = Calendar.getInstance()
-        c.set(Calendar.YEAR, year)
-        c.set(Calendar.MONTH, month - 1)
-        c.set(Calendar.DAY_OF_MONTH, day)
-        var week = ""
-        when (c.get(Calendar.DAY_OF_WEEK)) {
-            1 -> week = "星期天"
-            2 -> week = "星期一"
-            3 -> week = "星期二"
-            4 -> week = "星期三"
-            5 -> week = "星期四"
-            6 -> week = "星期五"
-            7 -> week = "星期六"
-        }
-        return week
     }
 }

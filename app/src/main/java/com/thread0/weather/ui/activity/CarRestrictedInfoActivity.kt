@@ -26,6 +26,7 @@ class CarRestrictedInfoActivity : SimpleActivity() {
 
     // view binding
     private lateinit var binding: ActivityCarRestrictedInfoBinding
+    private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +46,16 @@ class CarRestrictedInfoActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
-        //获取传输数据
+        //获取城市id
         val bundle = intent.extras
-        var id: String = ""
         if (bundle != null) {
-            id = bundle.getString("id").toString()
+            cityId = bundle.getString("id").toString()
         }
+
         val carRestrictedService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(CarRestrictedService::class.java)
         launch(Dispatchers.IO,{
-            val result = carRestrictedService.getCarRestricted(location = id)
+            val result = carRestrictedService.getCarRestricted(location = cityId)
             if(result != null){
                 withContext(
                     Dispatchers.Main

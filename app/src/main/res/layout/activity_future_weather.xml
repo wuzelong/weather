@@ -9,6 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
+        android:paddingTop="8dp"
         android:layout_height="wrap_content"
         android:background="@color/blue_00DEFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +18,7 @@
         app:navigationIcon="@drawable/ic_return">
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_weather_daily_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -45,6 +46,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/rv_item_weather_daily"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_future_title" />
 
@@ -53,9 +55,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temperature"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_2"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
@@ -63,9 +66,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/week"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_future_title_date"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
@@ -73,29 +77,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
-        app:layout_constraintEnd_toStartOf="@+id/tv_future_title_temperture"
-        app:layout_constraintStart_toEndOf="@+id/tv_future_title_week"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/tv_future_title_lowest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lowest"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
-        app:layout_constraintEnd_toStartOf="@+id/tv_future_title_highest"
-        app:layout_constraintStart_toEndOf="@+id/tv_future_title_temperture"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater_5_1"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/tv_future_title_highest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/highest"
+        android:text="@string/lowest_highest"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_future_title_lowest"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater_5_2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_quater_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_quater_5_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
+        app:layout_constraintStart_toStartOf="@+id/tv_future_title"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_quater_5_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 

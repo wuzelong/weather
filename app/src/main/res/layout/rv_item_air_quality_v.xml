@@ -31,7 +31,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_center"
-        app:layout_constraintStart_toEndOf="@+id/tv_quater3_1" />
+        app:layout_constraintStart_toEndOf="@+id/tv_quater3_1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_item_air_quality_aqi"

@@ -57,6 +57,6 @@ interface WeatherService {
         @Query("language") language: String = "zh-Hans",
         @Query("unit") unit: String = "c",
         @Query("start") start: String = "0",
-        @Query("days") days: String = "15",
+        @Query("days") days: String = "15"
     ): DailyWeatherServer?
 }
