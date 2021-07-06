@@ -155,8 +155,8 @@ class MainActivity : AppCompatActivity() {
             val result = sunMoonService.getSun()
             if(result != null){
                 val result0 = result.results[0].sun[0]
-                tv_sun_rise_info.text = result0.sunrise
-                tv_sun_set_info.text = result0.sunset
+                tv_sun_rise_info.text = "日出"+result0.sunrise
+                tv_sun_set_info.text = "日落"+result0.sunset
             }
         }
         //月出月落
@@ -164,8 +164,8 @@ class MainActivity : AppCompatActivity() {
             val result = sunMoonService.getMoon()
             if(result != null){
                 val result0 = result.results[0].moon[0]
-                tv_moon_rise_info.text = result0.rise
-                tv_moon_set_info.text = result0.set
+                tv_moon_rise_info.text = "月出"+result0.rise
+                tv_moon_set_info.text = "月落"+result0.set
             }
         }
 
