@@ -24,7 +24,10 @@
     <!--如果设置了target >= 28 如果需要启动后台定位则必须声明这个权限-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <!--如果您的应用需要后台定位权限，且有可能运行在Android Q设备上,并且设置了target>28，必须增加这个权限声明-->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.//权限检查
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
+            }" />
 
     <application
         android:name=".app.App"

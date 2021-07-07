@@ -65,8 +65,11 @@ class MainActivity : AppCompatActivity() {
         //初始化菜单栏
         toolbar.title = ""
         setSupportActionBar(toolbar);
-        //获取定位
-        cityId = "39.93:116.40"
+        //获取定位城市id
+        val bundle = intent.extras
+        if (bundle != null) {
+            cityId = bundle.getString("id").toString()
+        }
         //设置点击事件
         setClickEvent()
         //初始化列表
@@ -212,6 +215,7 @@ class MainActivity : AppCompatActivity() {
 
         //当前天气实况
         launch {
+            tv_title.text = cityId
             val result = weatherService.getLocationCurrentWeather(location = cityId)//获取返回数据
             if (result != null) {
                 tv_temperature.text = result.results[0].now.temperature.toString()

@@ -1,9 +1,12 @@
 package com.thread0.weather.ui.activity
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.thread0.weather.R
 import com.thread0.weather.util.LocationUtil
 import kotlinx.coroutines.GlobalScope
@@ -26,6 +29,10 @@ class EnterActivity : Activity() {
      */
     private fun parseXMLIntoDB() {
         var position: String? = null
+        //权限检查
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
+        }
         //操作完成后跳转首页
         GlobalScope.launch {
             supervisorScope {
@@ -42,7 +49,13 @@ class EnterActivity : Activity() {
             if (null == position) {
 //                Toast.makeText(applicationContext, "无法获取定位信息，请手动选择！", Toast.LENGTH_LONG).show()
                 startActivity(Intent(this, SearchActivity::class.java))
-            } else startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                val intent = Intent(this,MainActivity::class.java)
+                val bundle = Bundle()
+                bundle.putString("id",position)  //将城市id传过去
+                intent.putExtras(bundle)
+                startActivity(intent)
+            }
             finish()
         }
     }
