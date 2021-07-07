@@ -4,12 +4,8 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
-import android.os.Handler
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
 import com.thread0.weather.adapter.RvAdapterAirQuaRank
 import com.thread0.weather.data.model.AirQualityRank
 import com.thread0.weather.databinding.ActivityAirQualityRankBinding
@@ -20,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
-import java.util.*
+import java.util.ArrayList
 
 /**
  *@ClassName: AirQualityRankActivity
@@ -42,20 +38,12 @@ class AirQualityRankActivity : AppCompatActivity() {
         loadData()
         // 设置点击事件
         setClickEvent()
-
     }
+
     private fun setClickEvent() {
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
-        refreshLayout.setOnRefreshListener(object : RefreshListenerAdapter() {
-            override fun onRefresh(refreshLayout: TwinklingRefreshLayout) {
-                Handler().postDelayed(Runnable {
-                    refreshLayout.finishRefreshing()
-                    loadData()
-                    Toast.makeText(applicationContext,"已刷新", Toast.LENGTH_SHORT).show()}, 1000)
-            }
-        })
     }
     /**
      * 初始化列表
