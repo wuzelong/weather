@@ -8,37 +8,35 @@
     tools:context=".ui.activity.SearchActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_search"
-        android:layout_width="0dp"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_return_black">
+        app:navigationIcon="@drawable/ic_return">
 
-        <EditText
-            android:id="@+id/et_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/margin_large"
-            android:hint="@string/search_hint"
-            android:inputType="text"
-            android:maxLength="15"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="?attr/SmallText" />
+        <!--        <EditText-->
+        <!--            android:id="@+id/et_search"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="@dimen/margin_large"-->
+        <!--            android:hint="@string/search_hint"-->
+        <!--            android:inputType="text"-->
+        <!--            android:maxLength="15"-->
+        <!--            android:maxLines="1"-->
+        <!--            android:singleLine="true"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:textSize="?attr/SmallText"/>-->
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_city_list"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_search" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
