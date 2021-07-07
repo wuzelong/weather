@@ -66,7 +66,7 @@ class FutureWeatherActivity : SimpleActivity() {
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
         launch{
-            val result = weatherService.getDailyWeather()
+            val result = weatherService.getDailyWeather(location = cityId)
             val dailyWeatherList = ArrayList<DailyWeather>()
             if(result != null){
                 val  result0 =result.results[0].daily
