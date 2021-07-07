@@ -5,11 +5,15 @@ package com.thread0.weather.ui.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import com.thread0.weather.R
+import com.thread0.weather.util.LocationUtil
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import java.lang.Thread.sleep
+import kotlinx.coroutines.supervisorScope
 
 /**
  *@ClassName: EnterActivity
@@ -31,11 +35,22 @@ class EnterActivity : Activity() {
      *      3、保存完毕后跳转MainActivity，并销毁当前页面。
      */
     private fun parseXMLIntoDB() {
+        var position: String? = null
         //操作完成后跳转首页
         GlobalScope.launch {
-            sleep(1000);
+            supervisorScope {
+                val locationJob = async {
+                    LocationUtil.getInstance()?.getLocation()
+                }
+                try {
+                    position = locationJob.await()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }.invokeOnCompletion {
             startActivity(Intent(this, MainActivity::class.java))
+            Log.d("position", "$position")
             finish()
         }
     }
