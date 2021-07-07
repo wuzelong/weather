@@ -25,7 +25,6 @@ import com.huawei.hms.mlsdk.MLAnalyzerFactory
 import com.huawei.hms.mlsdk.common.MLFrame
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentation
 import com.huawei.hms.mlsdk.imgseg.MLImageSegmentationSetting
-import com.thread0.weather.databinding.ActivityHmsBinding
 import com.thread0.weather.ui.widget.CircleDot
 import com.thread0.weather.util.BitmapUtil
 import kotlinx.android.synthetic.main.activity_hms.*

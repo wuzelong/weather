@@ -5,118 +5,124 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.FutureWeatherActivity">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tb_future_weather"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_00DEFF"
+                android:paddingTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_return">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_future_weather"
-        android:layout_width="0dp"
-        android:paddingTop="8dp"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_00DEFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_return">
+                <TextView
+                    android:id="@+id/tv_weather_daily_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/activity_future_weather"
+                    android:textColor="@color/white"
+                    android:textSize="?attr/MediumText" />
 
-        <TextView
-            android:id="@+id/tv_weather_daily_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/activity_future_weather"
-            android:textColor="@color/white"
-            android:textSize="?attr/MediumText" />
+            </androidx.appcompat.widget.Toolbar>
 
-    </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:id="@+id/tv_future_title"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_shade_blue_rc_top"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
+            <TextView
+                android:id="@+id/tv_future_title_temperture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temperature"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
+                app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_2"
+                app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
-    <TextView
-        android:id="@+id/tv_future_title"
+            <TextView
+                android:id="@+id/tv_future_title_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/week"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
+                app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
+
+            <TextView
+                android:id="@+id/tv_future_title_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
+                app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
+                app:layout_constraintStart_toEndOf="@+id/tv_quater_5_1"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
+
+            <TextView
+                android:id="@+id/tv_future_title_highest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lowest_highest"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_quater_5_2"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
+
+            <TextView
+                android:id="@+id/tv_quater_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
+
+            <TextView
+                android:id="@+id/tv_quater_5_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
+                app:layout_constraintStart_toStartOf="@+id/tv_future_title"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
+
+            <TextView
+                android:id="@+id/tv_quater_5_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
+                app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_future_weather"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/bg_shade_blue_rc_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_recent_days_forecast"
-        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/rv_item_weather_daily"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_future_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_future_title">
 
-    <TextView
-        android:id="@+id/tv_future_title_temperture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/temperature"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
-        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_2"
-        app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-    <TextView
-        android:id="@+id/tv_future_title_week"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/week"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
-        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-    <TextView
-        android:id="@+id/tv_future_title_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/date"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
-        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
-        app:layout_constraintStart_toEndOf="@+id/tv_quater_5_1"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-    <TextView
-        android:id="@+id/tv_future_title_highest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lowest_highest"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_quater_5_2"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-    <TextView
-        android:id="@+id/tv_quater_5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-    <TextView
-        android:id="@+id/tv_quater_5_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
-        app:layout_constraintStart_toStartOf="@+id/tv_future_title"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-    <TextView
-        android:id="@+id/tv_quater_5_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
-        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recent_days_forecast"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_future_title"
+            tools:listitem="@layout/rv_item_weather_daily" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

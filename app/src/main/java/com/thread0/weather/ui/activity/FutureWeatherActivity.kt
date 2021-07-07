@@ -4,12 +4,16 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
 import com.thread0.weather.R
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.thread0.weather.adapter.RvAdapterDailyWeather
 import com.thread0.weather.data.model.DailyWeather
 import com.thread0.weather.net.service.WeatherService
 import kotlinx.android.synthetic.main.activity_future_weather.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
@@ -43,6 +47,12 @@ class FutureWeatherActivity : SimpleActivity() {
         tb_future_weather.setNavigationOnClickListener {
             finish()
         }
+        //上拉刷新
+        srl_future_weather.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            loadData()
+            Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
+            srl_future_weather.isRefreshing = false
+        })
     }
 
     /**

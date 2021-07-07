@@ -135,10 +135,8 @@ class MainActivity : AppCompatActivity() {
         //上拉刷新
         srl_main.setOnRefreshListener(OnRefreshListener {
             loadData()
-            Handler().postDelayed({
-                srl_main.isRefreshing = false
-                Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()
-            }, 500)
+            Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()
+            srl_main.isRefreshing = false
         })
     }
 
