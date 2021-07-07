@@ -5,10 +5,8 @@ package com.thread0.weather.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,19 +14,18 @@ import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterAlarm
 import com.thread0.weather.adapter.RvAdapterHourlyWeather
 import com.thread0.weather.data.constant.getSky
+import com.thread0.weather.data.model.Alarm
 import com.thread0.weather.data.model.HourlyWeather
-import com.thread0.weather.data.model.Weather
 import com.thread0.weather.net.service.SunMoonService
 import com.thread0.weather.net.service.WeatherService
-import kotlinx.android.synthetic.main.activity_air_quality.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
-import java.util.*
 import kotlin.collections.ArrayList
+
 
 /**
  *@ClassName: MainActivity
@@ -102,6 +99,7 @@ class MainActivity : AppCompatActivity() {
      * 初始化点击事件
      */
     private fun setClickEvent() {
+        //空气质量
         tv_air_quality.setOnClickListener {
             val intent = Intent(this, AirQualityActivity::class.java)
             val bundle = Bundle()
@@ -109,10 +107,20 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
         }
+        //降雨等级
         toolbar.setNavigationOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
         }
+        //查看天气
         btn_see_weather.setOnClickListener {
+            val intent = Intent(this, FutureWeatherActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("id",cityId)  //将城市id传过去
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
+        //更多
+        btn_more.setOnClickListener{
             val intent = Intent(this, FutureWeatherActivity::class.java)
             val bundle = Bundle()
             bundle.putString("id",cityId)  //将城市id传过去
@@ -222,10 +230,10 @@ class MainActivity : AppCompatActivity() {
         //气象预警
         launch {
             val result = weatherService.getAlarm()
-            val list = ArrayList<String>()
+            val list = ArrayList<Alarm>()
             if(result != null){
                 for(e in result.results[0].alarms){
-                    list.add(e.level+e.type)
+                    list.add(e)
                 }
             }
             withContext(
