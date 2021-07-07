@@ -6,6 +6,7 @@ package com.thread0.weather.ui.activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
 import com.thread0.weather.R
 import kotlinx.android.synthetic.main.activity_search.*
 import top.xuqingquan.base.view.activity.SimpleActivity
@@ -21,6 +22,7 @@ class SearchActivity : SimpleActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+        setSupportActionBar(toolbar);
         // 设置点击事件
         setClickEvent()
         // 初始化数据与布局
@@ -35,6 +37,11 @@ class SearchActivity : SimpleActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.search, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     private fun initDataAndUI() {
         //TODO:1、获取数据库内保存的城市数据，通过RecycleView展示出来，供用户选择；
         //      2、用户点击RecycleView后通过setResult()将所点击的城市数据传递出去，并关闭此界面。
@@ -42,19 +49,19 @@ class SearchActivity : SimpleActivity() {
 
     private fun setClickEvent() {
         // 返回
-        tb_search.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             finish()
         }
         // 文字变化时刷新列表
-        et_search.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                refreshCityList(s?.toString() ?: "")
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
+//        et_search.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                refreshCityList(s?.toString() ?: "")
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {}
+//        })
     }
 
     /**
