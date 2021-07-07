@@ -4,9 +4,9 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterPort
 import com.thread0.weather.data.model.Port
-import com.thread0.weather.databinding.ActivityPortBinding
 import com.thread0.weather.net.service.PortService
 import kotlinx.android.synthetic.main.activity_port.*
 import kotlinx.coroutines.Dispatchers
@@ -25,14 +25,12 @@ import java.util.ArrayList
 */
 class PortActivity : SimpleActivity() {
 
-    private lateinit var binding: ActivityPortBinding
     private lateinit var adapter: RvAdapterPort
     private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPortBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_port)
         //初始化列表
         initViewPage()
         //加载数据
@@ -42,7 +40,7 @@ class PortActivity : SimpleActivity() {
     }
 
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_port.setNavigationOnClickListener {
             finish()
         }
     }

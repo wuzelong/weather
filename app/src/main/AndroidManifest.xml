@@ -25,7 +25,7 @@
         <activity android:name=".ui.activity.AirQualityRankActivity" />
         <activity android:name=".ui.activity.AirQualityActivity" />
         <activity android:name=".ui.activity.FutureWeatherActivity" />
-        <activity android:name=".ui.activity.YesterdayActivity" />
+        <activity android:name=".ui.activity.RainActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.EnterActivity">
             <intent-filter>

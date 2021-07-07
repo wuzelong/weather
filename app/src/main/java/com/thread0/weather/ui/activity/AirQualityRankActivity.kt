@@ -4,11 +4,11 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import com.thread0.weather.R
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thread0.weather.adapter.RvAdapterAirQuaRank
 import com.thread0.weather.data.model.AirQualityRank
-import com.thread0.weather.databinding.ActivityAirQualityRankBinding
 import com.thread0.weather.net.service.AirQualityrService
 import com.thread0.weather.util.AQIUtil
 import kotlinx.android.synthetic.main.activity_air_quality_rank.*
@@ -26,14 +26,11 @@ import java.util.ArrayList
  *@Date: 2021/6/2 10:58 下午 Created
  */
 class AirQualityRankActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityAirQualityRankBinding
     private lateinit var adapterH:RvAdapterAirQuaRank
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAirQualityRankBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_air_quality_rank)
         initRecyclerView()
         loadData()
         // 设置点击事件
@@ -41,7 +38,7 @@ class AirQualityRankActivity : AppCompatActivity() {
     }
 
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_air_rank.setNavigationOnClickListener {
             finish()
         }
     }

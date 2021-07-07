@@ -4,8 +4,8 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterCity
-import com.thread0.weather.databinding.ActivityCarRestrictedCityBinding
 import kotlinx.android.synthetic.main.activity_car_restricted_city.*
 import top.xuqingquan.base.view.activity.SimpleActivity
 
@@ -19,9 +19,6 @@ import top.xuqingquan.base.view.activity.SimpleActivity
 *@Date: 2021/6/2 10:58 下午 Created
 */
 class CarRestrictedCityActivity : SimpleActivity() {
-
-    // view binding
-    private lateinit var binding: ActivityCarRestrictedCityBinding
     private lateinit var adapter:RvAdapterCity
     //机动车限行城市列表
     private val carRestrictedList = mutableListOf<Pair<String, String>>(
@@ -39,8 +36,7 @@ class CarRestrictedCityActivity : SimpleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCarRestrictedCityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_car_restricted_city)
         //适配器
         adapter = RvAdapterCity()
         rv_car_restricted.adapter = adapter
@@ -50,7 +46,7 @@ class CarRestrictedCityActivity : SimpleActivity() {
     }
 
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_car_city.setNavigationOnClickListener {
             finish()
         }
     }

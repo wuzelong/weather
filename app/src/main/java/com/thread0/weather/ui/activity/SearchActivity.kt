@@ -6,7 +6,8 @@ package com.thread0.weather.ui.activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import com.thread0.weather.databinding.ActivitySearchBinding
+import com.thread0.weather.R
+import kotlinx.android.synthetic.main.activity_search.*
 import top.xuqingquan.base.view.activity.SimpleActivity
 
 /**
@@ -17,13 +18,9 @@ import top.xuqingquan.base.view.activity.SimpleActivity
  */
 class SearchActivity : SimpleActivity() {
 
-    // view binding
-    private lateinit var binding: ActivitySearchBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_search)
         // 设置点击事件
         setClickEvent()
         // 初始化数据与布局
@@ -37,11 +34,11 @@ class SearchActivity : SimpleActivity() {
 
     private fun setClickEvent() {
         // 返回
-        binding.toolbar.setNavigationOnClickListener {
+        tb_search.setNavigationOnClickListener {
             finish()
         }
         // 文字变化时刷新列表
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
+        et_search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {

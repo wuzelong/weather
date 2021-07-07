@@ -8,7 +8,7 @@
     tools:context=".ui.activity.AirQualityRankActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tb_air_rank"
         android:paddingTop="8dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         android:background="@drawable/bg_shade_blue_rc_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_time_air_rank"
@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
         app:layout_constraintEnd_toStartOf="@+id/tv_center2"
         app:layout_constraintStart_toEndOf="@+id/tv_quater2_1"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
     <TextView
         android:id="@+id/tv_title_rank"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
         app:layout_constraintEnd_toStartOf="@+id/tv_quater2_1"
         app:layout_constraintStart_toStartOf="@+id/tv_airRankTitle"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
     <TextView
         android:id="@+id/tv_title_aqi2"
@@ -81,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
         app:layout_constraintEnd_toStartOf="@+id/tv_quater2_2"
         app:layout_constraintStart_toEndOf="@+id/tv_center2"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
     <TextView
         android:id="@+id/tv_title_weather"
@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_airRankTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_quater2_2"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
     <TextView
         android:id="@+id/tv_center2"
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
     <TextView
         android:id="@+id/tv_quater2_1"
@@ -108,7 +108,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/tv_center2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
     <TextView
         android:id="@+id/tv_quater2_2"
@@ -116,6 +116,6 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/tv_airRankTitle"
         app:layout_constraintStart_toEndOf="@+id/tv_center2"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

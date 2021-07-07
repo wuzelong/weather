@@ -7,7 +7,7 @@
     tools:context=".ui.activity.FutureWeatherActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tb_future_weather"
         android:layout_width="0dp"
         android:paddingTop="8dp"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_recent_days_forecast"
@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
         app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_2"
         app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
     <TextView
         android:id="@+id/tv_future_title_week"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
         app:layout_constraintEnd_toStartOf="@+id/tv_quater_5_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
     <TextView
         android:id="@+id/tv_future_title_date"
@@ -81,7 +81,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
         app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
         app:layout_constraintStart_toEndOf="@+id/tv_quater_5_1"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
     <TextView
         android:id="@+id/tv_future_title_highest"
@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_future_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_quater_5_2"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
     <TextView
         android:id="@+id/tv_quater_5"
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
     <TextView
         android:id="@+id/tv_quater_5_1"
@@ -108,7 +108,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/tv_quater_5"
         app:layout_constraintStart_toStartOf="@+id/tv_future_title"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
     <TextView
         android:id="@+id/tv_quater_5_2"
@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_quater_5"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_future_weather" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

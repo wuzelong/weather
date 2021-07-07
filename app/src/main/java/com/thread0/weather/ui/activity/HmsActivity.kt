@@ -4,6 +4,7 @@
 package com.thread0.weather.ui.activity
 
 import android.Manifest
+import com.thread0.weather.R
 import android.annotation.TargetApi
 import android.content.ContentUris
 import android.content.Intent
@@ -38,25 +39,22 @@ import top.xuqingquan.base.view.activity.SimpleActivity
  */
 class HmsActivity : SimpleActivity() {
 
-    // view binding
-    private lateinit var binding: ActivityHmsBinding
     private lateinit var bitmap: Bitmap
     private lateinit var toastLoad: Toast
     private lateinit var toastPhoto: Toast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHmsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_hms)
         initToast()  //初始化Toast
         photoImgIV.tag = "unselect"
         setClickEvent()// 设置点击事件
     }
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_hms.setNavigationOnClickListener {
             finish()
         }
-        binding.photoImgIV.setOnClickListener {
+        photoImgIV.setOnClickListener {
             //TODO:点击前往选择图片，选择完成后显示在此
             //权限检查
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -67,7 +65,7 @@ class HmsActivity : SimpleActivity() {
             albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
             startActivityForResult(albumIntent, 0x999 )
         }
-        binding.redCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
+        redCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为红色后显示到photoImgIV，处理过程需要有处理中的提示
                 if(photoImgIV.tag.equals("unselect")){
@@ -82,7 +80,7 @@ class HmsActivity : SimpleActivity() {
                 whiteCircleDot.isSelected = false
             }
         })
-        binding.blueCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
+        blueCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为蓝色后显示到photoImgIV，处理过程需要有处理中的提示
                 if(photoImgIV.getTag().equals("unselect")){
@@ -97,7 +95,7 @@ class HmsActivity : SimpleActivity() {
                 whiteCircleDot.isSelected = false
             }
         })
-        binding.whiteCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
+        whiteCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为白色后显示到photoImgIV，处理过程需要有处理中的提示
                 if(photoImgIV.tag.equals("unselect")){

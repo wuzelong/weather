@@ -4,10 +4,10 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import com.thread0.weather.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.thread0.weather.adapter.RvAdapterDailyWeather
 import com.thread0.weather.data.model.DailyWeather
-import com.thread0.weather.databinding.ActivityFutureWeatherBinding
 import com.thread0.weather.net.service.WeatherService
 import kotlinx.android.synthetic.main.activity_future_weather.*
 import kotlinx.coroutines.Dispatchers
@@ -25,16 +25,12 @@ import top.xuqingquan.extension.launch
  *@Date: 2021/6/2 10:59 下午 Created
  */
 class FutureWeatherActivity : SimpleActivity() {
-
-    // view binding
-    private lateinit var binding: ActivityFutureWeatherBinding
     private lateinit var cityId: String
     private lateinit var adapter: RvAdapterDailyWeather
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFutureWeatherBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_future_weather)
         //初始化列表
         initRecyclerView()
         //加载数据
@@ -44,7 +40,7 @@ class FutureWeatherActivity : SimpleActivity() {
     }
 
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_future_weather.setNavigationOnClickListener {
             finish()
         }
     }

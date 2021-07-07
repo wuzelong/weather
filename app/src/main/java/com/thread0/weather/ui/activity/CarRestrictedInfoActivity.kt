@@ -4,7 +4,7 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
-import com.thread0.weather.databinding.ActivityCarRestrictedInfoBinding
+import com.thread0.weather.R
 import com.thread0.weather.net.service.CarRestrictedService
 import kotlinx.android.synthetic.main.activity_car_restricted_info.*
 import kotlinx.coroutines.Dispatchers
@@ -23,22 +23,18 @@ import top.xuqingquan.extension.launch
  *@Date: 2021/6/2 10:59 下午 Created
  */
 class CarRestrictedInfoActivity : SimpleActivity() {
-
-    // view binding
-    private lateinit var binding: ActivityCarRestrictedInfoBinding
     private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCarRestrictedInfoBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_car_restricted_info)
         loadData()
         // 设置点击事件
         setClickEvent()
     }
 
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_car_info.setNavigationOnClickListener {
             finish()
         }
     }

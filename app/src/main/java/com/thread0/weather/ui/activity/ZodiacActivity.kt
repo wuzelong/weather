@@ -4,9 +4,9 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import com.thread0.weather.R
 import com.thread0.weather.adapter.Vp2AdapterZodiac
 import com.thread0.weather.data.model.ChineseCalendar
-import com.thread0.weather.databinding.ActivityZodiacBinding
 import com.thread0.weather.net.service.ChineseCalendarService
 import kotlinx.android.synthetic.main.activity_zodiac.*
 import kotlinx.coroutines.Dispatchers
@@ -25,14 +25,11 @@ import java.util.ArrayList
  */
 class ZodiacActivity : SimpleActivity() {
 
-    // view binding
-    private lateinit var binding: ActivityZodiacBinding
     private lateinit var adapter: Vp2AdapterZodiac
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityZodiacBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_zodiac)
         initViewPage()
         loadData()
         // 设置点击事件
@@ -40,7 +37,7 @@ class ZodiacActivity : SimpleActivity() {
     }
 
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_zodiac.setNavigationOnClickListener {
             finish()
         }
     }

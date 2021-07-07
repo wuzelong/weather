@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         }
         //降雨等级
         toolbar.setNavigationOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java))
+            startActivity(Intent(this, RainActivity::class.java))
         }
         //查看天气
         btn_see_weather.setOnClickListener {

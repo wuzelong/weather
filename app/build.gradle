@@ -111,4 +111,7 @@ dependencies {
     //viewpager2(RecycleView懒加载)
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
+    //图表控件
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+
 }

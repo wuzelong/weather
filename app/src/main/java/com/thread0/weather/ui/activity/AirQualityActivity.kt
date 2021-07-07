@@ -8,11 +8,11 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterAirQuaH
 import com.thread0.weather.adapter.RvAdapterAirQuaV
 import com.thread0.weather.data.model.AirQualityDailyBean
 import com.thread0.weather.data.model.AirQualityHourlyBean
-import com.thread0.weather.databinding.ActivityAirQualityBinding
 import com.thread0.weather.net.service.AirQualityrService
 import com.thread0.weather.util.AQIUtil
 import com.thread0.weather.util.TimeUtils
@@ -41,16 +41,13 @@ import kotlin.collections.ArrayList
  */
 class AirQualityActivity : SimpleActivity() {
 
-    // view binding
-    private lateinit var binding: ActivityAirQualityBinding
     private lateinit var adapterH: RvAdapterAirQuaH
     private lateinit var adapterV: RvAdapterAirQuaV
     private lateinit var cityId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAirQualityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_air_quality)
         //初始化列表
         initRecyclerView()
         //加载数据
@@ -61,7 +58,7 @@ class AirQualityActivity : SimpleActivity() {
     }
 
     private fun setClickEvent() {
-        binding.toolbar.setNavigationOnClickListener {
+        tb_air_quality.setNavigationOnClickListener {
             finish()
         }
         btn_airRank.setOnClickListener {
