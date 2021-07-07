@@ -15,7 +15,7 @@ class LocationUtil private constructor() {
             locationClient!!.setLocationListener { location: AMapLocation? ->
                 when {
                     null == location -> cont.resumeWithException(Exception("返回值为 null"))
-                    location.errorCode == 0 -> cont.resume("${location.latitude}:${location.altitude}")
+                    location.errorCode == 0 -> cont.resume("${location.latitude}:${location.longitude}")
                     else -> cont.resumeWithException(Exception(location.errorInfo))
                 }
             }
