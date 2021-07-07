@@ -8,19 +8,20 @@ import android.content.Context
 import com.tencent.mmkv.MMKV
 import com.thread0.weather.net.WEATHER_URL
 import com.thread0.weather.util.LocationUtil
+import org.litepal.LitePal
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.delegate.AppDelegate
 import top.xuqingquan.delegate.AppLifecycle
 import top.xuqingquan.http.log.Level
 
 /**
- *@ClassName: MApp
+ *@ClassName: App
  *@Description: Application
  * TODO：res文件夹内有一些图片，开发过程中可以使用，页可以自己寻找更好看的图片，无用图片需在最后提交前删除干净
  *@Author: hongzf
  *@Date: 2021/5/25 11:35 下午 Created
  */
-class MApp : Application() {
+class App : Application() {
 
     private lateinit var mAppDelegate: AppLifecycle
 
@@ -32,6 +33,8 @@ class MApp : Application() {
     override fun onCreate() {
         super.onCreate()
         MMKV.initialize(this)
+        // 初始化 LitePal
+        LitePal.initialize(this);
         //生命周期初始化
         mAppDelegate.onCreate(this)
         //配置初始化
