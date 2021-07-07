@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         toolbar.title = ""
         setSupportActionBar(toolbar);
         //获取定位
-        cityId = "WS7GQBRNR6V8"
+        cityId = "39.93:116.40"
         //设置点击事件
         setClickEvent()
         //初始化列表
@@ -108,8 +109,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         //降雨等级
+        tv_rain_level.setOnClickListener {
+            Toast.makeText(this,"无API权限！",Toast.LENGTH_LONG).show()
+        }
+        //添加城市
         toolbar.setNavigationOnClickListener {
-            startActivity(Intent(this, RainActivity::class.java))
+            startActivity(Intent(this, SearchActivity::class.java))
         }
         //查看天气
         btn_see_weather.setOnClickListener {
@@ -182,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         val sunMoonService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(SunMoonService::class.java)
         launch{
-            val result = sunMoonService.getSun()
+            val result = sunMoonService.getSun(location = cityId)
             if(result != null){
                 val result0 = result.results[0].sun[0]
                 tv_sun_rise_info.text = "日出"+result0.sunrise
@@ -191,7 +196,7 @@ class MainActivity : AppCompatActivity() {
         }
         //月出月落
         launch {
-            val result = sunMoonService.getMoon()
+            val result = sunMoonService.getMoon(location = cityId)
             if(result != null){
                 val result0 = result.results[0].moon[0]
                 tv_moon_rise_info.text = "月出"+result0.rise
@@ -201,7 +206,7 @@ class MainActivity : AppCompatActivity() {
 
         //当前天气实况
         launch {
-            val result = weatherService.getLocationCurrentWeather(cityId)//获取返回数据
+            val result = weatherService.getLocationCurrentWeather(location = cityId)//获取返回数据
             if (result != null) {
                 tv_temperature.text = result.results[0].now.temperature.toString()
                 tv_weather.text = result.results[0].now.weather
@@ -211,7 +216,7 @@ class MainActivity : AppCompatActivity() {
 
         //今日最高最低温度
         launch{
-            val result = weatherService.getDailyWeather(start="-1",days = "4")
+            val result = weatherService.getDailyWeather(location=cityId,start="-1",days = "4")
             if(result != null){
                 val result0 = result.results[0].daily[0]
                 tv_temperture_range.text = result0.low+"°/"+result0.high+"°"
@@ -232,7 +237,7 @@ class MainActivity : AppCompatActivity() {
 
         //气象预警
         launch {
-            val result = weatherService.getAlarm()
+            val result = weatherService.getAlarm(location = cityId)
             val list = ArrayList<Alarm>()
             if(result != null){
                 for(e in result.results[0].alarms){

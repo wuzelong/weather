@@ -166,6 +166,7 @@
                 android:id="@+id/tv_bg_sun_rise"
                 android:layout_width="150dp"
                 android:layout_height="100dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/bg_panel_1"
                 app:layout_constraintEnd_toStartOf="@+id/tv_bg_sun_set"
                 app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +179,7 @@
                 android:background="@drawable/bg_panel_2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tv_bg_sun_rise"
-                app:layout_constraintTop_toBottomOf="@+id/rv_time" />
+                app:layout_constraintTop_toTopOf="@+id/tv_bg_sun_rise" />
 
             <TextView
                 android:id="@+id/tv_sun_rise_info"

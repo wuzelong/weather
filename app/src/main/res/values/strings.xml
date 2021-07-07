@@ -22,8 +22,6 @@
     <string name="car_restricted">机动车尾号限行</string>
     <string name="port_search">港口查询</string>
 
-    <string name="activity_yesterday">昨日天气</string>
-
     <string name="activity_future_weather">天气预报</string>
 
     <string name="activity_alarm">气象预警</string>

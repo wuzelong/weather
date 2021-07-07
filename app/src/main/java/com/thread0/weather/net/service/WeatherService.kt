@@ -65,7 +65,7 @@ interface WeatherService {
      */
     @GET("/v3/weather/alarm.json")
     suspend fun getAlarm(
-        @Query("location") location: String = "WWJ1QCCEC7H5",
+        @Query("location") location: String = "39.93:116.40",
         @Query("key") key: String = WEATHER_PRIVATE_KEY
     ): AlarmServer?
 }
