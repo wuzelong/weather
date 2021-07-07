@@ -53,10 +53,6 @@ android {
         jvmTarget = '1.8'
     }
 
-    // 开启 viewBinding
-    buildFeatures {
-        viewBinding true
-    }
     //如果有用到 kapt 添加如下配置
     kapt {
         useBuildCache = true
