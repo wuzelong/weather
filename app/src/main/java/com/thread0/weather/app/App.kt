@@ -5,6 +5,7 @@ package com.thread0.weather.app
 
 import android.app.Application
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import com.tencent.mmkv.MMKV
 import com.thread0.weather.net.WEATHER_URL
 import com.thread0.weather.util.LocationUtil
@@ -23,11 +24,8 @@ import top.xuqingquan.http.log.Level
  */
 class App : Application() {
 
-    private lateinit var mAppDelegate: AppLifecycle
-
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-        mAppDelegate = AppDelegate.getInstance(base!!)
     }
 
     override fun onCreate() {
@@ -35,8 +33,8 @@ class App : Application() {
         MMKV.initialize(this)
         // 初始化 LitePal
         LitePal.initialize(this);
-        //生命周期初始化
-        mAppDelegate.onCreate(this)
+        // 设置夜间模式
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         //配置初始化
         ScaffoldConfig.getInstance(this)
             .setBaseUrl(WEATHER_URL)
@@ -45,7 +43,6 @@ class App : Application() {
 
     override fun onTerminate() {
         super.onTerminate()
-        mAppDelegate.onTerminate(this)
         LocationUtil.destroy()
     }
 }
