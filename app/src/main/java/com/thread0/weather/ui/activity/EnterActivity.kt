@@ -1,13 +1,9 @@
-/*
- * @Copyright: 2020-2021 www.thread0.com Inc. All rights reserved.
- */
 package com.thread0.weather.ui.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import com.thread0.weather.R
 import com.thread0.weather.util.LocationUtil
 import kotlinx.coroutines.GlobalScope
@@ -15,12 +11,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 
-/**
- *@ClassName: EnterActivity
- *@Description: 欢迎界面
- *@Author: hongzf
- *@Date: 2021/5/27 11:18 下午 Created
- */
 class EnterActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +39,10 @@ class EnterActivity : Activity() {
                 }
             }
         }.invokeOnCompletion {
-            startActivity(Intent(this, MainActivity::class.java))
-            Log.d("position", "$position")
+            if (null == position) {
+//                Toast.makeText(applicationContext, "无法获取定位信息，请手动选择！", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, SearchActivity::class.java))
+            } else startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
