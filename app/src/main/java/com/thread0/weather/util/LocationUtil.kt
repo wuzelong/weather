@@ -22,20 +22,18 @@ class LocationUtil private constructor() {
             }
         }
 
-    fun destory() {
-        locationClient!!.onDestroy()
-        locationClient = null
-        locationOption = null
-        instance = null
-    }
-
     companion object {
-        private const val TAG = "AMapLocationUtil"
         private var instance: LocationUtil? = null
+
         fun getInstance(): LocationUtil? {
             if (instance == null)
                 instance = LocationUtil()
             return instance
+        }
+
+        fun destroy() {
+            instance?.locationClient!!.onDestroy()
+            instance = null
         }
     }
 
