@@ -34,7 +34,10 @@
         android:layout_height="0dp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -202,8 +205,8 @@
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/tv_bg_moon_set"
                 android:background="@drawable/bg_panel_3"
+                app:layout_constraintEnd_toStartOf="@+id/tv_bg_moon_set"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_bg_sun_rise" />
 
@@ -259,7 +262,7 @@
             <View
                 android:id="@+id/view2"
                 android:layout_width="320dp"
-                android:layout_height="210dp"
+                android:layout_height="260dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/panel"
@@ -284,12 +287,12 @@
                 android:id="@+id/rv_alarm"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                tools:itemCount="1"
-                tools:listitem="@layout/rv_item_alarm"
                 app:layout_constraintBottom_toTopOf="@+id/tv_temperature"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="1"
+                tools:listitem="@layout/rv_item_alarm" />
 
             <TextView
                 android:id="@+id/tv_today"
@@ -312,7 +315,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/view2"
                 app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@+id/view2" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_yesterday_avg" />
 
             <TextView
                 android:id="@+id/tv_today_range"
@@ -404,6 +407,40 @@
                 app:layout_constraintBottom_toBottomOf="@+id/view2"
                 app:layout_constraintEnd_toEndOf="@+id/view2"
                 app:layout_constraintStart_toStartOf="@+id/view2" />
+
+            <TextView
+                android:id="@+id/tv_yesterday_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="28"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/view2" />
+
+            <TextView
+                android:id="@+id/tv_yesterday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yesterday"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_yesterday_avg"
+                app:layout_constraintStart_toStartOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/tv_yesterday_avg" />
+
+            <TextView
+                android:id="@+id/tv_yesterday_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26/33"
+                android:textColor="@color/picture_color_white"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintStart_toEndOf="@+id/tv_yesterday_avg"
+                app:layout_constraintTop_toTopOf="@+id/tv_yesterday_avg" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

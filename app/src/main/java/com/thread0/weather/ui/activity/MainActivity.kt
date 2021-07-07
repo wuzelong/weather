@@ -211,19 +211,22 @@ class MainActivity : AppCompatActivity() {
 
         //今日最高最低温度
         launch{
-            val result = weatherService.getDailyWeather(days = "3")
+            val result = weatherService.getDailyWeather(start="-1",days = "4")
             if(result != null){
                 val result0 = result.results[0].daily[0]
                 tv_temperture_range.text = result0.low+"°/"+result0.high+"°"
-                //今明后气温
-                tv_today_avg.text =((result0.low.toInt()+result0.high.toInt())/2).toString()+"°"
-                tv_today_range.text = result0.low+"°/"+result0.high+"°"
+                //昨今明后气温
+                tv_yesterday_avg.text =((result0.low.toInt()+result0.high.toInt())/2).toString()+"°"
+                tv_yesterday_range.text = result0.low+"°/"+result0.high+"°"
                 val result1 = result.results[0].daily[1]
-                tv_tomorrow_avg.text = ((result1.low.toInt()+result1.high.toInt())/2).toString()+"°"
-                tv_tomorrow_range.text = result1.low+"°/"+result1.high+"°"
+                tv_today_avg.text =((result1.low.toInt()+result1.high.toInt())/2).toString()+"°"
+                tv_today_range.text = result1.low+"°/"+result1.high+"°"
                 val result2 = result.results[0].daily[2]
-                tv_after_tomorrow_avg.text = ((result2.low.toInt()+result2.high.toInt())/2).toString()+"°"
-                tv_after_tomorrow_range.text = result2.low+"°/"+result2.high+"°"
+                tv_tomorrow_avg.text = ((result2.low.toInt()+result2.high.toInt())/2).toString()+"°"
+                tv_tomorrow_range.text = result2.low+"°/"+result2.high+"°"
+                val result3 = result.results[0].daily[3]
+                tv_after_tomorrow_avg.text = ((result3.low.toInt()+result3.high.toInt())/2).toString()+"°"
+                tv_after_tomorrow_range.text = result3.low+"°/"+result3.high+"°"
             }
         }
 
