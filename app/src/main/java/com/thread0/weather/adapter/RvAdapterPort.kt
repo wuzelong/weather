@@ -20,16 +20,12 @@ class RvAdapterPort : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         holder.itemView.tv_province.text = province+"省"
         holder.itemView.tv_location.text = "经度："+list[position].longitude+" 纬度："+list[position].latitude
         holder.itemView.tv_water_level.text = list[position].sea_level+"米"
+
     }
 
     fun setData(lists: List<Port>) {
         list.clear()
         list.addAll(lists)
-        if(lists.isEmpty()){
-            val toast = Toast.makeText(mContext,"当前城市无港口数据", Toast.LENGTH_LONG)
-            toast.setGravity(Gravity.CENTER,0,0)
-            toast.show()
-        }
         notifyDataSetChanged()
     }
     override fun getItemCount(): Int = list.size

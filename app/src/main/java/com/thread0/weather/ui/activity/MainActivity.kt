@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
         }
-        //上拉刷新
+        //下拉刷新
         srl_main.setOnRefreshListener(OnRefreshListener {
             loadData()
             Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()

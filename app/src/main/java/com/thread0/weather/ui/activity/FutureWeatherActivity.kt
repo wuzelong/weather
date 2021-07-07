@@ -37,6 +37,11 @@ class FutureWeatherActivity : SimpleActivity() {
         setContentView(R.layout.activity_future_weather)
         //初始化列表
         initRecyclerView()
+        //获取城市id
+        val bundle = intent.extras
+        if (bundle != null) {
+            cityId = bundle.getString("id").toString()
+        }
         //加载数据
         loadData()
         // 设置点击事件
@@ -47,7 +52,7 @@ class FutureWeatherActivity : SimpleActivity() {
         tb_future_weather.setNavigationOnClickListener {
             finish()
         }
-        //上拉刷新
+        //下拉刷新
         srl_future_weather.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             loadData()
             Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
@@ -67,12 +72,6 @@ class FutureWeatherActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
-        //获取城市id
-        val bundle = intent.extras
-        if (bundle != null) {
-            cityId = bundle.getString("id").toString()
-        }
-
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
         launch{

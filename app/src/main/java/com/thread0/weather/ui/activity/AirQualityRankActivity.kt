@@ -4,13 +4,16 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import com.thread0.weather.R
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.thread0.weather.adapter.RvAdapterAirQuaRank
 import com.thread0.weather.data.model.AirQualityRank
 import com.thread0.weather.net.service.AirQualityrService
 import com.thread0.weather.util.AQIUtil
+import kotlinx.android.synthetic.main.activity_air_quality.*
 import kotlinx.android.synthetic.main.activity_air_quality_rank.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -31,7 +34,9 @@ class AirQualityRankActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_air_quality_rank)
+        //初始化列表
         initRecyclerView()
+        //加载数据
         loadData()
         // 设置点击事件
         setClickEvent()
@@ -41,6 +46,12 @@ class AirQualityRankActivity : AppCompatActivity() {
         tb_air_rank.setNavigationOnClickListener {
             finish()
         }
+        //下拉刷新
+        srl_air_rank.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            loadData()
+            Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
+            srl_air_rank.isRefreshing = false
+        })
     }
     /**
      * 初始化列表

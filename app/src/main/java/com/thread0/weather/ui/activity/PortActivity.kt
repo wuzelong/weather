@@ -4,6 +4,9 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.Toast
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterPort
 import com.thread0.weather.data.model.Port
@@ -33,6 +36,11 @@ class PortActivity : SimpleActivity() {
         setContentView(R.layout.activity_port)
         //初始化列表
         initViewPage()
+        //获取城市id
+        val bundle = intent.extras
+        if (bundle != null) {
+            cityId = bundle.getString("id").toString()
+        }
         //加载数据
         loadData()
         // 设置点击事件
@@ -43,6 +51,12 @@ class PortActivity : SimpleActivity() {
         tb_port.setNavigationOnClickListener {
             finish()
         }
+        //下拉刷新
+        srl_port.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            loadData()
+            Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
+            srl_port.isRefreshing = false
+        })
     }
     /**
      * 初始化ViewPage
@@ -55,12 +69,6 @@ class PortActivity : SimpleActivity() {
      * 加载数据
      */
     private fun loadData(){
-        //获取城市id
-        val bundle = intent.extras
-        if (bundle != null) {
-            cityId = bundle.getString("id").toString()
-        }
-
         val portService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(PortService::class.java)
         val ports = ArrayList<Port>()
@@ -73,6 +81,8 @@ class PortActivity : SimpleActivity() {
                 withContext(
                     Dispatchers.Main
                 ) {
+                    if(ports.isEmpty())tv_port_alert.text = "暂无数据"
+                    else tv_port_alert.text = ""
                     adapter.setData(ports)
                 }
             }

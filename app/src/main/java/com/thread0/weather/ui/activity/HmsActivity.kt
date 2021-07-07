@@ -53,6 +53,7 @@ class HmsActivity : SimpleActivity() {
         tb_hms.setNavigationOnClickListener {
             finish()
         }
+        //图片选择
         photoImgIV.setOnClickListener {
             //TODO:点击前往选择图片，选择完成后显示在此
             //权限检查
@@ -64,6 +65,7 @@ class HmsActivity : SimpleActivity() {
             albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
             startActivityForResult(albumIntent, 0x999 )
         }
+        //红底
         redCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为红色后显示到photoImgIV，处理过程需要有处理中的提示
@@ -79,6 +81,7 @@ class HmsActivity : SimpleActivity() {
                 whiteCircleDot.isSelected = false
             }
         })
+        //蓝底
         blueCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为蓝色后显示到photoImgIV，处理过程需要有处理中的提示
@@ -94,6 +97,7 @@ class HmsActivity : SimpleActivity() {
                 whiteCircleDot.isSelected = false
             }
         })
+        //白底
         whiteCircleDot.setOnClickListener(object : CircleDot.OnClickListener {
             override fun onClick() {
                 //TODO：开始运用HMSCore的抠图能力，抠出人像，并设置背景色为白色后显示到photoImgIV，处理过程需要有处理中的提示

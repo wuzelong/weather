@@ -36,19 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_time_air_rank"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/rv_item_air_quality_rank"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_airRankTitle"
-        app:layout_constraintVertical_bias="1.0" />
-
     <TextView
         android:id="@+id/tv_title_city"
         android:layout_width="wrap_content"
@@ -117,4 +104,25 @@
         app:layout_constraintStart_toEndOf="@+id/tv_center2"
         app:layout_constraintTop_toBottomOf="@+id/tb_air_rank" />
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srl_air_rank"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_airRankTitle" >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_time_air_rank"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/rv_item_air_quality_rank"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_airRankTitle"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

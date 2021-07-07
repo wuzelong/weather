@@ -6,8 +6,10 @@ package com.thread0.weather.ui.activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterAirQuaH
 import com.thread0.weather.adapter.RvAdapterAirQuaV
@@ -22,7 +24,6 @@ import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.extension.launch
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -50,6 +51,11 @@ class AirQualityActivity : SimpleActivity() {
         setContentView(R.layout.activity_air_quality)
         //初始化列表
         initRecyclerView()
+        //获取城市id
+        val bundle = intent.extras
+        if (bundle != null) {
+            cityId = bundle.getString("id").toString()
+        }
         //加载数据
         loadData()
         // 设置点击事件
@@ -61,9 +67,16 @@ class AirQualityActivity : SimpleActivity() {
         tb_air_quality.setNavigationOnClickListener {
             finish()
         }
+        //空气质量排行榜
         btn_airRank.setOnClickListener {
             startActivity(Intent(this, AirQualityRankActivity::class.java))
         }
+        //下拉刷新
+        srl_air_quality.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            loadData()
+            Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
+            srl_air_quality.isRefreshing = false
+        })
     }
     /**
      * 初始化列表
@@ -82,12 +95,6 @@ class AirQualityActivity : SimpleActivity() {
      * 载入数据
      */
     private fun loadData() {
-        //获取城市id
-        val bundle = intent.extras
-        if (bundle != null) {
-            cityId = bundle.getString("id").toString()
-        }
-
         //当前空气质量
         val airQualityService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(AirQualityrService::class.java)
