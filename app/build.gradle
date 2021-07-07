@@ -75,8 +75,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // fastjson
-    implementation 'com.alibaba:fastjson:1.1.72.android'
+    // LitePal
+    implementation 'org.litepal.guolindev:core:3.2.3'
 
     // 子模块核心
     implementation 'top.xuqingquan:scaffold:3.0.2'
