@@ -8,14 +8,12 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_car_info"
-        android:paddingTop="8dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/blue_00DEFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_return">
+        app:navigationIcon="@drawable/ic_return_black">
 
         <TextView
             android:id="@+id/tv_title"
@@ -23,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/activity_car_restricted_info"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="?attr/MediumText" />
 
     </androidx.appcompat.widget.Toolbar>

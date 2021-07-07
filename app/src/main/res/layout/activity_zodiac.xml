@@ -4,19 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/btn_bg"
     tools:context=".ui.activity.ZodiacActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_zodiac"
         android:layout_width="0dp"
-        android:paddingTop="8dp"
         android:layout_height="wrap_content"
-        android:background="@color/blue_00DEFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_return">
+        app:navigationIcon="@drawable/ic_return_black">
 
         <TextView
             android:id="@+id/tv_title"
@@ -24,12 +21,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/activity_zodiac"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="?attr/MediumText" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.viewpager2.widget.ViewPager2
+        android:background="@color/btn_bg"
         android:id="@+id/vp2_zodiac"
         android:layout_width="0dp"
         android:layout_height="0dp"

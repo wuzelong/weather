@@ -14,10 +14,14 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.view.Gravity
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.huawei.hmf.tasks.Task
@@ -48,6 +52,14 @@ class HmsActivity : SimpleActivity() {
         initToast()  //初始化Toast
         photoImgIV.tag = "unselect"
         setClickEvent()// 设置点击事件
+        //设置状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //获取窗口区域
+            val window: Window = this.window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            //设置显示为白色背景，黑色字体
+            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        }
     }
     private fun setClickEvent() {
         tb_hms.setNavigationOnClickListener {

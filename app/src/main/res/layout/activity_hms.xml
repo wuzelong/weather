@@ -11,18 +11,16 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_hms"
-        android:paddingTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue_00DEFF"
-        app:navigationIcon="@drawable/ic_return">
+        app:navigationIcon="@drawable/ic_return_black">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/hms"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="?attr/MediumText"
             android:textStyle="bold"/>
 

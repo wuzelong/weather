@@ -9,12 +9,10 @@
                 android:id="@+id/tb_future_weather"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/blue_00DEFF"
-                android:paddingTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_return">
+                app:navigationIcon="@drawable/ic_return_black">
 
                 <TextView
                     android:id="@+id/tv_weather_daily_title"
@@ -22,7 +20,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/activity_future_weather"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="?attr/MediumText" />
 
             </androidx.appcompat.widget.Toolbar>

@@ -25,6 +25,14 @@ class SearchActivity : SimpleActivity() {
         setClickEvent()
         // 初始化数据与布局
         initDataAndUI()
+        //设置状态栏
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            //获取窗口区域
+            val window: android.view.Window = this.window
+            window.addFlags(android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            //设置显示为白色背景，黑色字体
+            window.decorView.setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        }
     }
 
     private fun initDataAndUI() {

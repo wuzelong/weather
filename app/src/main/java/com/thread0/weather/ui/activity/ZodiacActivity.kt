@@ -3,7 +3,11 @@
  */
 package com.thread0.weather.ui.activity
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import com.thread0.weather.R
 import com.thread0.weather.adapter.Vp2AdapterZodiac
 import com.thread0.weather.data.model.ChineseCalendar
@@ -14,7 +18,8 @@ import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.base.view.activity.SimpleActivity
 import top.xuqingquan.extension.launch
-import java.util.ArrayList
+import java.util.*
+
 
 /**
  *@ClassName: ZodiacActivity
@@ -34,6 +39,14 @@ class ZodiacActivity : SimpleActivity() {
         loadData()
         // 设置点击事件
         setClickEvent()
+        //设置状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //获取窗口区域
+            val window: Window = this.window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            //设置显示为白色背景，黑色字体
+            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        }
     }
 
     private fun setClickEvent() {
@@ -82,5 +95,6 @@ class ZodiacActivity : SimpleActivity() {
             }
         }
     }
+
 
 }
