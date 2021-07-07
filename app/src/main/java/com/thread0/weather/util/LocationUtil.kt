@@ -41,7 +41,7 @@ class LocationUtil private constructor() {
         locationClient = AMapLocationClient(ScaffoldConfig.getApplication())
         locationOption = AMapLocationClientOption()
         locationOption!!.locationMode =
-            AMapLocationClientOption.AMapLocationMode.Battery_Saving;
+            AMapLocationClientOption.AMapLocationMode.Battery_Saving
         locationOption!!.isOnceLocation = true
         locationOption!!.isOnceLocationLatest = true
         locationClient!!.setLocationOption(locationOption)
