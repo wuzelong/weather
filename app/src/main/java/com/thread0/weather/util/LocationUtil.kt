@@ -18,8 +18,8 @@ class LocationUtil private constructor() {
                     location.errorCode == 0 -> cont.resume("${location.latitude}:${location.altitude}")
                     else -> cont.resumeWithException(Exception(location.errorInfo))
                 }
-                locationClient!!.startLocation()
             }
+            locationClient!!.startLocation()
         }
 
     companion object {
