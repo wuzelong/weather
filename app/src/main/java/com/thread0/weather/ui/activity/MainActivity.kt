@@ -5,7 +5,6 @@ package com.thread0.weather.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -215,11 +214,11 @@ class MainActivity : AppCompatActivity() {
 
         //当前天气实况
         launch {
-            tv_title.text = cityId
             val result = weatherService.getLocationCurrentWeather(location = cityId)//获取返回数据
             if (result != null) {
                 tv_temperature.text = result.results[0].now.temperature.toString()
                 tv_weather.text = result.results[0].now.weather
+                tv_title.text = result.results[0].location.name
                 cl_main.background = getDrawable(getSky(result.results[0].now.code.toString()).bg)
             }
         }
