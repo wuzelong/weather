@@ -5,12 +5,14 @@ package com.thread0.weather.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import com.thread0.weather.R
 import com.thread0.weather.adapter.RvAdapterAlarm
 import com.thread0.weather.adapter.RvAdapterHourlyWeather
@@ -20,12 +22,10 @@ import com.thread0.weather.data.model.HourlyWeather
 import com.thread0.weather.net.service.SunMoonService
 import com.thread0.weather.net.service.WeatherService
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.toolbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
-import kotlin.collections.ArrayList
 
 
 /**
@@ -132,6 +132,14 @@ class MainActivity : AppCompatActivity() {
             intent.putExtras(bundle)
             startActivity(intent)
         }
+        //上拉刷新
+        srl_main.setOnRefreshListener(OnRefreshListener {
+            loadData()
+            Handler().postDelayed({
+                srl_main.isRefreshing = false
+                Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()
+            }, 500)
+        })
     }
 
     /**
