@@ -3,11 +3,14 @@
  */
 package com.thread0.weather.ui.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +32,7 @@ import org.litepal.LitePal
 import org.litepal.extension.findAll
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
+import kotlin.math.abs
 
 
 /**
@@ -60,8 +64,9 @@ import top.xuqingquan.extension.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var adapterHourlyWeather: RvAdapterHourlyWeather
     private lateinit var adapterAlarm: RvAdapterAlarm
-    private lateinit var locations: List<LocationWeather>
+    private lateinit var locations: MutableList<LocationWeather>
     private lateinit var location: LocationWeather
+    private var index = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,10 +74,9 @@ class MainActivity : AppCompatActivity() {
         //初始化菜单栏
         toolbar.title = ""
         setSupportActionBar(toolbar)
-
         locations = LitePal.findAll<LocationWeather>()
         if (locations.isNotEmpty()) {
-            location = locations[0]
+            location = locations[index]
         } else {
             location = LocationWeather()
         }
@@ -82,6 +86,30 @@ class MainActivity : AppCompatActivity() {
             location.cityId = bundle.getString("id").toString()
             location.save()
         }
+
+        var startX = 0F
+        var startY = 0F
+        nv_main.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    startX = event.rawX
+                    startY = event.rawY
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    println("---action move-----")
+                }
+                MotionEvent.ACTION_UP -> {
+                    val x = event.rawX - startX
+                    val y = event.rawY - startY
+                    if (abs(x) > abs(y)) {
+                        changeLocation(x)
+                    }
+                }
+            }
+            nv_main.performClick()
+            false
+        }
+
         //设置点击事件
         setClickEvent()
         //初始化列表
@@ -120,6 +148,16 @@ class MainActivity : AppCompatActivity() {
             loadData()
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun changeLocation(x: Float) {
+        if (x > 0) {
+            if (--index < 0) index = locations.size - 1
+        } else {
+            if (++index == locations.size) index = 0
+        }
+        location = locations[index]
+        loadData()
     }
 
     /**
