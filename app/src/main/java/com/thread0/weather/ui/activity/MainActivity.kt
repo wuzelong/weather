@@ -82,7 +82,12 @@ class MainActivity : AppCompatActivity() {
         //获取定位城市id
         val bundle = intent.extras
         if (bundle != null) {
-            location.id = bundle.getString("id").toString()
+            val id = bundle.getString("id")
+            if (id == null) {
+                startActivityForResult(Intent(this, SearchActivity::class.java), 3)
+                return
+            }
+            location.id = id
             location.save()
         }
 
