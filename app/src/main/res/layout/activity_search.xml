@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".ui.activity.SearchActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -15,19 +14,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_return_black">
 
-        <!--        <EditText-->
-        <!--            android:id="@+id/et_search"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginEnd="@dimen/margin_large"-->
-        <!--            android:hint="@string/search_hint"-->
-        <!--            android:inputType="text"-->
-        <!--            android:maxLength="15"-->
-        <!--            android:maxLines="1"-->
-        <!--            android:singleLine="true"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:textSize="?attr/SmallText"/>-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/panel"
+            android:text="省份" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="城市" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="地区" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView

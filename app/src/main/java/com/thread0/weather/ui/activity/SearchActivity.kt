@@ -4,12 +4,15 @@
 package com.thread0.weather.ui.activity
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import com.thread0.weather.R
+import com.thread0.weather.net.service.LocationService
 import kotlinx.android.synthetic.main.activity_search.*
-import top.xuqingquan.base.view.activity.SimpleActivity
+import top.xuqingquan.app.ScaffoldConfig
+import top.xuqingquan.extension.launch
 
 /**
  *@ClassName: SearchActivity
@@ -17,11 +20,12 @@ import top.xuqingquan.base.view.activity.SimpleActivity
  *@Author: hongzf
  *@Date: 2021/6/2 11:00 下午 Created
  */
-class SearchActivity : SimpleActivity() {
+class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+        toolbar.title = ""
         setSupportActionBar(toolbar);
         // 设置点击事件
         setClickEvent()
@@ -39,6 +43,17 @@ class SearchActivity : SimpleActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search, menu)
+        val searchView: SearchView = menu!!.findItem(R.id.search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(s: String): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(s: String): Boolean {
+                refreshCityList(s)
+                return true
+            }
+        })
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -52,16 +67,6 @@ class SearchActivity : SimpleActivity() {
         toolbar.setNavigationOnClickListener {
             finish()
         }
-        // 文字变化时刷新列表
-//        et_search.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                refreshCityList(s?.toString() ?: "")
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {}
-//        })
     }
 
     /**
@@ -70,6 +75,15 @@ class SearchActivity : SimpleActivity() {
      * @param keyword 关键词
      */
     fun refreshCityList(keyword: String) {
+        val locationService =
+            ScaffoldConfig.getRepositoryManager().obtainRetrofitService(LocationService::class.java)
+        launch {
+            val result = locationService.getLocations(location = keyword)
+            if(result!=null){
+                for(location in result.results){
 
+                }
+            }
+        }
     }
 }

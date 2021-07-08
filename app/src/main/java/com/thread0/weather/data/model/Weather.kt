@@ -6,22 +6,6 @@ package com.thread0.weather.data.model
 import com.google.gson.annotations.SerializedName
 
 /**
- *@ClassName: Location
- *@Description: 心知 Location 位置类
- *@Author: hongzf
- *@Date: 2021/5/30 4:59 下午 Created
- */
-data class Location(
-    val id: String,
-    val name: String,
-    val country: String,
-    val path: String,
-    val timezone: String,
-    @SerializedName("timezone_offset")
-    val timezoneOffset: String
-)
-
-/**
  *@ClassName: Weather
  *@Description: 心知 Weather 天气类
  *@Author: hongzf
