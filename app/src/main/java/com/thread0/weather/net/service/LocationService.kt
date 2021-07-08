@@ -9,6 +9,6 @@ interface LocationService {
     @GET("/v3/location/search.json")
     suspend fun getLocations(
         @Query("key") key: String = WEATHER_PRIVATE_KEY,
-        @Query("location") location: String
+        @Query("q") location: String
     ): LocationResult?
 }

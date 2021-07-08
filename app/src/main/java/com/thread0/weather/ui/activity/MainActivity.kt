@@ -3,6 +3,7 @@
  */
 package com.thread0.weather.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -87,15 +88,23 @@ class MainActivity : AppCompatActivity() {
             R.id.calendar -> startActivity(Intent(this, ZodiacActivity::class.java))
             R.id.hms -> startActivity(Intent(this, HmsActivity::class.java))
             R.id.carRestricted -> startActivity(Intent(this, CarRestrictedCityActivity::class.java))
-            R.id.port ->{  //传递城市id
-                val intent = Intent(this,PortActivity::class.java)
+            R.id.port -> {  //传递城市id
+                val intent = Intent(this, PortActivity::class.java)
                 val bundle = Bundle()
-                bundle.putString("id",cityId)  //将城市id传过去
+                bundle.putString("id", cityId)  //将城市id传过去
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
         }
         return false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            cityId = data.getStringExtra("cityId").toString()
+            loadData()
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     /**
@@ -106,38 +115,38 @@ class MainActivity : AppCompatActivity() {
         tv_air_quality.setOnClickListener {
             val intent = Intent(this, AirQualityActivity::class.java)
             val bundle = Bundle()
-            bundle.putString("id",cityId)  //将城市id传过去
+            bundle.putString("id", cityId)  //将城市id传过去
             intent.putExtras(bundle)
             startActivity(intent)
         }
         //降雨等级
         tv_rain_level.setOnClickListener {
-            Toast.makeText(this,"无API权限！",Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "无API权限！", Toast.LENGTH_LONG).show()
         }
         //添加城市
         toolbar.setNavigationOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java))
+            startActivityForResult(Intent(this, SearchActivity::class.java), 3)
         }
         //查看天气
         btn_see_weather.setOnClickListener {
             val intent = Intent(this, FutureWeatherActivity::class.java)
             val bundle = Bundle()
-            bundle.putString("id",cityId)  //将城市id传过去
+            bundle.putString("id", cityId)  //将城市id传过去
             intent.putExtras(bundle)
             startActivity(intent)
         }
         //更多
-        btn_more.setOnClickListener{
+        btn_more.setOnClickListener {
             val intent = Intent(this, FutureWeatherActivity::class.java)
             val bundle = Bundle()
-            bundle.putString("id",cityId)  //将城市id传过去
+            bundle.putString("id", cityId)  //将城市id传过去
             intent.putExtras(bundle)
             startActivity(intent)
         }
         //下拉刷新
         srl_main.setOnRefreshListener(OnRefreshListener {
             loadData()
-            Toast.makeText(this,"刷新成功",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "刷新成功", Toast.LENGTH_SHORT).show()
             srl_main.isRefreshing = false
         })
     }
@@ -162,30 +171,39 @@ class MainActivity : AppCompatActivity() {
         val weatherService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(WeatherService::class.java)
         val data = ArrayList<HourlyWeather>()
-        launch{
+        launch {
             //过去24小时天气
             val result2 = weatherService.getHistoryWeather(location = cityId)
-            if(result2 != null){
+            if (result2 != null) {
                 val result0 = result2.results[0].hourlyHistory
-                for(i in 23 downTo 0){
-                    data.add(HourlyWeather(result0[i].lastUpdate.substring(11,14)+"00",result0[i].text,result0[i].code,
-                        result0[i].temperature,result0[i].humidity,result0[i].windDirection,result0[i].windSpeed))
+                for (i in 23 downTo 0) {
+                    data.add(
+                        HourlyWeather(
+                            result0[i].lastUpdate.substring(11, 14) + "00",
+                            result0[i].text,
+                            result0[i].code,
+                            result0[i].temperature,
+                            result0[i].humidity,
+                            result0[i].windDirection,
+                            result0[i].windSpeed
+                        )
+                    )
                 }
             }
             //未来24小时天气
             val result = weatherService.getHourlyWeather(location = cityId)
-            if(result != null){
+            if (result != null) {
                 val result0 = result.results[0].hourly
-                for(i in 1..23){
-                    var cur =result0[i]
-                    if(cur.time.substring(11,16)=="00:00")cur.time = "明天"
-                    else cur.time = cur.time.substring(11,16)
+                for (i in 1..23) {
+                    var cur = result0[i]
+                    if (cur.time.substring(11, 16) == "00:00") cur.time = "明天"
+                    else cur.time = cur.time.substring(11, 16)
                     data.add(cur)
                 }
             }
             withContext(
                 Dispatchers.Main
-            ){
+            ) {
                 adapterHourlyWeather.setData(data)
                 rv_time.scrollToPosition(22)
             }
@@ -194,21 +212,21 @@ class MainActivity : AppCompatActivity() {
         //日出日落
         val sunMoonService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(SunMoonService::class.java)
-        launch{
+        launch {
             val result = sunMoonService.getSun(location = cityId)
-            if(result != null){
+            if (result != null) {
                 val result0 = result.results[0].sun[0]
-                tv_sun_rise_info.text = "日出"+result0.sunrise
-                tv_sun_set_info.text = "日落"+result0.sunset
+                tv_sun_rise_info.text = "日出" + result0.sunrise
+                tv_sun_set_info.text = "日落" + result0.sunset
             }
         }
         //月出月落
         launch {
             val result = sunMoonService.getMoon(location = cityId)
-            if(result != null){
+            if (result != null) {
                 val result0 = result.results[0].moon[0]
-                tv_moon_rise_info.text = "月出"+result0.rise
-                tv_moon_set_info.text = "月落"+result0.set
+                tv_moon_rise_info.text = "月出" + result0.rise
+                tv_moon_set_info.text = "月落" + result0.set
             }
         }
 
@@ -224,23 +242,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         //今日最高最低温度
-        launch{
-            val result = weatherService.getDailyWeather(location=cityId,start="-1",days = "4")
-            if(result != null){
+        launch {
+            val result = weatherService.getDailyWeather(location = cityId, start = "-1", days = "4")
+            if (result != null) {
                 //昨今明后气温
                 val result0 = result.results[0].daily[0]
-                tv_yesterday_avg.text =((result0.low.toInt()+result0.high.toInt())/2).toString()+"°"
-                tv_yesterday_range.text = result0.low+"°/"+result0.high+"°"
+                tv_yesterday_avg.text =
+                    ((result0.low.toInt() + result0.high.toInt()) / 2).toString() + "°"
+                tv_yesterday_range.text = result0.low + "°/" + result0.high + "°"
                 val result1 = result.results[0].daily[1]
-                tv_today_avg.text =((result1.low.toInt()+result1.high.toInt())/2).toString()+"°"
-                tv_today_range.text = result1.low+"°/"+result1.high+"°"
-                tv_temperture_range.text = result1.low+"°/"+result1.high+"°"
+                tv_today_avg.text =
+                    ((result1.low.toInt() + result1.high.toInt()) / 2).toString() + "°"
+                tv_today_range.text = result1.low + "°/" + result1.high + "°"
+                tv_temperture_range.text = result1.low + "°/" + result1.high + "°"
                 val result2 = result.results[0].daily[2]
-                tv_tomorrow_avg.text = ((result2.low.toInt()+result2.high.toInt())/2).toString()+"°"
-                tv_tomorrow_range.text = result2.low+"°/"+result2.high+"°"
+                tv_tomorrow_avg.text =
+                    ((result2.low.toInt() + result2.high.toInt()) / 2).toString() + "°"
+                tv_tomorrow_range.text = result2.low + "°/" + result2.high + "°"
                 val result3 = result.results[0].daily[3]
-                tv_after_tomorrow_avg.text = ((result3.low.toInt()+result3.high.toInt())/2).toString()+"°"
-                tv_after_tomorrow_range.text = result3.low+"°/"+result3.high+"°"
+                tv_after_tomorrow_avg.text =
+                    ((result3.low.toInt() + result3.high.toInt()) / 2).toString() + "°"
+                tv_after_tomorrow_range.text = result3.low + "°/" + result3.high + "°"
             }
         }
 
@@ -248,14 +270,14 @@ class MainActivity : AppCompatActivity() {
         launch {
             val result = weatherService.getAlarm(location = cityId)
             val list = ArrayList<Alarm>()
-            if(result != null){
-                for(e in result.results[0].alarms){
+            if (result != null) {
+                for (e in result.results[0].alarms) {
                     list.add(e)
                 }
             }
             withContext(
                 Dispatchers.Main
-            ){
+            ) {
                 adapterAlarm.setData(list)
             }
         }

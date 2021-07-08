@@ -3,16 +3,19 @@
  */
 package com.thread0.weather.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.thread0.weather.R
+import com.thread0.weather.adapter.RvAdapterSearchLocation
 import com.thread0.weather.net.service.LocationService
 import kotlinx.android.synthetic.main.activity_search.*
 import top.xuqingquan.app.ScaffoldConfig
 import top.xuqingquan.extension.launch
+
 
 /**
  *@ClassName: SearchActivity
@@ -21,12 +24,14 @@ import top.xuqingquan.extension.launch
  *@Date: 2021/6/2 11:00 下午 Created
  */
 class SearchActivity : AppCompatActivity() {
+    private lateinit var adapterSearchLocation: RvAdapterSearchLocation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        toolbar.title = ""
         setSupportActionBar(toolbar);
+        adapterSearchLocation = RvAdapterSearchLocation()
+        rv_city_list.adapter = adapterSearchLocation
         // 设置点击事件
         setClickEvent()
         // 初始化数据与布局
@@ -77,12 +82,20 @@ class SearchActivity : AppCompatActivity() {
     fun refreshCityList(keyword: String) {
         val locationService =
             ScaffoldConfig.getRepositoryManager().obtainRetrofitService(LocationService::class.java)
+
         launch {
             val result = locationService.getLocations(location = keyword)
-            if(result!=null){
-                for(location in result.results){
-
-                }
+            if (result != null) {
+                adapterSearchLocation.setData(
+                    result.results,
+                    object : RvAdapterSearchLocation.OnCityClickListener {
+                        override fun onCityClick(id: String?) {
+                            val data = Intent()
+                            data.putExtra("cityId", id)
+                            setResult(Activity.RESULT_OK, data)
+                            finish()
+                        }
+                    })
             }
         }
     }
