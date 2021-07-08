@@ -5,4 +5,5 @@
     android:layout_height="wrap_content"
     android:paddingStart="20dp"
     android:paddingVertical="5dp"
+    android:textSize="20sp"
     android:text="位置" />
