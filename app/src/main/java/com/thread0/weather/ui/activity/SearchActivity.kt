@@ -89,9 +89,10 @@ class SearchActivity : AppCompatActivity() {
                 adapterSearchLocation.setData(
                     result.results,
                     object : RvAdapterSearchLocation.OnCityClickListener {
-                        override fun onCityClick(id: String?) {
+                        override fun onCityClick(id: String, name: String) {
                             val data = Intent()
                             data.putExtra("cityId", id)
+                            data.putExtra("name", name)
                             setResult(Activity.RESULT_OK, data)
                             finish()
                         }

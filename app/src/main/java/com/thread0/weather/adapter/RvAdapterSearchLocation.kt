@@ -16,7 +16,7 @@ class RvAdapterSearchLocation : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_location.text = list[position].name
         holder.itemView.tv_location.setOnClickListener {
-            onCityClickListener?.onCityClick(list[position].id)
+            onCityClickListener?.onCityClick(list[position].id, list[position].name)
         }
     }
 
@@ -39,6 +39,6 @@ class RvAdapterSearchLocation : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
 
     interface OnCityClickListener {
-        fun onCityClick(id: String?)
+        fun onCityClick(id: String, name: String)
     }
 }
