@@ -29,7 +29,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar)
         adapterSearchLocation = RvAdapterSearchLocation()
         rv_city_list.adapter = adapterSearchLocation
         // 设置点击事件
