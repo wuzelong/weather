@@ -30,8 +30,16 @@ class EnterActivity : Activity() {
     private fun parseXMLIntoDB() {
         var position: String? = null
         //权限检查
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
+                1
+            )
         }
         //操作完成后跳转首页
         GlobalScope.launch {
@@ -46,16 +54,11 @@ class EnterActivity : Activity() {
                 }
             }
         }.invokeOnCompletion {
-            if (null == position) {
-//                Toast.makeText(applicationContext, "无法获取定位信息，请手动选择！", Toast.LENGTH_LONG).show()
-                startActivity(Intent(this, SearchActivity::class.java))
-            } else {
-                val intent = Intent(this,MainActivity::class.java)
-                val bundle = Bundle()
-                bundle.putString("id",position)  //将城市id传过去
-                intent.putExtras(bundle)
-                startActivity(intent)
-            }
+            val intent = Intent(this, MainActivity::class.java)
+            val bundle = Bundle()
+            bundle.putString("id", position)  //将城市id传过去
+            intent.putExtras(bundle)
+            startActivity(intent)
             finish()
         }
     }
