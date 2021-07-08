@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         //初始化菜单栏
         toolbar.title = ""
         setSupportActionBar(toolbar)
-
+        //加载城市天气信息
         locations = LitePal.findAll<LocationWeather>()
         if (locations.isNotEmpty()) {
             location = locations[0]
@@ -91,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.main, menu)  //加载布局
         return true
     }
 
