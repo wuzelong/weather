@@ -33,8 +33,8 @@ data class Restriction(
  * 限行信息
  */
 data class Limit(
-    val date: String,
-    val plates: List<String>,
-    val memo: String
+    val date: String,  //限行日期
+    val plates: List<String>,  //限行尾号
+    val memo: String  //详细说明
 )
 
