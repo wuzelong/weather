@@ -24,21 +24,21 @@ data class ChineseCalendarResult(
 data class ChineseCalendar(
     val date:String,
     val zodiac:String,
-    @SerializedName("ganzhi_year")
+    @SerializedName("ganzhi_year")  //农历干支年份
     val ganzhiYear:String,
-    @SerializedName("ganzhi_month")
+    @SerializedName("ganzhi_month")  //农历干支月份
     val ganzhiMonth:String,
-    @SerializedName("ganzhi_day")
+    @SerializedName("ganzhi_day")  //农历干支日期
     val ganzhiDay:String,
-    @SerializedName("lunar_year")
+    @SerializedName("lunar_year")  //农历年份
     val lunarYear:String,
-    @SerializedName("lunar_month_name")
+    @SerializedName("lunar_month_name")  //农历月份名
     val lunarMonthName:String,
-    @SerializedName("lunar_day_name")
+    @SerializedName("lunar_day_name")  //农历日期名
     val lunarDayName:String,
-    @SerializedName("lunar_festival")
+    @SerializedName("lunar_festival")  //农历节日
     val lunarFestival:String,
-    @SerializedName("solar_term")
+    @SerializedName("solar_term")  //二十四节气
     val solarTerm:String
 )
 
