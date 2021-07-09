@@ -7,8 +7,11 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import com.thread0.weather.R
+import com.thread0.weather.data.model.LocationWeather
 import com.thread0.weather.util.LocationUtil
 import kotlinx.coroutines.*
+import org.litepal.LitePal
+import org.litepal.extension.count
 
 class EnterActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +50,11 @@ class EnterActivity : Activity() {
     private fun init(hasPermission: Boolean) {
         var position: String? = null
 
+//        if (LitePal.count<LocationWeather>() > 0) {
+//            start(null)
+//            return
+//        }
+
         //操作完成后跳转首页
         CoroutineScope(Dispatchers.Main).launch {
             supervisorScope {
@@ -60,12 +68,16 @@ class EnterActivity : Activity() {
                 }
             }
         }.invokeOnCompletion {
-            val intent = Intent(this, MainActivity::class.java)
-            val bundle = Bundle()
-            bundle.putString("id", position)  //将城市id传过去
-            intent.putExtras(bundle)
-            startActivity(intent)
-            finish()
+            start(position)
         }
+    }
+
+    private fun start(position: String?) {
+        val intent = Intent(this, MainActivity::class.java)
+        val bundle = Bundle()
+        bundle.putString("position", position)  //将城市id传过去
+        intent.putExtras(bundle)
+        startActivity(intent)
+        finish()
     }
 }
